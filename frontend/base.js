@@ -1,7 +1,7 @@
 //const probabilityRangeMax = 255;
 //var colorScale = ['#0000ff00','blue','cyan','green','yellow','red'];
 const probabilityRangeMax = 22;
-var colorScale = ['green','red'];
+const colorScale = ['green','red'];
 
 var probabilityPossibleValues = Array.from(Array(probabilityRangeMax + 1), (_,x) => x);;
 
