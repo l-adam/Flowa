@@ -134,14 +134,14 @@ gmap = gmplot.GoogleMapPlotter(59.9127300, 10.7460900, 14, apikey=apikey)
 departure_lats_morning, departure_lngs_morning = zip(*list_departures_morning)
 #gmap.scatter(departure_lats, departure_lngs, color='cornflowerblue', size=40, marker=False)
 
-
+"""
 print("lengths : ", len(list_departures_morning), len(list_arrivals_morning))
 for couple_ind in range(len(list_departures_morning)):
     #gmap.marker(couple[0], couple[1], color=random_color(),size=40, marker=True)
     pathlat = [list_departures_morning[couple_ind][0],list_arrivals_morning[couple_ind][0]]
     pathlon = [list_departures_morning[couple_ind][1],list_arrivals_morning[couple_ind][1]]
     #gmap.plot(pathlat,pathlon,'cornflowerblue', edge_width=1)
-
+"""
 
 #***************************************************************************************
 # OpenRoutesService :
@@ -163,45 +163,18 @@ print(routes)
 #***************************************************************************************
 #if needed, to draw polygons, etc, check : https://github.com/jazzband/geojson
 # "type" : "LineString", "coordinates" :[[],[],[]]
+
+# UNUSED METHOD ITS USELESS
 def create_geojson():
     station_0 = result[0]
     geojson = {
                 "type" : "FeatureCollection",
                 "features" : [
-                    {
-                    "type" : "Feature",
-                        "geometry" : {
-                            "type" : "Point",
-                            "coordinates" : [
-                                result[0]["start_station_latitude"],result[0]["start_station_longitude"]
-                            ]
-                        },
-    #c'est ici qu'il faut rajouter properties
-                    }
-                #là si on veut rajouter il faut faire ,{ "type" : "Feature", etc...}
+
                 ]
     }
 
-    dico_station_i = {"properties" : {
-                            "started_at" : result[0]["started_at"],
-                            "ended_at" : result[0]["ended_at"],
-                            "duration": result[0]["duration"],
-                            "start_station_id": result[0]["start_station_id"],
-                            "start_station_name": result[0]["start_station_name"],
-                            "start_station_description": result[0]["start_station_description"],
-                            "start_station_latitude": result[0]["start_station_latitude"],
-                            "start_station_longitude": result[0]["start_station_longitude"],
-                            "end_station_id": result[0]["end_station_id"],
-                            "end_station_name": result[0]["end_station_name"],
-                            "end_station_description": result[0]["end_station_description"],
-                            "end_station_latitude": result[0]["end_station_latitude"],
-                            "end_station_longitude": result[0]["end_station_longitude"]
-                        }}
-
-    geojson["features"][0]["properties"]=dico_station_i["properties"]
-    print(geojson["features"][0])
-
-    for station in range(1,len(result)):
+    for station in range(len(result)):
         station_i = result[station]
         geojson["features"].append({
                     "type" : "Feature",
@@ -226,8 +199,6 @@ def create_geojson():
                             "end_station_latitude": station_i["end_station_latitude"],
                             "end_station_longitude": station_i["end_station_longitude"]
                         }
-
-    #c'est ici qu'il faut rajouter à chaque fois
                     })
     with open('myfile2.geojson', 'w') as f:
         f.write(str(geojson))
@@ -235,10 +206,111 @@ def create_geojson():
 #create_geojson()
 
 
+
+
+
+c_o = [10.68695068359375, 59.954838366826024] # = [longitude, latitude]
+# Builds the file without returning back to beginning of the line, it works but it doesn't look clean
+def create_geojson2():
+    geojson = {
+                "type" : "FeatureCollection",
+                "features" : [
+                    
+                ]
+    }
+    # c_o[0] + 10**(-4)*4.07696*lon_indice
+    # c_o[1] - 10**(-4)*2.04425*lat_indice
+    increment_long = 10**(-4)*4.07696*2
+    increment_lat = 10**(-4)*2.04425*2
+    for lat_indice in range(130):
+        for lon_indice in range(150):
+            geojson["features"].append({
+                                        "type" : "Feature",
+                            "geometry" : {
+                                "type" : "Polygon",
+                                "coordinates" : [[
+                                    
+                                    [
+                                    c_o[0] + increment_long*lon_indice,
+                                    c_o[1] - increment_lat*lat_indice
+                                    ],
+                                    [
+                                    c_o[0] + increment_long*(lon_indice + 1),
+                                    c_o[1] - increment_lat*lat_indice
+                                    ],
+                                    [
+                                    c_o[0] + increment_long*(lon_indice+1),
+                                    c_o[1] - increment_lat*(lat_indice+1) 
+                                    ],
+                                    [
+                                    c_o[0] + increment_long*lon_indice,
+                                    c_o[1] - increment_lat*(lat_indice+1) 
+                                    ],
+                                    [
+                                    c_o[0] + increment_long*lon_indice,
+                                    c_o[1] - increment_lat*lat_indice
+                                    ]
+                                    
+                                ]]
+                            },
+                            "properties" : {
+                                "probability" : random.randint(0,255)
+                            }
+
+                        })
+
+    with open('myfile2.geojson', 'w') as f:
+        string_final1 = str(geojson)
+        string_final2 = string_final1.replace("'",'"')
+        f.write(string_final2)
+
+create_geojson2()
+
+
+
+
+
+# Builds the file returning back to beginning of the line, it works but it takes too much time to build the file (~116 minutes)
+# how to make this more efficient?
+def create_geojson3():
+    geojson = "{\n  \"type\" : \"FeatureCollection\",\n  \"features\" : [  \n    ]\n}"
+    index_add = 0
+    for lat_indice in range(1000):
+        for lon_indice in range(1000):
+            index_add +=1
+            new_el_str = ("    {\n      \"type\" : \"Feature\",\n      \"geometry\" : {\n        \"type\" : \"Polygon\",\n        \"coordinates\" : [\n          [\n            [\n              " 
+            + str(c_o[1]+ 10**(-1)*lon_indice) + ",\n              " 
+            + str(c_o[0]+ 10**(-1)*lat_indice) 
+            + "\n            ],\n            [\n              " 
+            + str(c_o[1]+ 10**(-1)*lon_indice +10**(-1)) 
+            + ",\n              " 
+            + str(c_o[0]+ 10**(-1)*lat_indice) 
+            + "\n            ],            [\n              " 
+            + str(c_o[1]+ 10**(-1)*lon_indice) 
+            + ",\n              " 
+            + str(c_o[0]+ 10**(-1)*lat_indice +10**(-1)) 
+            + "\n            ],\n            [\n              " 
+            + str(c_o[1]+ 10**(-1)*lon_indice +10**(-1)) 
+            + ",\n              " 
+            + str(c_o[0]+ 10**(-1)*lat_indice +10**(-1)) 
+            + "\n            ]\n          ]\n        ]\n      },\n      \"properties\" : {\n        \"probability\" : random.randint(0,255)\n      }\n    }")
+            if lat_indice!=999 and lon_indice != 999:
+                new_el_str += ","
+            insert_index = 57+index_add*len(new_el_str)
+            geojson = geojson[:insert_index] + new_el_str + geojson[insert_index:]
+            print(index_add)
+    with open('myfile2.geojson', 'w') as f:
+        f.write(str(geojson))
+
+#create_geojson3()
+
+
 # Draw the map to an HTML file:
-gmap.draw('map.html')
+#gmap.draw('map.html')
 
 #***************************************************************************************
+
+                                        
 #color methods :
 #***************************************************************************************
 
