@@ -23,6 +23,7 @@ limits_random = [
     ]]
 
 # Builds the file without returning back to beginning of the line, it works but it doesn't look clean
+# Returns a geojson file with random points to create an artificial dataset
 def create_geojson_covid():
     geojson = {
                 "type" : "FeatureCollection",

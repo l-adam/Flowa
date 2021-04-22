@@ -1,0 +1,5 @@
+-> oslo_matrix contains the first version of the matrix we did
+-> oslo_matrix_bigger is the same thing but covering the main part of Oslo
+-> oslo_matrix_square_station is the same as the one above but each square has for parameters :
+ - the id of the clothest bike station,
+ - the name and the coordinates of the clothest test center linked to this station
