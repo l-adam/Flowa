@@ -1,23 +1,12 @@
-var map = L.map('mapid').setView([59.918721, 10.743942, ], 12);
+mapboxgl.accessToken = 'pk.eyJ1IjoiczM1NzU1NiIsImEiOiJja201NTJvdnEwYjZuMm90cHNvOXllaG43In0.oPyg05LFrXhKR5Zmd_LJzQ';
 
-var geojsonLayer = geoJSONadd("norway_polygons.geojson");
+var map = new mapboxgl.Map({
+	container: 'map', // container ID
+	style: 'mapbox://styles/mapbox/outdoors-v11', // style URL
+	center: [10.743942, 59.918721], // starting position
+	zoom: 12, // starting zoom
+	antialias: false
+});
 
-L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}'+ (L.Browser.retina? '@2x': '') + '?access_token=pk.eyJ1IjoiczM1NzU1NiIsImEiOiJja201NTJvdnEwYjZuMm90cHNvOXllaG43In0.oPyg05LFrXhKR5Zmd_LJzQ', {
-	maxZoom: 18,
-	attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
-		'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-	id: 'mapbox/streets-v11',
-	tileSize: 512,
-	zoomOffset: -1
-}).addTo(map);
-
-var popup = L.popup();
-
-function onMapClick(e) {
-	popup
-		.setLatLng(e.latlng)
-		.setContent("You clicked the map at " + e.latlng.toString())
-		.openOn(map);
-}
-
-map.on('click', onMapClick);
+initializeHeatmap('heatmap',
+	'/backend/export/13months_data_analyze/oslo_matrix_square_station_0.geojson', -2, 0, 2);

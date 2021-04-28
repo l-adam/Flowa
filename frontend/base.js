@@ -1,29 +1,56 @@
-//const probabilityRangeMax = 255;
-//var colorScale = ['#0000ff00','blue','cyan','green','yellow','red'];
-const probabilityRangeMax = 22;
-const colorScale = ['green','red'];
+const colorScale = ['#0000FF', '#0000FF', '#FF7700'];
+const opacityScale = [0.0, 0.5, 0.5];
 
-var probabilityPossibleValues = Array.from(Array(probabilityRangeMax + 1), (_,x) => x);;
+function initializeHeatmap(heatmapID, GeoJSONdata, minStop, middleStop, maxStop) {
+	map.on('load', function() {
+		var layers = map.getStyle().layers;
+		// Find the index of the first symbol layer in the map style
+		var firstSymbolId;
 
-function getColorChroma(n,classBreaks,colorHex) {
-    var mapScale = chroma.scale(colorHex).classes(classBreaks);
-    if (n === 0) {
-        var regionColor = '#ffffff';
-    } else { 
-        var regionColor = mapScale(n).hex();
-    }
-    return regionColor
+		for (var i = 0; i < layers.length; i++) {
+			if (layers[i].type === 'symbol') {
+				firstSymbolId = layers[i].id;
+				break;
+			}
+		}
+
+		// Add a data source containing GeoJSON data.
+		map.addSource('heatmap', {
+			'type': 'geojson',
+			'data': GeoJSONdata
+		});
+
+		// Add a new layer to visualize the polygon.
+		map.addLayer({
+				'id': heatmapID,
+				'type': 'fill',
+				'source': heatmapID, // reference the data source
+				'layout': {},
+				'paint': {
+					'fill-color': {
+						property: 'probability',
+						stops: [
+							[minStop, colorScale[0]],
+							[middleStop, colorScale[1]],
+							[maxStop, colorScale[2]]
+						]
+					},
+					'fill-opacity': {
+						property: 'probability',
+						stops: [
+							[minStop, opacityScale[0]],
+							[middleStop, opacityScale[1]],
+							[maxStop, opacityScale[2]]
+						]
+					},
+					'fill-antialias': false,
+				}
+			},
+			firstSymbolId);
+	});
+
 }
 
-function heatmap(feature) {
-    return {
-        fillColor: getColorChroma(feature.properties.completeness,probabilityPossibleValues,colorScale),
-        weight: 0,
-        opacity: 1,
-        fillOpacity: 0.7
-    };
-}
-
-function geoJSONadd(geoJSONsource) {
-	return new L.GeoJSON.AJAX(geoJSONsource, {style: heatmap}).addTo(map);
+function setHeatmap(heatmapID, GeoJSONdata) {
+	map.getSource(heatmapID).setData(GeoJSONdata);
 }
