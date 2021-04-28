@@ -1,3 +1,6 @@
+"outdated" folder contains previous maps that have utf-8 related issues
+"13months_data_analyze" contains the right maps
+
 -> oslo_matrix contains the first version of the matrix we did
 -> oslo_matrix_bigger is the same thing but covering the main part of Oslo
 -> oslo_matrix_square_station is the same as the one above but each square has for parameters :
