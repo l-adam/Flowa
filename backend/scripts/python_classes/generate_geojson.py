@@ -34,6 +34,7 @@ class Generate_geojson():
         self.global_station_hub_keys = list(self.global_station_hub.keys())
         self.data_covid = self.init_dfe.test_station_amount_cases() #returns a dictionnary with test_center_name: amount of cases since march 2020 to march 2021 included
         self.ntl_dico = self.init_dfe.new_to_legacy_dico()
+        self.ltn_dico = self.init_dfe.legacy_to_new_dico()
 
         # we instantiate the class Tools()
         self.init_tools = tools.Tools()
@@ -138,7 +139,7 @@ class Generate_geojson():
                                     "clothest_station_bike": gcbs_stat,
                                     "clothest_test_station": self.global_station_hub[gcbs_stat][2],
                                     #"clothest_test_center_coordinates": places_coordinates[global_station_hub[gcbs_stat][2]],
-                                    "probability" : self.compare_then_proba(month_num, self.init_dfe.legacy_to_new(gcbs_stat), json_file, amount_travels_bfore, amount_travels_dico)#month num, bike station id  compare_then_proba(month_num, bike_station_id, json_file):
+                                    "probability" : self.compare_then_proba(month_num, self.legacy_to_new(gcbs_stat), json_file, amount_travels_bfore, amount_travels_dico)#month num, bike station id  compare_then_proba(month_num, bike_station_id, json_file):
                                 }
 
                             })
@@ -165,8 +166,8 @@ class Generate_geojson():
             amount_travels = amount_travels_dico[bike_station_id]
 
             #covid:  global_station_hub = station_hub() # dico pour chaque id de station:[(lat, long), distance_clothest_test_center, 'Name_clothest_test_center']
-            legacy_id = new_to_legacy(bike_station_id)
-            linked_test_center = global_station_hub[legacy_id][2]
+            legacy_id = self.new_to_legacy(bike_station_id)
+            linked_test_center = self.global_station_hub[legacy_id][2]
             #print("linked test center : ", linked_test_center)
 
             # data_covid : returns a dictionnary with test_center_name: amount of cases since march 2020 to march 2021 included
@@ -180,7 +181,7 @@ class Generate_geojson():
             #print("bikes : ", amount_travels, amount_travels_bfore[bike_station_id])
             comparison_bike = amount_travels-amount_travels_bfore[bike_station_id]
             comparison_test = data_covid_station_month-data_covid_station_month_bfore
-
+            """
             if comparison_bike > 0 and comparison_test>0:
                 print("1")
                 return 1
@@ -197,9 +198,26 @@ class Generate_geojson():
             else:
                 print(comparison_bike, " ", comparison_test)
                 return 0
+            """
+            if comparison_bike > 0 and comparison_test>0:
+                print("5")
+                return 5
+            elif comparison_bike < 0 and comparison_test<0:
+                print("-5")
+                return -1
+
+            elif comparison_bike > 0 and comparison_test<0:
+                print("1")
+                return 1
+            elif comparison_bike < 0 and comparison_test>0:
+                print("9")
+                return 9
+            else:
+                print(comparison_bike, " ", comparison_test)
+                return 0
         
         except:
-            print("erreur")
+            print("0")
             return 0
             
         #print("end compare_then_proba()")
@@ -217,4 +235,12 @@ class Generate_geojson():
                 clothest_station = key
         return clothest_station, shortest_distance
 
-
+    # returns the legacy id of a new id
+    def new_to_legacy(self, new_id):
+        return self.ntl_dico[str(new_id)]
+    
+    # returns the new id from a legacy id
+    # ltn_dico hasn't been generated because we don't need it for now
+    # if you need it, generate ltn_dico the same way ntl_dico has been generated in new_to_legacy()
+    def legacy_to_new(self, legacy_id):
+        return self.ltn_dico[str(legacy_id)]

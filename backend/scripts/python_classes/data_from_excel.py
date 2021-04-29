@@ -67,10 +67,6 @@ class Data_from_excel():
             print("end new_to_legacy_dico()")
             return dico
 
-    # returns the legacy id of a new id
-    def new_to_legacy(self, new_id):
-        return ntl_dico[str(new_id)]
-    
     #returns string
     def legacy_to_new_dico(self):
         dico={}
@@ -82,15 +78,11 @@ class Data_from_excel():
             csv_reader = reader(read_obj)
             for line in csv_reader:
                 dico[line[1]]=line[0]
-            del dico['new_id']
+            del dico['legacy_id']
             print("end legacy_to_new_dico()")
             return dico
 
-    # returns the new id from a legacy id
-    # ltn_dico hasn't been generated because we don't need it for now
-    # if you need it, generate ltn_dico the same way ntl_dico has been generated in new_to_legacy()
-    def legacy_to_new(self, legacy_id):
-        return ltn_dico[str(legacy_id)]
+
 
     from csv import reader
     # for each bike station, which hub? (returns a dictionnary)
