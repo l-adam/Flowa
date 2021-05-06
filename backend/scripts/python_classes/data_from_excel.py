@@ -1,5 +1,8 @@
 from csv import reader
 
+import os
+import PyPDF2
+
 class Data_from_excel():
     def __init__(self,data_dir="C:\\Users\\virgi\\Desktop\\cours_imt\\A2\\S4 norway\\Project 6\\python_part", excel_filename='table_cases_oslo.xlsx'):
         self.data_dir = data_dir
@@ -14,6 +17,27 @@ class Data_from_excel():
                         'Østensjø':(59.887563, 10.832748), 'Nordstrand':(59.859314, 10.801257), 'Søndre Nordstrand':(59.845535, 10.807981)}
 
         self.places_names = list(self.places_coordinates.keys())
+
+    # Reads the pdf file "pdf_name" and generates "table_cases_oslo.csv" which contains the amount of cases per month per station
+    def read_pdf_download_csv(pdf_name):
+        pdf_name = "Statusrapport koronastatistikk 13. april 2021.pdf" #page 6
+        print("********** read_pdf_download_csv('" + pdf_name + "') **********")
+        # creating a pdf file object (on ouvre le fichier en code binaire)
+        pdfFileObj = open(self.data_dir + "/" + pdf_name, 'rb') 
+
+        # creating a pdf reader object  (Here, we create an object of PdfFileReader class of PyPDF2 module and  pass the pdf file object & get a pdf reader object)
+        pdfReader = PyPDF2.PdfFileReader(pdfFileObj) 
+        nbPages = pdfReader.numPages
+
+        if not os.path.isdir(self.data_dir + "/tables_covid"):
+            os.mkdir(data_dir + "/tables_covid")
+        tables = tabula.read_pdf(pdf_name, pages = 6)
+        folder_name = self.data_dir + "/tables_covid"
+        page_id_titre = "table_cases_oslo.xlsx"
+        
+        # Conversion des tableaux en excel
+        tables[0].to_excel(os.path.join(folder_name, page_id_titre), index=False)
+        print("\nread_pdf_download(" + pdf_name + ") done")
 
     # returns a dictionnary with test_center_name: amount of cases since march 2020 to march 2021 included
     def test_station_amount_cases(self):

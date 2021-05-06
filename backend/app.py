@@ -1,5 +1,5 @@
 #Import the flask module
-from flask import Flask, redirect, url_for, request
+from flask import Flask, redirect, url_for, request, render_template
 
 #Create a Flask constructor. It takes name of the current module as the argument
 app = Flask(__name__)
@@ -15,7 +15,7 @@ def tutorialspoint():
 
 @app.route('/oslo_map')
 def oslo_map():
-    return "here we willpu the html map built earlier"
+    return "here we will put the html map built earlier"
 #app.add_url_rule('/', 'oslo_map', oslo_map)
 
 @app.route('/admin')
@@ -38,7 +38,8 @@ def hello_user(name):
 def success(name):
    return 'welcome %s' % name
 
-@app.route('/login',methods = ['POST', 'GET'])
+
+"""
 def login():
    if request.method == 'POST':
       user = request.form['nm']
@@ -46,6 +47,14 @@ def login():
    else:
       user = request.args.get('nm')
       return redirect(url_for('success',name = user))
+"""
+@app.route('/login',methods = ['POST', 'GET'])
+def login():
+   return render_template("login.html")
+
+@app.route("/<usr>")
+def user(usr):
+   return f"<h1>{usr}</h1>"
 
 #Create the main driver function
 if __name__ == '__main__':
