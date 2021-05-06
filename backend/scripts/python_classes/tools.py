@@ -58,7 +58,7 @@ class Tools():
     # returns dictionnary with bike_station_new_id (string): amount of uses this month (int) (the month of the json_file)
     # new or legacy? I guess new
     def fill_departures_list2(self, json_file):
-        # global_station_hub = dico pour chaque id de station de vélo:[(lat, long), distance_clothest_test_center, 'Name_clothest_test_center']
+        # global_station_hub = dico pour chaque id de station de vélo:[(lat, long), distance_closest_test_center, 'Name_closest_test_center']
         
         amount_travel_morning = 0
 
