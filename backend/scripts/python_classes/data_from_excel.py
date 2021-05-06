@@ -86,7 +86,7 @@ class Data_from_excel():
 
     from csv import reader
     # for each bike station, which hub? (returns a dictionnary)
-    # returns 'Name_station' : [(lat, long), distance_clothest_test_center, 'Name_clothest_test_center']
+    # returns 'Name_station' : [(lat, long), distance_closest_test_center, 'Name_closest_test_center']
     # CARREFULL : currently using legacy names, can easely use the latest ones with 'legacy_new_station_id_mapping.csv' but useless
     def station_hub(self):
         print("start station_hub()")
@@ -105,17 +105,17 @@ class Data_from_excel():
 
                     station_lat, station_long = float(station[1]), float(station[2])
                     
-                    clothest_place = self.places_names[0]
-                    distance_min = ((self.places_coordinates[clothest_place][0]-station_lat)**2 
-                    + (self.places_coordinates[clothest_place][1] - station_long)**2)**(1/2)
+                    closest_place = self.places_names[0]
+                    distance_min = ((self.places_coordinates[closest_place][0]-station_lat)**2 
+                    + (self.places_coordinates[closest_place][1] - station_long)**2)**(1/2)
                     for place_name in self.places_names:
                         distance = ((self.places_coordinates[place_name][0]-station_lat)**2 
                     + (self.places_coordinates[place_name][1] - station_long)**2)**(1/2)
                         if distance<distance_min:
                             distance_min = distance
-                            clothest_place = place_name
+                            closest_place = place_name
                     
-                    dic_station_hub[station[0]]= [(float(station[1]), float(station[2])), distance_min, clothest_place]
+                    dic_station_hub[station[0]]= [(float(station[1]), float(station[2])), distance_min, closest_place]
                 dont_want_1st_line+=1
                 # station variable is a list that represents a row in csv
         print("end station_hub()")

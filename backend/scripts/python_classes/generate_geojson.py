@@ -30,7 +30,7 @@ class Generate_geojson():
 
         # we instanciate the class Data_from_excel() and we generate the variables we need from it
         self.init_dfe = data_from_excel.Data_from_excel()
-        self.global_station_hub = self.init_dfe.station_hub() # dico pour chaque id de station:[(lat, long), distance_clothest_test_center, 'Name_clothest_test_center']
+        self.global_station_hub = self.init_dfe.station_hub() # dico pour chaque id de station:[(lat, long), distance_closest_test_center, 'Name_closest_test_center']
         self.global_station_hub_keys = list(self.global_station_hub.keys())
         self.data_covid = self.init_dfe.test_station_amount_cases() #returns a dictionnary with test_center_name: amount of cases since march 2020 to march 2021 included
         self.ntl_dico = self.init_dfe.new_to_legacy_dico()
@@ -102,7 +102,7 @@ class Generate_geojson():
         for lat_indice in range(220):
             for lon_indice in range(200):
                 # here it can be optimised:
-                gcbs_stat = self.get_clothest_bike_station(self.init_tools.get_center_rectangle(c_o[1] - increment_lat*lat_indice, c_o[0] + increment_long*lon_indice, c_o[1] - increment_lat*(lat_indice+1), c_o[0] + increment_long*(lon_indice + 1))[0],self.init_tools.get_center_rectangle(c_o[1] - increment_lat*lat_indice, c_o[0] + increment_long*lon_indice, c_o[1] - increment_lat*(lat_indice+1), c_o[0] + increment_long*(lon_indice + 1))[1])[0]
+                gcbs_stat = self.get_closest_bike_station(self.init_tools.get_center_rectangle(c_o[1] - increment_lat*lat_indice, c_o[0] + increment_long*lon_indice, c_o[1] - increment_lat*(lat_indice+1), c_o[0] + increment_long*(lon_indice + 1))[0],self.init_tools.get_center_rectangle(c_o[1] - increment_lat*lat_indice, c_o[0] + increment_long*lon_indice, c_o[1] - increment_lat*(lat_indice+1), c_o[0] + increment_long*(lon_indice + 1))[1])[0]
                 geojson["features"].append({
                                             "type" : "Feature",
                                 "geometry" : {
@@ -136,9 +136,9 @@ class Generate_geojson():
                                 "properties" : {
                                     #bg, bd, hg
                                     #"center" : get_center_rectangle(c_o[1] - increment_lat*lat_indice, c_o[0] + increment_long*lon_indice, c_o[1] - increment_lat*(lat_indice+1), c_o[0] + increment_long*(lon_indice + 1)),
-                                    "clothest_station_bike": gcbs_stat,
-                                    "clothest_test_station": self.global_station_hub[gcbs_stat][2],
-                                    #"clothest_test_center_coordinates": places_coordinates[global_station_hub[gcbs_stat][2]],
+                                    "closest_station_bike": gcbs_stat,
+                                    "closest_test_station": self.global_station_hub[gcbs_stat][2],
+                                    #"closest_test_center_coordinates": places_coordinates[global_station_hub[gcbs_stat][2]],
                                     "probability" : self.compare_then_proba(month_num, self.legacy_to_new(gcbs_stat), json_file, amount_travels_bfore, amount_travels_dico)#month num, bike station id  compare_then_proba(month_num, bike_station_id, json_file):
                                 }
 
@@ -165,7 +165,7 @@ class Generate_geojson():
         try:
             amount_travels = amount_travels_dico[bike_station_id]
 
-            #covid:  global_station_hub = station_hub() # dico pour chaque id de station:[(lat, long), distance_clothest_test_center, 'Name_clothest_test_center']
+            #covid:  global_station_hub = station_hub() # dico pour chaque id de station:[(lat, long), distance_closest_test_center, 'Name_closest_test_center']
             legacy_id = self.new_to_legacy(bike_station_id)
             linked_test_center = self.global_station_hub[legacy_id][2]
             #print("linked test center : ", linked_test_center)
@@ -223,17 +223,17 @@ class Generate_geojson():
         #print("end compare_then_proba()")
         return 0
 
-    #parameter = coordinates point from which we want the clothest station
+    #parameter = coordinates point from which we want the closest station
     #returns station_id, distance
-    def get_clothest_bike_station(self, lat, longi):
-        clothest_station = self.global_station_hub_keys[0]
-        shortest_distance = self.init_tools.distance(self.global_station_hub[clothest_station][0][0], self.global_station_hub[clothest_station][0][1], lat, longi)
+    def get_closest_bike_station(self, lat, longi):
+        closest_station = self.global_station_hub_keys[0]
+        shortest_distance = self.init_tools.distance(self.global_station_hub[closest_station][0][0], self.global_station_hub[closest_station][0][1], lat, longi)
         for key in self.global_station_hub_keys:
             lat_key, long_key = self.global_station_hub[key][0][0], self.global_station_hub[key][0][1]
             if self.init_tools.distance(lat_key, long_key, lat, longi)<shortest_distance:
                 shortest_distance = self.init_tools.distance(lat_key, long_key, lat, longi)
-                clothest_station = key
-        return clothest_station, shortest_distance
+                closest_station = key
+        return closest_station, shortest_distance
 
     # returns the legacy id of a new id
     def new_to_legacy(self, new_id):
