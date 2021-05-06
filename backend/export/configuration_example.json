@@ -1,7 +1,8 @@
 {
 	"serverConfiguration": {
 		"backendPort": 8000,
-		"geoJSONpath": "/backend/export/final/"
+		"dataSourcesPath": "/backend/export/final/",
+		"dataOverlaysPath": "/backend/export/overlays/"
 	},
 	"dataSources": {
 		"header": "Data Sources",
