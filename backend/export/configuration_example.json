@@ -1,0 +1,45 @@
+{
+	"serverConfiguration": {
+		"backendPort": 8000,
+		"geoJSONpath": "/backend/export/final/"
+	},
+	"dataSources": {
+		"header": "Data Sources",
+		"description": "These are data sources",
+		"items": [{
+				"id": "bikes",
+				"label": "Oslo Bike Data"
+			},
+			{
+				"id": "scooters",
+				"label": "Oslo Scooters"
+			}
+		]
+	},
+	"dataOverlays": {
+		"header": "Data Overlays",
+		"description": "These are data overlays",
+		"items": [{
+				"id": "osloCovid",
+				"label": "Oslo Covid Test Stations"
+			},
+			{
+				"id": "osloVaccination",
+				"label": "Oslo Vaccination Sites"
+			}
+		]
+	},
+	"timeline": {
+		"header": "Timeline",
+		"description": "The time periods",
+		"items": [{
+				"id": "2020-01",
+				"label": "January 2020"
+			},
+			{
+				"id": "2020-02",
+				"label": "February 2020"
+			}
+		]
+	}
+}
