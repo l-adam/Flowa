@@ -6,7 +6,8 @@
 	"dataSources": {
 		"header": "Data Sources",
 		"description": "These are data sources",
-		"items": [{
+		"items": [
+			{
 				"id": "bikes",
 				"label": "Oslo Bike Data"
 			},
@@ -19,7 +20,8 @@
 	"dataOverlays": {
 		"header": "Data Overlays",
 		"description": "These are data overlays",
-		"items": [{
+		"items": [
+			{
 				"id": "osloCovid",
 				"label": "Oslo Covid Test Stations"
 			},
@@ -32,7 +34,8 @@
 	"timeline": {
 		"header": "Timeline",
 		"description": "The time periods",
-		"items": [{
+		"items": [
+			{
 				"id": "2020-01",
 				"label": "January 2020"
 			},
