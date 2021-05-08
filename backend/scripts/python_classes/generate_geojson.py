@@ -20,7 +20,7 @@ class Generate_geojson():
                         'Vestre Aker':(59.9583, 10.670319), 'Nordre Aker':(59.953638, 10.756412), 'Bjerke':(59.940668, 10.808725), 
                         'Grorud':(59.961424, 10.880549), 'Stovner':(59.958595, 10.927285), 'Alna':(59.93092, 10.85403), 
                         'Ostensjo':(59.887563, 10.832748), 'Nordstrand':(59.859314, 10.801257), 'Sondre Nordstrand':(59.845535, 10.807981)}
-        self.places_names = list(self.places_coordinates.keys())
+        self.places_name = list(self.places_coordinates.keys())
 
         # working directory
         self.data_dir = "C:\\Users\\virgi\\Desktop\\cours_imt\\A2\\S4 norway\\Project 6\\python_part"
@@ -151,6 +151,64 @@ class Generate_geojson():
             print("end create_matrix_square_station() ")
 
 
+# generates a geojson file with the coordinates of all the test stations
+    def create_test_stations(self):
+        print("start create_test_stations() ")
+        geojson = {
+                    "type" : "FeatureCollection",
+                    "features" : [
+                        
+                    ]
+        }
+        for name_station in self.places_name:
+            geojson["features"].append({
+                                        "type" : "Feature",
+                            "geometry" : {
+                                "type" : "Point",
+                                "coordinates" : [self.places_coordinates[name_station][0], self.places_coordinates[name_station][1]]  
+                                
+                            },
+                            "properties" : {
+                                "Name_place": name_station,
+                            }
+
+                        })
+
+        with open('test_stations.geojson', 'w') as f:
+            string_final1 = str(geojson)
+            string_final2 = string_final1.replace("'",'"')
+            f.write(string_final2)
+            print("end create_test_stations() ")
+
+    # generates a geojson file with the coordinates of all the bike stations {legacy_id : [lat, long]}
+    def create_bike_stations(self):
+        print("start create_bike_stations() ")
+        dico_from_excel = self.init_dfe.bike_station_coord()
+        geojson = {
+                    "type" : "FeatureCollection",
+                    "features" : [
+                        
+                    ]
+        }
+        for name_station in list(dico_from_excel.keys()):
+            geojson["features"].append({
+                                        "type" : "Feature",
+                            "geometry" : {
+                                "type" : "Point",
+                                "coordinates" : [dico_from_excel[name_station][0], dico_from_excel[name_station][1]]  
+                                
+                            },
+                            "properties" : {
+                                "Name_place": name_station,
+                            }
+
+                        })
+
+        with open('bike_stations.geojson', 'w') as f:
+            string_final1 = str(geojson)
+            string_final2 = string_final1.replace("'",'"')
+            f.write(string_final2)
+            print("end create_bike_stations() ")
 
     # month_num in [0:12], 0-> march 2020, 12-> march 2021
     # station_id : new

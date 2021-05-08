@@ -1,8 +1,8 @@
 {
 	"serverConfiguration": {
 		"backendPort": 8000,
-		"dataSourcesPath": "/backend/export/final/",
-		"dataOverlaysPath": "/backend/export/overlays/"
+		"dataSourcesPath": "/backend/export/data_bike_covid/",
+		"dataOverlaysPath": "/backend/export/overlays_bike-covid/"
 	},
 	"dataSources": {
 		"header": "Data Sources",
@@ -23,12 +23,16 @@
 		"description": "These are data overlays",
 		"items": [
 			{
-				"id": "osloCovid",
-				"label": "Oslo Covid Test Stations"
+				"id": "oslo_covid",
+				"label": "Oslo covid test stations"
 			},
 			{
-				"id": "osloVaccination",
-				"label": "Oslo Vaccination Sites"
+				"id": "bike_covid",
+				"label": "Comparison bike-covid"
+			},
+			{
+				"id": "bike_stations",
+				"label": "Bike stations stations"
 			}
 		]
 	},

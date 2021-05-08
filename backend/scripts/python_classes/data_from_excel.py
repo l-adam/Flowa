@@ -16,7 +16,7 @@ class Data_from_excel():
                         'Grorud':(59.961424, 10.880549), 'Stovner':(59.958595, 10.927285), 'Alna':(59.93092, 10.85403), 
                         'Østensjø':(59.887563, 10.832748), 'Nordstrand':(59.859314, 10.801257), 'Søndre Nordstrand':(59.845535, 10.807981)}
 
-        self.places_names = list(self.places_coordinates.keys())
+        self.places_name = list(self.places_coordinates.keys())
 
     # Reads the pdf file "pdf_name" and generates "table_cases_oslo.csv" which contains the amount of cases per month per station
     def read_pdf_download_csv(pdf_name):
@@ -129,10 +129,10 @@ class Data_from_excel():
 
                     station_lat, station_long = float(station[1]), float(station[2])
                     
-                    clothest_place = self.places_names[0]
+                    clothest_place = self.places_name[0]
                     distance_min = ((self.places_coordinates[clothest_place][0]-station_lat)**2 
                     + (self.places_coordinates[clothest_place][1] - station_long)**2)**(1/2)
-                    for place_name in self.places_names:
+                    for place_name in self.places_name:
                         distance = ((self.places_coordinates[place_name][0]-station_lat)**2 
                     + (self.places_coordinates[place_name][1] - station_long)**2)**(1/2)
                         if distance<distance_min:
@@ -144,3 +144,25 @@ class Data_from_excel():
                 # station variable is a list that represents a row in csv
         print("end station_hub()")
         return dic_station_hub
+
+    def bike_station_coord(self):
+        print("start bike_station_coord()")
+        dic_bs_coord = {}
+        excel_title = '../tables_covid/legacy_coord.csv'
+        # open file in read mode
+        with open(excel_title, 'r') as read_obj:
+            # pass the file object to reader() to get the reader object
+            csv_reader = reader(read_obj)
+            print(type(csv_reader).__name__)
+
+            # Iterate over each row in the csv using reader object
+            dont_want_1st_line=0
+            for station in csv_reader:
+                if dont_want_1st_line>0:
+
+                    station_lat, station_long = float(station[1]), float(station[2])
+                    dic_bs_coord[station[0]]= [station_lat, station_long]
+                dont_want_1st_line+=1
+                # station variable is a list that represents a row in csv
+        print("end bike_station_coord()")
+        return dic_bs_coord
