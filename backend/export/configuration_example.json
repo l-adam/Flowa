@@ -13,8 +13,8 @@
 				"label": "Oslo Bike Data"
 			},
 			{
-				"id": "scooters",
-				"label": "Oslo Scooters"
+				"id": "cases_covid",
+				"label": "amount of covid cases per test center"
 			}
 		]
 	},
