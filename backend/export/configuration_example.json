@@ -1,15 +1,15 @@
 {
 	"serverConfiguration": {
 		"backendPort": 8000,
-		"dataSourcesPath": "/backend/export/data_bike_covid/",
-		"dataOverlaysPath": "/backend/export/overlays_bike-covid/"
+		"dataSourcesPath": "/backend/export/sources/",
+		"dataOverlaysPath": "/backend/export/overlays/"
 	},
 	"dataSources": {
 		"header": "Data Sources",
 		"description": "These are data sources",
 		"items": [
 			{
-				"id": "bikes",
+				"id": "bike_covid",
 				"label": "Oslo Bike Data"
 			},
 			{
@@ -41,13 +41,16 @@
 		"description": "The time periods",
 		"items": [
 			{
-				"id": "2020-01",
+				"id": "2020-03",
 				"label": "January 2020"
 			},
 			{
-				"id": "2020-02",
+				"id": "2020-04",
 				"label": "February 2020"
 			}
 		]
+	},
+	"defaults": {
+		
 	}
 }
