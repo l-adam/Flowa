@@ -7,6 +7,7 @@ var dataOverlaysPath;
 var dataSources;
 var dataOverlays;
 var timelines;
+var defaults;
 
 function getJSON(url) {
 	var resp;
@@ -34,6 +35,7 @@ function parseConfig() {
 	dataSources = config.dataSources.items;
 	dataOverlays = config.dataSources.items;
 	timelines = config.timeline.items;
+	defaults = config.defaults;
 }
 
 function parseGeoJSONUrl(index, type, timelineIndexFrom, timelineIndexTo) {

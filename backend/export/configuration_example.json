@@ -51,6 +51,8 @@
 		]
 	},
 	"defaults": {
-		
+		"dataSourceIndex": 0,
+		"timelineFromIndex": 0,
+		"timelineToIndex": 1
 	}
 }
