@@ -8,5 +8,4 @@ var map = new mapboxgl.Map({
 	antialias: false
 });
 
-initializeHeatmap('heatmap',
-	'/backend/export/13months_data_analyze/oslo_matrix_square_station_0.geojson', -2, 0, 2);
+initializeHeatmap('/backend/export/13months_data_analyze/oslo_matrix_square_station_0.geojson', -2, 0, 2);
