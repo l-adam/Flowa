@@ -10,11 +10,7 @@
 		"items": [
 			{
 				"id": "bike_covid",
-				"label": "Oslo Bike Data"
-			},
-			{
-				"id": "cases_covid",
-				"label": "amount of covid cases per test center"
+				"label": "Comparison bike-covid"
 			}
 		]
 	},
@@ -25,10 +21,6 @@
 			{
 				"id": "oslo_covid",
 				"label": "Oslo covid test stations"
-			},
-			{
-				"id": "bike_covid",
-				"label": "Comparison bike-covid"
 			},
 			{
 				"id": "bike_stations",
