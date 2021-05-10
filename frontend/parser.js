@@ -28,10 +28,10 @@ function getJSON(url) {
 
 function parseConfig() {
 	config = getJSON(configUrl);
-	
+
 	dataSourcesPath = config.serverConfiguration.dataSourcesPath;
 	dataOverlaysPath = config.serverConfiguration.dataOverlaysPath;
-	
+
 	dataSources = config.dataSources.items;
 	dataOverlays = config.dataSources.items;
 	timelines = config.timeline.items;
@@ -41,15 +41,15 @@ function parseConfig() {
 function parseGeoJSONUrl(index, type, timelineIndexFrom, timelineIndexTo) {
 	var geoJSONUrl = '';
 	var dataName;
-	
+
 	if (type == 'source') {
 		dataName = dataSources[index].id;
 	} else if (type == 'overlay') {
 		dataName = dataOverlays[index].id;
 	}
-	
+
 	geoJSONUrl = dataSourcesPath + dataName + '_' +
-	timelines[timelineIndexFrom].id + '_' + timelines[timelineIndexTo].id + '.geojson';
-	
+		timelines[timelineIndexFrom].id + '_' + timelines[timelineIndexTo].id + '.geojson';
+
 	return geoJSONUrl;
 }
