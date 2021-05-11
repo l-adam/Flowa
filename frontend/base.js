@@ -90,7 +90,7 @@ function initializeHeatmap(GeoJSONdata, minStop, middleStop, maxStop) {
 		currentHeatmapId = heatmapIds[0];
 
 		addGeoJSONSource(heatmapIds[0], GeoJSONdata);
-		addGeoJSONSource(heatmapIds[1], '/backend/export/null.geojson');
+		addGeoJSONSource(heatmapIds[1], '/frontend/assets/null.geojson');
 
 		addGeoJSONLayer(heatmapIds[0], 'visible', minStop, middleStop, maxStop);
 		addGeoJSONLayer(heatmapIds[1], 'none', minStop, middleStop, maxStop);
