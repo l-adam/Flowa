@@ -3,7 +3,7 @@ const opacityScale = [0.5, 0.5, 0.5];
 
 var firstSymbolId;
 var currentHeatmapId;
-let heatmapIds = ['heatmap', 'heatmap2'];
+var heatmapIds = ['heatmap', 'heatmap2'];
 
 // Find the index of the first symbol layer in the map style
 function findFirstLayer() {
@@ -19,7 +19,7 @@ function findFirstLayer() {
 	return firstSymbolId;
 }
 
-function addHeatmap(GeoJSONdata) {
+function changeHeatmap(GeoJSONdata, minStop, middleStop, maxStop) {
 	var heatmapOff;
 	var heatmapOn;
 
@@ -34,6 +34,8 @@ function addHeatmap(GeoJSONdata) {
 	}
 
 	setHeatmap(heatmapOn, GeoJSONdata);
+	
+	changeHeatmapScale(minStop, middleStop, maxStop);
 
 	map.once('data', function() {
 		switchHeatmapVisibility(heatmapOff, heatmapOn);
@@ -99,4 +101,19 @@ function initializeHeatmap(GeoJSONdata, minStop, middleStop, maxStop) {
 
 function setHeatmap(heatmapId, GeoJSONdata) {
 	map.getSource(heatmapId).setData(GeoJSONdata);
+}
+
+function changeHeatmapScale(minStop, middleStop, maxStop) {
+	var fillColor = {
+		property: 'probability',
+		stops: [
+			[minStop, colorScale[0]],
+			[middleStop, colorScale[1]],
+			[maxStop, colorScale[2]]
+		]
+	};
+
+	heatmapIds.forEach(heatmapId => {
+		map.setPaintProperty(heatmapId, 'fill-color', fillColor);
+	});
 }
