@@ -39,7 +39,8 @@ class Generate_geojson():
         # we instantiate the class Tools()
         self.init_tools = tools.Tools()
 
-
+        self.compt = [0,0,0,0,0]
+        self.compt_it = 0
 
     #indice_starting_month in [0:11]
     # filled with NEW ids
@@ -67,6 +68,9 @@ class Generate_geojson():
             #print(amount_travels_dico)
             #print(amount_travels_bfore)
             self.create_matrix_square_station(index_month_relevant, result, map_number, amount_travels_bfore, amount_travels_dico)
+            print("compt ",self.compt_it, " : ", self.compt)
+            self.compt = [0,0,0,0,0]
+            self.compt_it +=1
             amount_travels_bfore = self.init_tools.fill_departures_list2(result)
             index_month_relevant += 1
             i_month +=1
@@ -79,6 +83,9 @@ class Generate_geojson():
 
             amount_travels_dico = self.init_tools.fill_departures_list2(result)
             self.create_matrix_square_station(index_month_relevant, result, map_number, amount_travels_bfore, amount_travels_dico)
+            print("compt ",self.compt_it, " : ", self.compt)
+            self.compt = [0,0,0,0,0]
+            self.compt_it +=1
             amount_travels_bfore = self.init_tools.fill_departures_list2(result)
             index_month_relevant +=1
             i_month +=1
@@ -88,7 +95,7 @@ class Generate_geojson():
     # generates a geojson file with the link between the different data sources
     def create_matrix_square_station(self, month_num, json_file, map_number, amount_travels_bfore, amount_travels_dico):
         c_o = [10.665, 59.97] # = [longitude, latitude]
-        print("start create_matrix_square_station() ")
+        #print("start create_matrix_square_station() ")
         geojson = {
                     "type" : "FeatureCollection",
                     "features" : [
@@ -148,12 +155,12 @@ class Generate_geojson():
             string_final1 = str(geojson)
             string_final2 = string_final1.replace("'",'"')
             f.write(string_final2)
-            print("end create_matrix_square_station() ")
+            #print("end create_matrix_square_station() ")
 
 
 # generates a geojson file with the coordinates of all the test stations
     def create_test_stations(self):
-        print("start create_test_stations() ")
+        #print("start create_test_stations() ")
         geojson = {
                     "type" : "FeatureCollection",
                     "features" : [
@@ -173,16 +180,16 @@ class Generate_geojson():
                             }
 
                         })
-
+        """
         with open('test_stations.geojson', 'w') as f:
             string_final1 = str(geojson)
             string_final2 = string_final1.replace("'",'"')
             f.write(string_final2)
             print("end create_test_stations() ")
-
+        """
     # generates a geojson file with the coordinates of all the bike stations {legacy_id : [lat, long]}
     def create_bike_stations(self):
-        print("start create_bike_stations() ")
+        #print("start create_bike_stations() ")
         dico_from_excel = self.init_dfe.bike_station_coord()
         geojson = {
                     "type" : "FeatureCollection",
@@ -208,7 +215,7 @@ class Generate_geojson():
             string_final1 = str(geojson)
             string_final2 = string_final1.replace("'",'"')
             f.write(string_final2)
-            print("end create_bike_stations() ")
+            #print("end create_bike_stations() ")
 
     # month_num in [0:12], 0-> march 2020, 12-> march 2021
     # station_id : new
@@ -239,23 +246,29 @@ class Generate_geojson():
             #print("bikes : ", amount_travels, amount_travels_bfore[bike_station_id])
             comparison_bike = amount_travels-amount_travels_bfore[bike_station_id]
             comparison_test = data_covid_station_month-data_covid_station_month_bfore
-            """
+            
             if comparison_bike > 0 and comparison_test>0:
-                print("1")
+                #print("1")
+                self.compt[0]+=1
                 return 1
             elif comparison_bike < 0 and comparison_test<0:
-                print("-1)")
+                #print("-1)")
+                self.compt[1]+=1
                 return -1
 
             elif comparison_bike > 0 and comparison_test<0:
-                print("2")
+                #print("2")
+                self.compt[2]+=1
                 return 2
             elif comparison_bike < 0 and comparison_test>0:
-                print("-2")
+                #print("-2")
+                self.compt[3]+=1
                 return -2
             else:
-                print(comparison_bike, " ", comparison_test)
+                #print(comparison_bike, " ", comparison_test)
+                self.compt[4]+=1
                 return 0
+            
             """
             if comparison_bike > 0 and comparison_test>0:
                 print("5")
@@ -273,9 +286,10 @@ class Generate_geojson():
             else:
                 print(comparison_bike, " ", comparison_test)
                 return 0
-        
+            """
         except:
-            print("0")
+            #print("0")
+            self.compt[4]+=1
             return 0
             
         #print("end compare_then_proba()")

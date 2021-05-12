@@ -1,0 +1,7 @@
+Legend for each map:
+
+1: increase_bike_use + increase_positive_test : light orange
+-1: decrease_bike_use + decrease_positive_test : orange
+2: increase_bike_use + decrease_positive_test : dark orange
+-2: decrease_bike_use + increase_positive_test : dark blue
+0 : other cases : light blue
