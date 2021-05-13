@@ -1,4 +1,4 @@
-const colorScale = ['#0000FF', '#FF7700'];
+const defaultColorScheme = ['#0000FF', '#FF7700'];
 const opacity = 0.5;
 
 var firstSymbolId;
@@ -35,7 +35,7 @@ function changeHeatmap(GeoJSONdata, minStop, maxStop) {
 
 	setHeatmap(heatmapOn, GeoJSONdata);
 
-	changeHeatmapScale(minStop, maxStop);
+	setHeatmapColorScale(defaultColorScheme, minStop, maxStop);
 
 	map.once('data', function() {
 		switchHeatmapVisibility(heatmapOff, heatmapOn);
@@ -56,12 +56,8 @@ function addGeoJSONLayer(heatmapId, visibility, minStop, maxStop) {
 				'visibility': visibility
 			},
 			'paint': {
-				'fill-color': {
-					property: 'probability',
-					stops: generateColorScale(colorScale[0], colorScale[1], minStop, maxStop)
-				},
 				'fill-opacity': opacity,
-				'fill-antialias': false,
+				'fill-antialias': false
 			},
 		},
 		firstSymbolId);
@@ -74,7 +70,7 @@ function addGeoJSONSource(heatmapId, GeoJSONdata) {
 	});
 }
 
-function initializeHeatmap(GeoJSONdata, minStop, maxStop) {
+function initializeHeatmap(GeoJSONdata, colorScheme, minStop, maxStop) {
 	map.once('load', function() {
 		firstSymbolId = findFirstLayer();
 
@@ -85,6 +81,8 @@ function initializeHeatmap(GeoJSONdata, minStop, maxStop) {
 
 		addGeoJSONLayer(heatmapIds[0], 'visible', minStop, maxStop);
 		addGeoJSONLayer(heatmapIds[1], 'none', minStop, maxStop);
+
+		setHeatmapColorScale(colorScheme, minStop, maxStop);
 	})
 }
 
@@ -92,10 +90,10 @@ function setHeatmap(heatmapId, GeoJSONdata) {
 	map.getSource(heatmapId).setData(GeoJSONdata);
 }
 
-function changeHeatmapScale(minStop, maxStop) {
+function setHeatmapColorScale(colorScale, minStop, maxStop) {
 	var fillColor = {
 		property: 'probability',
-		stops: generateColorScale(colorScale[0], colorScale[1], minStop, maxStop)
+		stops: generateColorScale(colorScale, minStop, maxStop)
 	};
 
 	heatmapIds.forEach(heatmapId => {
@@ -110,9 +108,9 @@ function* range(start, end, step) {
 	}
 }
 
-function generateColorScale(colorHex1, colorHex2, minStop, maxStop) {
+function generateColorScale(colorScheme, minStop, maxStop) {
 	var stops = Array.from(range(minStop, maxStop, 1));
-	var colors = chroma.scale([colorHex1, colorHex2]).colors(stops.length);
+	var colors = chroma.scale(colorScheme).colors(stops.length);
 	var colorScale = [];
 
 	colors.forEach(
