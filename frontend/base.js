@@ -1,5 +1,6 @@
 const defaultColorScheme = ['#0000FF', '#FF7700'];
 const opacity = 0.5;
+var currentColorScheme;
 
 var firstSymbolId;
 var currentHeatmapId;
@@ -35,7 +36,7 @@ function changeHeatmap(GeoJSONdata, minStop, maxStop) {
 
 	setHeatmap(heatmapOn, GeoJSONdata);
 
-	setHeatmapColorScale(defaultColorScheme, minStop, maxStop);
+	setHeatmapColorScale(currentColorScheme, minStop, maxStop);
 
 	map.once('data', function() {
 		switchHeatmapVisibility(heatmapOff, heatmapOn);
@@ -118,6 +119,8 @@ function generateColorScale(colorScheme, minStop, maxStop) {
 			colorScale[index] = [stops[index], color]
 		}
 	);
+
+	currentColorScheme = colorScheme;
 
 	return colorScale;
 }
