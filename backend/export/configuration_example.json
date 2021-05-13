@@ -10,7 +10,8 @@
 		"items": [
 			{
 				"id": "bike_covid",
-				"label": "Comparison bike-covid"
+				"label": "Comparison bike-covid",
+				"colorScheme": ["#0000FF", "#FF7700"]
 			}
 		]
 	},
