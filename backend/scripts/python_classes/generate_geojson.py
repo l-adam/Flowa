@@ -159,8 +159,8 @@ class Generate_geojson():
 
 
 # generates a geojson file with the coordinates of all the test stations
-    def create_test_stations(self):
-        #print("start create_test_stations() ")
+    def create_test_stations(self, month):
+        print("start create_test_stations() ")
         geojson = {
                     "type" : "FeatureCollection",
                     "features" : [
@@ -177,16 +177,17 @@ class Generate_geojson():
                             },
                             "properties" : {
                                 "Name_place": name_station,
+                                "Cases_this_month": self.data_covid[name_station][month]
                             }
 
                         })
-        """
-        with open('test_stations.geojson', 'w') as f:
+        
+        with open('test_stations'+ str(month)+ '.geojson', 'w') as f:
             string_final1 = str(geojson)
             string_final2 = string_final1.replace("'",'"')
             f.write(string_final2)
             print("end create_test_stations() ")
-        """
+        
     # generates a geojson file with the coordinates of all the bike stations {legacy_id : [lat, long]}
     def create_bike_stations(self):
         #print("start create_bike_stations() ")
