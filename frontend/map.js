@@ -11,4 +11,4 @@ var map = new mapboxgl.Map({
 });
 
 initializeHeatmap(parseGeoJSONUrl(defaults.dataSourceIndex, 'source',
-	defaults.timelineFromIndex, defaults.timelineToIndex), -2, 0, 2);
+	defaults.timelineFromIndex, defaults.timelineToIndex), -2, 2);

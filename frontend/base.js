@@ -1,5 +1,5 @@
-const colorScale = ['#0000FF', '#773377', '#FF7700'];
-const opacityScale = [0.5, 0.5, 0.5];
+const colorScale = ['#0000FF', '#FF7700'];
+const opacity = 0.5;
 
 var firstSymbolId;
 var currentHeatmapId;
@@ -19,7 +19,7 @@ function findFirstLayer() {
 	return firstSymbolId;
 }
 
-function changeHeatmap(GeoJSONdata, minStop, middleStop, maxStop) {
+function changeHeatmap(GeoJSONdata, minStop, maxStop) {
 	var heatmapOff;
 	var heatmapOn;
 
@@ -34,8 +34,8 @@ function changeHeatmap(GeoJSONdata, minStop, middleStop, maxStop) {
 	}
 
 	setHeatmap(heatmapOn, GeoJSONdata);
-	
-	changeHeatmapScale(minStop, middleStop, maxStop);
+
+	changeHeatmapScale(minStop, maxStop);
 
 	map.once('data', function() {
 		switchHeatmapVisibility(heatmapOff, heatmapOn);
@@ -47,7 +47,7 @@ function switchHeatmapVisibility(heatmapOff, heatmapOn) {
 	map.setLayoutProperty(heatmapOn, 'visibility', 'visible');
 }
 
-function addGeoJSONLayer(heatmapId, visibility, minStop, middleStop, maxStop) {
+function addGeoJSONLayer(heatmapId, visibility, minStop, maxStop) {
 	map.addLayer({
 			'id': heatmapId,
 			'type': 'fill',
@@ -58,22 +58,11 @@ function addGeoJSONLayer(heatmapId, visibility, minStop, middleStop, maxStop) {
 			'paint': {
 				'fill-color': {
 					property: 'probability',
-					stops: [
-						[minStop, colorScale[0]],
-						[middleStop, colorScale[1]],
-						[maxStop, colorScale[2]]
-					]
+					stops: generateColorScale(colorScale[0], colorScale[1], minStop, maxStop)
 				},
-				'fill-opacity': {
-					property: 'probability',
-					stops: [
-						[minStop, opacityScale[0]],
-						[middleStop, opacityScale[1]],
-						[maxStop, opacityScale[2]]
-					]
-				},
+				'fill-opacity': opacity,
 				'fill-antialias': false,
-			}
+			},
 		},
 		firstSymbolId);
 }
@@ -85,7 +74,7 @@ function addGeoJSONSource(heatmapId, GeoJSONdata) {
 	});
 }
 
-function initializeHeatmap(GeoJSONdata, minStop, middleStop, maxStop) {
+function initializeHeatmap(GeoJSONdata, minStop, maxStop) {
 	map.once('load', function() {
 		firstSymbolId = findFirstLayer();
 
@@ -94,8 +83,8 @@ function initializeHeatmap(GeoJSONdata, minStop, middleStop, maxStop) {
 		addGeoJSONSource(heatmapIds[0], GeoJSONdata);
 		addGeoJSONSource(heatmapIds[1], '/frontend/assets/null.geojson');
 
-		addGeoJSONLayer(heatmapIds[0], 'visible', minStop, middleStop, maxStop);
-		addGeoJSONLayer(heatmapIds[1], 'none', minStop, middleStop, maxStop);
+		addGeoJSONLayer(heatmapIds[0], 'visible', minStop, maxStop);
+		addGeoJSONLayer(heatmapIds[1], 'none', minStop, maxStop);
 	})
 }
 
@@ -103,17 +92,34 @@ function setHeatmap(heatmapId, GeoJSONdata) {
 	map.getSource(heatmapId).setData(GeoJSONdata);
 }
 
-function changeHeatmapScale(minStop, middleStop, maxStop) {
+function changeHeatmapScale(minStop, maxStop) {
 	var fillColor = {
 		property: 'probability',
-		stops: [
-			[minStop, colorScale[0]],
-			[middleStop, colorScale[1]],
-			[maxStop, colorScale[2]]
-		]
+		stops: generateColorScale(colorScale[0], colorScale[1], minStop, maxStop)
 	};
 
 	heatmapIds.forEach(heatmapId => {
 		map.setPaintProperty(heatmapId, 'fill-color', fillColor);
 	});
+}
+
+function* range(start, end, step) {
+	while (start < end) {
+		yield start;
+		start += step;
+	}
+}
+
+function generateColorScale(colorHex1, colorHex2, minStop, maxStop) {
+	var stops = Array.from(range(minStop, maxStop, 1));
+	var colors = chroma.scale([colorHex1, colorHex2]).colors(stops.length);
+	var colorScale = [];
+
+	colors.forEach(
+		(color, index) => {
+			colorScale[index] = [stops[index], color]
+		}
+	);
+
+	return colorScale;
 }
