@@ -91,15 +91,17 @@ function setHeatmap(heatmapId, GeoJSONdata) {
 	map.getSource(heatmapId).setData(GeoJSONdata);
 }
 
-function setHeatmapColorScale(colorScale, minStop, maxStop) {
+function setHeatmapColorScale(colorScheme, minStop, maxStop) {
 	var fillColor = {
 		property: 'probability',
-		stops: generateColorScale(colorScale, minStop, maxStop)
+		stops: generateColorScale(colorScheme, minStop, maxStop)
 	};
 
 	heatmapIds.forEach(heatmapId => {
 		map.setPaintProperty(heatmapId, 'fill-color', fillColor);
 	});
+
+	currentColorScheme = colorScheme;
 }
 
 function* range(start, end, step) {
@@ -119,8 +121,6 @@ function generateColorScale(colorScheme, minStop, maxStop) {
 			colorScale[index] = [stops[index], color]
 		}
 	);
-
-	currentColorScheme = colorScheme;
 
 	return colorScale;
 }
