@@ -23,12 +23,20 @@
 		"description": "These are data overlays",
 		"items": [
 			{
-				"id": "oslo_covid",
-				"label": "Oslo covid test stations"
+				"id": "test_stations",
+				"label": "Oslo covid test stations",
+				"colorScheme": [
+					"#0000FF",
+					"#FF7700"
+				]
 			},
 			{
 				"id": "bike_stations",
-				"label": "Bike stations"
+				"label": "Bike stations",
+				"colorScheme": [
+					"#0000FF",
+					"#FF7700"
+				]
 			}
 		]
 	},
