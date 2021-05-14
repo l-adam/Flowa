@@ -21,6 +21,11 @@ class Generate_geojson():
                         'Grorud':(59.961424, 10.880549), 'Stovner':(59.958595, 10.927285), 'Alna':(59.93092, 10.85403), 
                         'Ostensjo':(59.887563, 10.832748), 'Nordstrand':(59.859314, 10.801257), 'Sondre Nordstrand':(59.845535, 10.807981)}
         self.places_name = list(self.places_coordinates.keys())
+        self.ids = {'Gamle Oslo':'gamle_oslo', 'Grunerlokka':'grunerlokka', 'Sagene':'sagene', 
+                        'St. Hanshaugen':'hanshaugen', 'Frogner':'frogner', 'Ullern':'ullern' ,
+                        'Vestre Aker':'vestre_aker', 'Nordre Aker':'nordre_aker', 'Bjerke':'bjerke', 
+                        'Grorud':'grorud', 'Stovner':'stovner', 'Alna':'alna', 
+                        'Ostensjo':'ostensjo', 'Nordstrand':'nordstrand', 'Sondre Nordstrand':'sondre_nordstrand'}
 
         # working directory
         self.data_dir = "C:\\Users\\virgi\\Desktop\\cours_imt\\A2\\S4 norway\\Project 6\\python_part"
@@ -178,6 +183,7 @@ class Generate_geojson():
                                 
                             },
                             "properties" : {
+                                "id": self.ids[name_station],
                                 "name_place": name_station,
                                 "cases_this_month": int(number_cases)
                             }
