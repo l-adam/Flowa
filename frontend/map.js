@@ -10,5 +10,5 @@ var map = new mapboxgl.Map({
 	antialias: false
 });
 
-initializeHeatmap(parseGeoJSONUrl(defaults.dataSourceIndex, 'source', defaults.timelineFromIndex,
-	defaults.timelineToIndex), dataSources[defaults.dataSourceIndex].colorScheme, -2, 2);
+initializeHeatmap(parseGeoJSONUrl(defaults.dataSourceIndex, 'source',
+	defaults.timelineIndex), dataSources[defaults.dataSourceIndex].colorScheme, -2, 2);

@@ -11,7 +11,10 @@
 			{
 				"id": "bike_covid",
 				"label": "Comparison bike-covid",
-				"colorScheme": ["#0000FF", "#FF7700"]
+				"colorScheme": [
+					"#0000FF",
+					"#FF7700"
+				]
 			}
 		]
 	},
@@ -33,10 +36,6 @@
 		"header": "Timeline",
 		"description": "The time periods",
 		"items": [
-			{
-				"id": "2020-03",
-				"label": "March 2020"
-			},
 			{
 				"id": "2020-04",
 				"label": "April 2020"
@@ -89,12 +88,10 @@
 				"id": "2021-04",
 				"label": "April 2021"
 			}
-
 		]
 	},
 	"defaults": {
 		"dataSourceIndex": 0,
-		"timelineFromIndex": 0,
-		"timelineToIndex": 1
+		"timelineIndex": 0
 	}
 }

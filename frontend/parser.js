@@ -38,7 +38,7 @@ function parseConfig() {
 	defaults = config.defaults;
 }
 
-function parseGeoJSONUrl(index, type, timelineIndexFrom, timelineIndexTo) {
+function parseGeoJSONUrl(index, type, timelineIndex) {
 	var geoJSONUrl = '';
 	var dataName;
 
@@ -49,7 +49,7 @@ function parseGeoJSONUrl(index, type, timelineIndexFrom, timelineIndexTo) {
 	}
 
 	geoJSONUrl = dataSourcesPath + dataName + '_' +
-		timelines[timelineIndexFrom].id + '_' + timelines[timelineIndexTo].id + '.geojson';
+		timelines[timelineIndex].id + '.geojson';
 
 	return geoJSONUrl;
 }
