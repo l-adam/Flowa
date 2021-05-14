@@ -3,8 +3,15 @@
 		"overlayIcons": [
 			{
 				"id": "pin",
-				"url": "/frontend/assets/map/overlays/pin.png"
+				"url": "/frontend/assets/map/overlays/pin.png",
+				"size": 0.33
 			}
-		]
+		],
+		"defaults": {
+			"overlayIcons": {
+				"id": "pin",
+				"size": 0.33
+			}
+		}
 	}
 }

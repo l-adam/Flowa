@@ -4,6 +4,7 @@ const opacity = 0.5;
 var current = {};
 var firstSymbolId;
 var heatmapIds = ['heatmap', 'heatmap2'];
+var iconProperties;
 
 // Find the index of the first symbol layer in the map style
 function findFirstLayer() {
@@ -140,8 +141,8 @@ function addOverlayLayer(overlay, visibility, minStop, maxStop) {
 		'type': 'symbol',
 		'source': overlay.id,
 		'layout': {
-			'icon-image': 'pin',
-			'icon-size': 0.25,
+			'icon-image': iconProperties.ids,
+			'icon-size': iconProperties.sizes,
 			'visibility': visibility,
 			'text-field': ['get', overlay.analyzedProperty],
 			'text-font': [
@@ -174,8 +175,26 @@ function generateColorMatch(overlay, colorScheme, minStop, maxStop) {
 	return colorMatch;
 }
 
+function generateIconProperties() {
+	iconProperties = {};
+	
+	iconProperties.ids = ['match', ['get', 'id']];
+	iconProperties.sizes = ['match', ['get', 'id']];
+	
+	assetsConfig.mapAssets.overlayIcons.forEach(
+		(icon, index) => {
+			iconProperties.ids.push(icon.id, icon.id);
+			iconProperties.sizes.push(icon.id, icon.size);
+		}
+	);
+	
+	iconProperties.ids.push(assetsConfig.mapAssets.defaults.overlayIcons.id);
+	iconProperties.sizes.push(assetsConfig.mapAssets.defaults.overlayIcons.size);
+}
+
 function initializeOverlays() {
 	loadAssets();
+	generateIconProperties();
 
 	dataOverlays.forEach(
 		(dataOverlay, index) => {
