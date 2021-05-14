@@ -143,7 +143,7 @@ function addOverlayLayer(overlay, visibility, minStop, maxStop) {
 			'icon-image': 'pin',
 			'icon-size': 0.25,
 			'visibility': visibility,
-			'text-field': ['get', 'title'],
+			'text-field': ['get', overlay.analyzedProperty],
 			'text-font': [
 				'Open Sans Semibold',
 				'Arial Unicode MS Bold'
