@@ -127,33 +127,41 @@ function generateColorScale(colorScheme, minStop, maxStop) {
 	return colorScale;
 }
 
-function addGeoJSONOverlay(overlayId, GeoJSONdata) {
-	map.addSource(overlayId, {
+function addGeoJSONOverlay(overlay, GeoJSONdata) {
+	map.addSource(overlay.id, {
 		'type': 'geojson',
 		'data': GeoJSONdata
 	});
 }
 
-function addOverlayLayer(overlayId, visibility, minStop, maxStop) {
+function addOverlayLayer(overlay, visibility, minStop, maxStop) {
 	map.addLayer({
-		'id': overlayId,
+		'id': overlay.id,
 		'type': 'symbol',
-		'source': overlayId,
+		'source': overlay.id,
 		'layout': {
 			'icon-image': 'pin',
 			'icon-size': 0.25,
-			'visibility': visibility
+			'visibility': visibility,
+			'text-field': ['get', 'title'],
+			'text-font': [
+				'Open Sans Semibold',
+				'Arial Unicode MS Bold'
+			],
+			'text-offset': [0, 1.25],
+			'text-anchor': 'top'
 		},
 		'paint': {
-			'icon-color': generateColorMatch(current.dataSource.colorScheme, minStop, maxStop)
+			'icon-color': generateColorMatch(overlay, overlay.colorScheme,
+				minStop, maxStop)
 		}
 	});
 }
 
-function generateColorMatch(colorScheme, minStop, maxStop) {
+function generateColorMatch(overlay, colorScheme, minStop, maxStop) {
 	var stops = Array.from(range(minStop, maxStop, 1));
 	var colors = chroma.scale(colorScheme).colors(stops.length);
-	var colorMatch = ['match', ['get', 'cases_this_month']];
+	var colorMatch = ['match', ['get', overlay.analyzedProperty]];
 
 	colors.forEach(
 		(color, index) => {
@@ -177,10 +185,10 @@ function initializeOverlays() {
 				'timelineIndex': defaults.timelineIndex
 			};
 
-			addGeoJSONOverlay(dataOverlay.id,
+			addGeoJSONOverlay(dataOverlay,
 				parseGeoJSONUrl(dataOverlayOptions), dataOverlay.colorScheme);
 
-			addOverlayLayer(dataOverlay.id, dataOverlay.defaultVisibility,
+			addOverlayLayer(dataOverlay, dataOverlay.defaultVisibility,
 				dataOverlay.minStop, dataOverlay.maxStop)
 		});
 }

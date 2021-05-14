@@ -39,10 +39,17 @@ function parseConfig() {
 	timelines = config.timeline.items;
 	defaults = config.defaults;
 
+	generateIndices(dataSources);
+	generateIndices(dataOverlays);
+
 	assetsConfig = getJSON(assetsConfigUrl);
 }
 
-function parseGeoJSONUrl({index, type, timelineIndex}) {
+function parseGeoJSONUrl({
+	index,
+	type,
+	timelineIndex
+}) {
 	var geoJSONUrl = '';
 	var dataName;
 	var dataPath;
@@ -59,4 +66,11 @@ function parseGeoJSONUrl({index, type, timelineIndex}) {
 		timelines[timelineIndex].id + '.geojson';
 
 	return geoJSONUrl;
+}
+
+function generateIndices(data) {
+	data.forEach(
+		(data, index) => {
+			data.index = index;
+		});
 }
