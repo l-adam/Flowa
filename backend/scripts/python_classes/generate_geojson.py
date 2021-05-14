@@ -168,16 +168,18 @@ class Generate_geojson():
                     ]
         }
         for name_station in self.places_name:
+            number_cases = self.data_covid[name_station][month]
+            number_cases = number_cases.replace(" ", "")
             geojson["features"].append({
                                         "type" : "Feature",
                             "geometry" : {
                                 "type" : "Point",
-                                "coordinates" : [self.places_coordinates[name_station][0], self.places_coordinates[name_station][1]]  
+                                "coordinates" : [self.places_coordinates[name_station][1], self.places_coordinates[name_station][0]]  
                                 
                             },
                             "properties" : {
-                                "Name_place": name_station,
-                                "Cases_this_month": self.data_covid[name_station][month]
+                                "name_place": name_station,
+                                "cases_this_month": int(number_cases)
                             }
 
                         })
