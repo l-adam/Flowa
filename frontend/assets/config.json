@@ -1,0 +1,10 @@
+{
+	"mapAssets": {
+		"overlayIcons": [
+			{
+				"id": "pin",
+				"url": "/frontend/assets/map/overlays/pin.png"
+			}
+		]
+	}
+}

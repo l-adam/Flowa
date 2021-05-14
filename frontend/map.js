@@ -10,5 +10,14 @@ var map = new mapboxgl.Map({
 	antialias: false
 });
 
-initializeHeatmap(parseGeoJSONUrl(defaults.dataSourceIndex, 'source',
-	defaults.timelineIndex), dataSources[defaults.dataSourceIndex].colorScheme, -2, 2);
+var dataSourceOptions = {
+	'index': defaults.dataSourceIndex,
+	'type': 'source',
+	'timelineIndex': defaults.timelineIndex
+};
+
+initializeHeatmap(dataSourceOptions, dataSources[defaults.dataSourceIndex].colorScheme, -2, 2);
+
+map.once('load', function() {
+	initializeOverlays();
+});

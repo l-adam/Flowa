@@ -14,7 +14,10 @@
 				"colorScheme": [
 					"#0000FF",
 					"#FF7700"
-				]
+				],
+				"analyzedProperty": "probability",
+				"minStop": -2,
+				"maxStop": 2
 			}
 		]
 	},
@@ -28,7 +31,11 @@
 				"colorScheme": [
 					"#0000FF",
 					"#FF7700"
-				]
+				],
+				"analyzedProperty": "cases_this_month",
+				"defaultVisibility": "visible",
+				"minStop": 0,
+				"maxStop": 150
 			},
 			{
 				"id": "bike_stations",
@@ -36,7 +43,11 @@
 				"colorScheme": [
 					"#0000FF",
 					"#FF7700"
-				]
+				],
+				"analyzedProperty": "probability",
+				"defaultVisibility": "none",
+				"minStop": -2,
+				"maxStop": 2
 			}
 		]
 	},
