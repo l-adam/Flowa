@@ -211,7 +211,7 @@ class Generate_geojson():
                                         "type" : "Feature",
                             "geometry" : {
                                 "type" : "Point",
-                                "coordinates" : [dico_from_excel[name_station][0], dico_from_excel[name_station][1]]  
+                                "coordinates" : [dico_from_excel[name_station][1], dico_from_excel[name_station][0]]  
                                 
                             },
                             "properties" : {
