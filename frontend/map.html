@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Flowa</title>
+		<title>
+			Flowa
+		</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
-		<link rel="preconnect" href="https://fonts.gstatic.com"> 
-		<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+		<link rel="preconnect" href="https://fonts.gstatic.com">
+		<link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&amp;display=swap" rel="stylesheet">
 		<link href="./js/mapbox-gl.css" rel="stylesheet">
 		<link href="./styles/map.css" rel="stylesheet">
 		<script src="./js/mapbox-gl.js"></script>
@@ -14,15 +16,67 @@
 		<script src="parser.js"></script>
 	</head>
 	<body>
-		<div id="header">
-			<div id="logo"></div>
-			<div id="navigation">
-				<div class="navigationButton">Map<div class="navigationIndicator"></div></div>
-				<div class="navigationButton">Statistics</div>
-				<div class="navigationButton">Contribute</div>
-				<div class="navigationButton">Support</div>
-				<div class="navigationButton">About Us</div>
+		<div id="content">
+			<div class="contentFrame">
+				<div id="header" class="flex">
+					<div id="logo"></div>
+					<div id="navigation">
+						<div class="navigationButton">
+							Map
+							<div class="navigationIndicator"></div>
+						</div>
+						<div class="navigationButton">
+							Statistics
+						</div>
+						<div class="navigationButton">
+							Contribute
+						</div>
+						<div class="navigationButton">
+							Support
+						</div>
+						<div class="navigationButton">
+							About Us
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="line"></div>
+			<div class="contentFrame">
+				<div id="mapView" class="flex">
+					<div id="mapSidebar">
+						<div id="mapSelector" class="flex">
+							<div class="mapSelectorEntryActive">Positives</div>
+							<div class="mapSelectorEntry"> Deaths</div>
+							<div class="mapSelectorEntry">Vaccinated</div>
+						</div>
+						<div id="mapSearch" class="textbox"></div>
+						<div id="mapDate" class="flex">
+							<div id="mapDatePicker" class="textbox"></div>
+							<div id="mapSearchButton" class="flex">
+								<img src="./assets/website/search.svg" alt="Search">
+							</div>
+						</div>
+						<div id="statistics" class="text">
+							Statistics
+							<div id="casesTotal" class="statistics"></div>
+							<div id="casesNew" class="statistics"></div>
+							<div id="casesRecovered" class="statistics"></div>
+							<div id="casesCasualties" class="statistics"></div>
+						</div>
+						<div id="legend" class="text">
+							Cases density
+							<div id="legendBar"></div>
+							<div id="legendText">
+								<div id="legendMin"></div>
+								<div id="legendMax"></div>
+							</div>
+						</div>
+					</div>
+					<div id="map"></div>
+				</div>
+				<div id="timeline"></div>
 			</div>
 		</div>
+		<script type="text/javascript" src="map.js"></script>
 	</body>
 </html>
