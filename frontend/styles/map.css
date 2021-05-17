@@ -35,6 +35,26 @@
 	letter-spacing: -0.015em;
 }
 
+.navigationButtonCurrent {
+	font-family: Lato, sans-serif;
+	font-style: normal;
+	font-weight: 900;
+	font-size: 15px;
+	margin-left: 20px;
+	margin-right: 20px;
+	margin-top: 8px;
+	color: #0000FF;
+	letter-spacing: -0.015em;
+}
+
+.navigationButton:hover {
+	color: #CCCCFF;
+}
+
+.navigationButton:active {
+	color: #0000FF;
+}
+
 .navigationIndicator {
 	background: url("../assets/website/indicator.svg");
 	width: 5px;
@@ -105,6 +125,14 @@ body {
 
 .mapSelectorEntry {
 	background: #E1E1E1;
+}
+
+.mapSelectorEntry:hover {
+	background: #CCCCFF;;
+}
+
+.mapSelectorEntry:active {
+	background: #0000FF;;
 }
 
 .textbox {

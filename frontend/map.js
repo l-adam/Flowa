@@ -14,6 +14,15 @@ map.addControl(new mapboxgl.FullscreenControl(), 'top-right');
 map.addControl(new MapControlLayers(), 'top-right');
 map.addControl(new MapControlSettings(), 'top-right');
 
+const mapButtonFullscreen = document.getElementsByClassName("mapboxgl-ctrl-fullscreen")[0];
+mapButtonFullscreen.addEventListener("click", () => {
+	setTimeout(resize, 500);
+});
+
+function resize() {
+	map.resize();
+}
+
 var geocoder = new MapboxGeocoder({ // Initialize the geocoder
 	accessToken: mapboxgl.accessToken, // Set the access token
 	mapboxgl: mapboxgl, // Set the mapbox-gl instance
