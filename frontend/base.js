@@ -177,17 +177,17 @@ function generateColorMatch(overlay, colorScheme, minStop, maxStop) {
 
 function generateIconProperties() {
 	iconProperties = {};
-	
+
 	iconProperties.ids = ['match', ['get', 'id']];
 	iconProperties.sizes = ['match', ['get', 'id']];
-	
+
 	assetsConfig.mapAssets.overlayIcons.forEach(
 		(icon, index) => {
 			iconProperties.ids.push(icon.id, icon.id);
 			iconProperties.sizes.push(icon.id, icon.size);
 		}
 	);
-	
+
 	iconProperties.ids.push(assetsConfig.mapAssets.defaults.overlayIcons.id);
 	iconProperties.sizes.push(assetsConfig.mapAssets.defaults.overlayIcons.size);
 }
@@ -224,4 +224,32 @@ function loadAssets() {
 					});
 				});
 		});
+}
+
+class MapControlLayers {
+	onAdd(map) {
+		this._map = map;
+		this._container = document.createElement('div');
+		this._container.className = 'mapButton mapButtonLayers';
+		return this._container;
+	}
+
+	onRemove() {
+		this._container.parentNode.removeChild(this._container);
+		this._map = undefined;
+	}
+}
+
+class MapControlSettings {
+	onAdd(map) {
+		this._map = map;
+		this._container = document.createElement('div');
+		this._container.className = 'mapButton mapButtonSettings';
+		return this._container;
+	}
+
+	onRemove() {
+		this._container.parentNode.removeChild(this._container);
+		this._map = undefined;
+	}
 }

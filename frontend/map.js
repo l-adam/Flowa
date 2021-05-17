@@ -10,6 +10,25 @@ var map = new mapboxgl.Map({
 	antialias: false
 });
 
+map.addControl(new mapboxgl.FullscreenControl(), 'top-right');
+map.addControl(new MapControlLayers(), 'top-right');
+map.addControl(new MapControlSettings(), 'top-right');
+
+var geocoder = new MapboxGeocoder({ // Initialize the geocoder
+	accessToken: mapboxgl.accessToken, // Set the access token
+	mapboxgl: mapboxgl, // Set the mapbox-gl instance
+	marker: false, // Do not use the default marker style
+	placeholder: 'Search', // Placeholder text for the search bar
+	bbox: [10.343942, 59.118721, 11.343942, 60.918721], // Boundary for Berkeley
+	proximity: {
+		longitude: 10.7439428,
+		latitude: 59.918721
+	}
+});
+
+// Add the geocoder to the map
+map.addControl(geocoder, 'top-left');
+
 var dataSourceOptions = {
 	'index': defaults.dataSourceIndex,
 	'type': 'source',

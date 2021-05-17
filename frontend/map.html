@@ -9,6 +9,8 @@
 		<link rel="preconnect" href="https://fonts.gstatic.com">
 		<link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&amp;display=swap" rel="stylesheet">
 		<link href="./js/mapbox-gl.css" rel="stylesheet">
+		<script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.min.js'></script>
+		<link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.css' type='text/css' />
 		<link href="./styles/map.css" rel="stylesheet">
 		<script src="./js/mapbox-gl.js"></script>
 		<script src="./js/chroma.min.js"></script>
@@ -45,36 +47,128 @@
 				<div id="mapView" class="flex">
 					<div id="mapSidebar">
 						<div id="mapSelector" class="flex">
-							<div class="mapSelectorEntryActive">Positives</div>
-							<div class="mapSelectorEntry"> Deaths</div>
-							<div class="mapSelectorEntry">Vaccinated</div>
+							<div class="mapSelectorEntryActive">
+								Positives
+							</div>
+							<div class="mapSelectorEntry">
+								Deaths
+							</div>
+							<div class="mapSelectorEntry">
+								Vaccinated
+							</div>
 						</div>
-						<div id="mapSearch" class="textbox"></div>
+						<div id="mapSearch" class="textbox">
+							<img src="./assets/website/location.svg" class="textboxIcon" alt="Location"> <input type="text" name="mapSearchText" value="Majorstuen, Oslo, Norway" id="mapSearchText" class="textboxText">
+						</div>
 						<div id="mapDate" class="flex">
-							<div id="mapDatePicker" class="textbox"></div>
+							<div id="mapDatePicker" class="textbox">
+								<img src="./assets/website/calendar.svg" class="textboxIcon" alt="Date"> <input type="text" name="mapSearchText" value="August, 26 — October, 6" id="mapCalendarText" class="textboxText">
+							</div>
 							<div id="mapSearchButton" class="flex">
 								<img src="./assets/website/search.svg" alt="Search">
 							</div>
 						</div>
 						<div id="statistics" class="text">
 							Statistics
-							<div id="casesTotal" class="statistics"></div>
-							<div id="casesNew" class="statistics"></div>
-							<div id="casesRecovered" class="statistics"></div>
-							<div id="casesCasualties" class="statistics"></div>
+							<div id="casesTotal" class="statistics">
+								<div id="casesTotalTitle" class="statisticsTitle">
+									Total cases
+								</div>
+								<div id="casesTotalNumber" class="statisticsNumber">
+									116k
+								</div>
+							</div>
+							<div id="casesNew" class="statistics">
+								<div id="casesNewTitle" class="statisticsTitle">
+									New cases
+								</div>
+								<div id="casesNewNumber" class="statisticsNumber">
+									231
+								</div>
+							</div>
+							<div id="casesRecovered" class="statistics">
+								<div id="casesRecoveredTitle" class="statisticsTitle">
+									Recovered
+								</div>
+								<div id="casesRecoveredNumber" class="statisticsNumber">
+									17k
+								</div>
+							</div>
+							<div id="casesCasualties" class="statistics">
+								<div id="casesCasualtiesTitle" class="statisticsTitle">
+									Casualties
+								</div>
+								<div id="casesCasualtiesNumber" class="statisticsNumber">
+									767
+								</div>
+							</div>
 						</div>
 						<div id="legend" class="text">
 							Cases density
-							<div id="legendBar"></div>
+							<div id="legendBar">
+								<img src="./assets/website/minus.svg" id="legendMin" alt="-"> <img src="./assets/website/plus.svg" id="legendMax" alt="+">
+							</div>
 							<div id="legendText">
-								<div id="legendMin"></div>
-								<div id="legendMax"></div>
+								<div id="legendMinText">
+									&lt;10
+								</div>
+								<div id="legendMaxText">
+									&lt;1000
+								</div>
 							</div>
 						</div>
 					</div>
 					<div id="map"></div>
 				</div>
-				<div id="timeline"></div>
+				<div id="timelineContainer">
+					<input type="range" min="1" max="1200" value="600" class="slider" id="timeline">
+				</div>
+				<div id="timelineDescription">
+					<div class="time">
+						<div class="month">April</div>
+						<div class="year">2020</div>
+					</div>
+					<div class="time">
+						<div class="month">May</div>
+						<div class="year">2020</div>
+					</div>
+					<div class="time">
+						<div class="month">July</div>
+						<div class="year">2020</div>
+					</div>
+					<div class="time">
+						<div class="month">August</div>
+						<div class="year">2020</div>
+					</div>
+					<div class="time">
+						<div class="month">September</div>
+						<div class="year">2020</div>
+					</div>
+					<div class="time">
+						<div class="month">October</div>
+						<div class="year">2020</div>
+					</div>
+					<div class="time">
+						<div class="month">November</div>
+						<div class="year">2020</div>
+					</div>
+					<div class="time">
+						<div class="month">December</div>
+						<div class="year">2020</div>
+					</div>
+					<div class="time">
+						<div class="month">January</div>
+						<div class="year">2021</div>
+					</div>
+					<div class="time">
+						<div class="month">February</div>
+						<div class="year">2021</div>
+					</div>
+					<div class="time">
+						<div class="month">March</div>
+						<div class="year">2021</div>
+					</div>
+				</div>
 			</div>
 		</div>
 		<script type="text/javascript" src="map.js"></script>
