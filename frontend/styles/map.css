@@ -134,8 +134,10 @@ body {
 }
 
 .textboxIcon {
+	width: max-content;
 	padding-left: 11px;
 	padding-right: 8px;
+    object-fit: none;
 }
 
 #mapSearchButton {
@@ -287,6 +289,17 @@ body {
 	  background: #0000FF;
 	  box-shadow: 0px 3px 4px #CCCCFF;
 	  border-radius: 10px;
+}
+
+#timeline::-moz-range-thumb {
+	appearance: none;
+	width: 8.33%;
+	height: 25px;
+	background: #0000FF;
+	cursor: pointer;
+	box-shadow: 0px 3px 4px #CCCCFF;
+	border-radius: 10px;
+	border: none;
 }
 
 #timelineDescription {
