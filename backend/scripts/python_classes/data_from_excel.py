@@ -7,8 +7,9 @@ class Data_from_excel():
     def __init__(self,data_dir="C:\\Users\\virgi\\Desktop\\cours_imt\\A2\\S4 norway\\Project 6\\python_part", excel_filename='table_cases_oslo.xlsx'):
         self.data_dir = data_dir
         self.excel_filename = excel_filename
+        #self.station_hub_result = self.station_hub()
         self.station_hub_result = {}
-
+        self.ltn = self.legacy_to_new_dico()
 
         self.places_coordinates = {'Gamle Oslo':(59.899237, 10.734767), 'Grünerløkka':(59.921875, 10.771906), 'Sagene':(59.937439, 10.760452), 
                         'St. Hanshaugen':(59.92795, 10.738958), 'Frogner':(59.917606, 10.710252), 'Ullern':(59.924469, 10.65988), 
@@ -75,8 +76,8 @@ class Data_from_excel():
         #print("\ntest_station_amount_cases done")
         return dic_station_month_amount
 
-    # generates the dictionnary which links the old id (legacy id) of a given bike station with the new id of a given bike station
-    # {"legacy_id" : "new_id"}
+    # generates the dictionnary which links the new id of a given bike station with its legacy id
+    # {"new_id" : "legacy_id"}
     def new_to_legacy_dico(self):
         dico={}
         #print("start new_to_legacy_dico()")
@@ -91,7 +92,8 @@ class Data_from_excel():
             #print("end new_to_legacy_dico()")
             return dico
 
-    #returns string
+    # generates the dictionnary which links the legacy id of a given bike station with its new id
+    # {"legacy_id" : "new_id"}
     def legacy_to_new_dico(self):
         dico={}
         #print("start legacy_to_new_dico()")
@@ -111,7 +113,7 @@ class Data_from_excel():
     from csv import reader
     # for each bike station, which hub? (returns a dictionnary)
     # returns 'Name_station' : [(lat, long), distance_closest_test_center, 'Name_closest_test_center']
-    # CARREFULL : currently using legacy names, can easely use the latest ones with 'legacy_new_station_id_mapping.csv' but useless
+    # (no? )CARREFULL : currently using legacy names, can easely use the latest ones with 'legacy_new_station_id_mapping.csv' but useless
     def station_hub(self):
         #print("start station_hub()")
         dic_station_hub = {}
@@ -138,13 +140,18 @@ class Data_from_excel():
                         if distance<distance_min:
                             distance_min = distance
                             closest_place = place_name
-                    
-                    dic_station_hub[station[0]]= [(float(station[1]), float(station[2])), distance_min, closest_place]
+                    ltn = self.legacy_to_new_dico()
+                    try:
+                        new_name = ltn[station[0]]
+                        dic_station_hub[new_name]= [(float(station[1]), float(station[2])), distance_min, closest_place]
+                    except:
+                        pass
                 dont_want_1st_line+=1
                 # station variable is a list that represents a row in csv
         #print("end station_hub()")
         return dic_station_hub
 
+    # {legacy_id:coords}
     def bike_station_coord(self):
         #print("start bike_station_coord()")
         dic_bs_coord = {}
@@ -166,3 +173,10 @@ class Data_from_excel():
                 # station variable is a list that represents a row in csv
         #print("end bike_station_coord()")
         return dic_bs_coord
+
+    def hub_station(self):
+        dct = self.station_hub().copy()
+        print(dct)
+        dct = {v: k for k, v in dct.items()}
+        print("\n",dct)
+        return dct

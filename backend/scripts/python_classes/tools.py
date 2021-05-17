@@ -1,4 +1,5 @@
 import generate_geojson
+import data_from_excel
 
 import requests
 import gmplot
@@ -7,6 +8,7 @@ import os
 
 import datetime
 from datetime import time
+import requests
 
 class Tools():
     def __init__(self):
@@ -102,3 +104,34 @@ class Tools():
         self.newId_usesMonth = dic_station_number
         return dic_station_number
 
+
+    def fill_departures_list3(self, json_file):
+        dfeo = data_from_excel.Data_from_excel()
+        new_to_test_center = dfeo.station_hub()
+        
+        amount_travel = 0
+
+        test_center_amount = {}
+        #result = fichier json
+        #pour chaque station
+        for i in range(len(json_file)):
+            start_station_id = json_file[i]["start_station_id"]
+            end_station_id = json_file[i]["end_station_id"]
+            
+            #si c'est la première fois qu'on voit cette station on l'instancie à 1 sinon on lui rajoute 1.
+            if new_to_test_center[start_station_id] not in test_center_amount:
+                test_center_amount[new_to_test_center[start_station_id]] = 0
+            if new_to_test_center[end_station_id] not in test_center_amount:
+                test_center_amount[new_to_test_center[end_station_id]] = 0
+
+            
+            # infos relatives à la station i = dic_travel
+            dic_travel=json_file[i]
+            amount_travel+=1
+            test_center_amount[new_to_test_center[start_station_id]] +=1
+            test_center_amount[new_to_test_center[end_station_id]] +=1
+
+        self.newId_usesMonth = test_center_amount
+        return test_center_amount
+
+            

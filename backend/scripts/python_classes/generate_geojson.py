@@ -55,6 +55,9 @@ class Generate_geojson():
         
         r = requests.get('https://data.urbansharing.com/oslobysykkel.no/trips/v1/2020/03.json')        
         result = r.json()
+        self.trav = len(result)
+        self.create_bike_stations(map_number)
+        
         amount_travels_bfore = self.init_tools.fill_departures_list2(result)
         
 
@@ -64,11 +67,14 @@ class Generate_geojson():
         index_month_relevant=1
     
         amount_travels_month =[]
+        
         for i in range(10):
+            
             str_i_month = index_month[i_month]
+            print("str:", str_i_month)
             r = requests.get('https://data.urbansharing.com/oslobysykkel.no/trips/v1/2020/' + str(str_i_month) + '.json')        
             result = r.json()
-
+            
             amount_travels_dico = self.init_tools.fill_departures_list2(result)
             #print(amount_travels_dico)
             #print(amount_travels_bfore)
@@ -77,26 +83,35 @@ class Generate_geojson():
             self.compt = [0,0,0,0,0]
             self.compt_it +=1
             amount_travels_bfore = self.init_tools.fill_departures_list2(result)
+            
             index_month_relevant += 1
             i_month +=1
             i_month = i_month%12
+            print("imonth: ",i_month)
+            
             map_number +=1
+            
         for i in range(3):
+            
             str_i_month = index_month[i_month]
+            
             r = requests.get('https://data.urbansharing.com/oslobysykkel.no/trips/v1/2021/' + str(str_i_month) + '.json')        
             result = r.json()
 
+            
             amount_travels_dico = self.init_tools.fill_departures_list2(result)
             self.create_matrix_square_station(index_month_relevant, result, map_number, amount_travels_bfore, amount_travels_dico)
             print("compt ",self.compt_it, " : ", self.compt)
             self.compt = [0,0,0,0,0]
             self.compt_it +=1
             amount_travels_bfore = self.init_tools.fill_departures_list2(result)
+            
             index_month_relevant +=1
             i_month +=1
             i_month = i_month%12
+            
             map_number +=1
-
+            
     # generates a geojson file with the link between the different data sources
     def create_matrix_square_station(self, month_num, json_file, map_number, amount_travels_bfore, amount_travels_dico):
         c_o = [10.665, 59.97] # = [longitude, latitude]
@@ -164,7 +179,7 @@ class Generate_geojson():
 
 
 # generates a geojson file with the coordinates of all the test stations
-    def create_test_stations(self, month):
+    def create_test_stations(self):
         print("start create_test_stations() ")
         geojson = {
                     "type" : "FeatureCollection",
@@ -190,15 +205,18 @@ class Generate_geojson():
 
                         })
         
-        with open('test_stations'+ str(month)+ '.geojson', 'w') as f:
+        with open('test_stations.geojson', 'w') as f:
             string_final1 = str(geojson)
             string_final2 = string_final1.replace("'",'"')
             f.write(string_final2)
             print("end create_test_stations() ")
         
     # generates a geojson file with the coordinates of all the bike stations {legacy_id : [lat, long]}
-    def create_bike_stations(self):
+    def create_bike_stations(self, month, jsf):
+        #returns dictionnary with bike_station_new_id (string): amount of uses this month (int) (the month of the json_file)
+        dsn = self.init_tools.fill_departures_list2(jsf)
         #print("start create_bike_stations() ")
+        # legacy_id : coord
         dico_from_excel = self.init_dfe.bike_station_coord()
         geojson = {
                     "type" : "FeatureCollection",
@@ -206,21 +224,29 @@ class Generate_geojson():
                         
                     ]
         }
-        for name_station in list(dico_from_excel.keys()):
+        #list(dico_from_excel.keys())
+        for new_id in list(dsn.keys()):
+            amount_travel = dsn[new_id]
+            legacy_dico = self.init_dfe.new_to_legacy_dico()
+            try:
+                legacy = legacy_dico[new_id]
+            except:
+                legacy = legacy_dico['606']
             geojson["features"].append({
                                         "type" : "Feature",
                             "geometry" : {
                                 "type" : "Point",
-                                "coordinates" : [dico_from_excel[name_station][1], dico_from_excel[name_station][0]]  
+                                "coordinates" : [dico_from_excel[legacy][1], dico_from_excel[legacy][0]]  
                                 
                             },
                             "properties" : {
-                                "Name_place": name_station,
+                                "name_place": new_id,
+                                "amount_travels": amount_travel
                             }
 
                         })
 
-        with open('bike_stations.geojson', 'w') as f:
+        with open('bike_stations' + str(month) + '.geojson', 'w') as f:
             string_final1 = str(geojson)
             string_final2 = string_final1.replace("'",'"')
             f.write(string_final2)

@@ -2,15 +2,20 @@ import generate_geojson
 import data_from_excel
 import tools
 
+import requests
+
 
 if __name__=="__main__":
    
     gg_object = generate_geojson.Generate_geojson()
     #gg_object.for_each_month_map()
-    
-
-    gg_object.create_bike_stations()
-
+    m=0
+    da = ["2020/01", "2020/02", "2020/03", "2020/04", "2020/05", "2020/06", "2020/07","2020/08","2020/09","2020/10","2020/11","2020/12","2021/01", "2021/02", "2021/03", "2021/04"]
+    for d in da:
+        r = requests.get('https://data.urbansharing.com/oslobysykkel.no/trips/v1/'+ d + '.json')
+        result = r.json() 
+        gg_object.create_bike_stations(m, result)
+        m +=1
     #ROAD MAP:
     # Parse Oslo Bysikkel site to get the bikes-related data
     # Generate a geojson file filled with a matrix
