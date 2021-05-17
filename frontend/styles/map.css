@@ -12,6 +12,7 @@
 	width: 101px;
 	height: 43px;
 	margin: 20px;
+	margin-left: 10px;
 }
 
 #navigation {
@@ -19,7 +20,7 @@
 	margin: 20px;
 	float: right;
 	margin-left: auto;
-	margin-right: 20px;
+	margin-right: 10px;
 }
 
 .navigationButton {
@@ -51,6 +52,7 @@ body {
 	max-width: 1200px;
 	margin-left: auto;
 	margin-right: auto;
+	padding-inline: 20px;
 }
 
 #line {
@@ -137,7 +139,7 @@ body {
 	width: max-content;
 	padding-left: 11px;
 	padding-right: 8px;
-    object-fit: none;
+	object-fit: none;
 }
 
 #mapSearchButton {
@@ -281,14 +283,14 @@ body {
 }
 
 #timeline::-webkit-slider-thumb {
-	  -webkit-appearance: none;
-	  appearance: none;
-	  width: 8.33%;
-	  height: 25px;
-	  cursor: pointer;
-	  background: #0000FF;
-	  box-shadow: 0px 3px 4px #CCCCFF;
-	  border-radius: 10px;
+	-webkit-appearance: none;
+	appearance: none;
+	width: 8.33%;
+	height: 25px;
+	cursor: pointer;
+	background: #0000FF;
+	box-shadow: 0px 3px 4px #CCCCFF;
+	border-radius: 10px;
 }
 
 #timeline::-moz-range-thumb {
