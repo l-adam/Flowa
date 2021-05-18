@@ -68,7 +68,10 @@
 		"items": [
 			{
 				"id": "2020-04",
-				"label": "April 2020",
+				"label": {
+					"month": "April",
+					"year": "2020"
+				},
 				"statistics": {
 					"casesTotal": "116k",
 					"casesNew": "231",
@@ -88,7 +91,10 @@
 			},
 			{
 				"id": "2020-05",
-				"label": "May 2020",
+				"label": {
+					"month": "May",
+					"year": "2020"
+				},
 				"statistics": {
 					"casesTotal": "116k",
 					"casesNew": "231",
@@ -108,7 +114,10 @@
 			},
 			{
 				"id": "2020-06",
-				"label": "June 2020",
+				"label": {
+					"month": "June",
+					"year": "2020"
+				},
 				"statistics": {
 					"casesTotal": "116k",
 					"casesNew": "231",
@@ -128,7 +137,10 @@
 			},
 			{
 				"id": "2020-07",
-				"label": "July 2020",
+				"label": {
+					"month": "July",
+					"year": "2020"
+				},
 				"statistics": {
 					"casesTotal": "116k",
 					"casesNew": "231",
@@ -148,7 +160,10 @@
 			},
 			{
 				"id": "2020-08",
-				"label": "August 2020",
+				"label": {
+					"month": "August",
+					"year": "2020"
+				},
 				"statistics": {
 					"casesTotal": "116k",
 					"casesNew": "231",
@@ -168,7 +183,10 @@
 			},
 			{
 				"id": "2020-09",
-				"label": "September 2020",
+				"label": {
+					"month": "September",
+					"year": "2020"
+				},
 				"statistics": {
 					"casesTotal": "116k",
 					"casesNew": "231",
@@ -188,7 +206,10 @@
 			},
 			{
 				"id": "2020-10",
-				"label": "October 2020",
+				"label": {
+					"month": "October",
+					"year": "2020"
+				},
 				"statistics": {
 					"casesTotal": "116k",
 					"casesNew": "231",
@@ -208,7 +229,10 @@
 			},
 			{
 				"id": "2020-11",
-				"label": "November 2020",
+				"label": {
+					"month": "November",
+					"year": "2020"
+				},
 				"statistics": {
 					"casesTotal": "116k",
 					"casesNew": "231",
@@ -228,7 +252,10 @@
 			},
 			{
 				"id": "2020-12",
-				"label": "December 2020",
+				"label": {
+					"month": "December",
+					"year": "2020"
+				},
 				"statistics": {
 					"casesTotal": "116k",
 					"casesNew": "231",
@@ -248,7 +275,10 @@
 			},
 			{
 				"id": "2021-01",
-				"label": "January 2021",
+				"label": {
+					"month": "January",
+					"year": "2021"
+				},
 				"statistics": {
 					"casesTotal": "116k",
 					"casesNew": "231",
@@ -268,7 +298,10 @@
 			},
 			{
 				"id": "2021-02",
-				"label": "February 2021",
+				"label": {
+					"month": "February",
+					"year": "2021"
+				},
 				"statistics": {
 					"casesTotal": "116k",
 					"casesNew": "231",
@@ -288,7 +321,10 @@
 			},
 			{
 				"id": "2021-03",
-				"label": "March 2021",
+				"label": {
+					"month": "March",
+					"year": "2021"
+				},
 				"statistics": {
 					"casesTotal": "116k",
 					"casesNew": "231",
@@ -308,7 +344,10 @@
 			},
 			{
 				"id": "2021-04",
-				"label": "April 2021",
+				"label": {
+					"month": "April",
+					"year": "2021"
+				},
 				"statistics": {
 					"casesTotal": "116k",
 					"casesNew": "231",
