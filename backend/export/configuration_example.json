@@ -10,7 +10,7 @@
 		"items": [
 			{
 				"id": "bike_covid",
-				"label": "Comparison bike-covid",
+				"label": "Bikes/Cases",
 				"colorScheme": [
 					"#0000FF",
 					"#FF7700"
@@ -21,7 +21,7 @@
 			},
 			{
 				"id": "fake_data",
-				"label": "fake dataset",
+				"label": "Fake Dataset",
 				"colorScheme": [
 					"#0000FF",
 					"#FF7700"
