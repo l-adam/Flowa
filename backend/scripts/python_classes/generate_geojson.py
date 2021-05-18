@@ -46,7 +46,6 @@ class Generate_geojson():
 
         self.compt = [0,0,0,0,0]
         self.compt_it = 0
-        self.ind = 0
     #indice_starting_month in [0:11]
     # filled with NEW ids
     def for_each_month_map(self):
@@ -363,7 +362,7 @@ class Generate_geojson():
         # 59 970 000 -> 60 059 947 / 10**6
         # entre 5994 et 97000 /10**5
         random_points = []
-        for i in range(10):
+        for i in range(3):
             random_long = 10 + random.randint(66500,82807)/10**5
             random_lat = random.randint(59970000, 60059947)/10**6
             random_points.append((random_long, random_lat))
@@ -428,12 +427,13 @@ class Generate_geojson():
     
     def get_fake_value(self, list_points, longi, lati):
         #value ranging from 0 to 20
-
+        # 0.07 -> 0.12
         value = 10
+        biggest_value = 10
+
         for point in list_points:
             dist = self.init_tools.distance(lati, longi, point[1], point[0])
 
-            self.ind +=1
             #break?
             if dist<0.9:
                 value = 0
@@ -453,7 +453,6 @@ class Generate_geojson():
                 value =  8        
             if dist<0.1:
                 value = 9
-
             if dist<0.09:
                 value = 11
             if dist < 0.08:
@@ -472,4 +471,7 @@ class Generate_geojson():
                 value =  19        
             if dist<0.01:
                 value = 20
-        return value
+            if value>biggest_value:
+                biggest_value = value
+        
+        return biggest_value

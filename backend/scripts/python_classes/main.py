@@ -24,8 +24,9 @@ if __name__=="__main__":
     print(c_o[0]+increment_long*200)
     print(c_o[1]+increment_lat*220)
     """
-
-    gg_object.fake(0)
+    
+    for num in range(8):
+        gg_object.fake(num)
     #ROAD MAP:
     # Parse Oslo Bysikkel site to get the bikes-related data
     # Generate a geojson file filled with a matrix
