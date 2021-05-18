@@ -17,18 +17,29 @@ function initializeLayout() {
 	});
 }
 
-function layoutChangeDataSource(index) {
+function layoutChangeDataSource(dataSourceIndex) {
 	var dataSourceOptions = {
-		'index': index,
+		'index': dataSourceIndex,
 		'type': 'source',
 		'timelineIndex': current.timelineIndex
 	};
 
 	var geoJSONUrl = parseGeoJSONUrl(dataSourceOptions);
 
-	current.dataSource = dataSources[index];
-	changeHeatmap(geoJSONUrl, dataSources[index].minStop, dataSources[index].maxStop);
+	current.dataSource = dataSources[dataSourceIndex];
+	changeHeatmap(geoJSONUrl, dataSources[dataSourceIndex].minStop,
+		dataSources[dataSourceIndex].maxStop);
 	//timelines[current.timelineIndex].legend[dataSources[index].id]
+
+	mapSelector.forEach((mapSelector, index) => {
+		if (index == dataSourceIndex) {
+			mapSelector.classList.add("mapSelectorEntry", "mapSelectorEntryActive");
+			mapSelector.classList.remove("mapSelectorEntry");
+		} else {
+			mapSelector.classList.add("mapSelectorEntry", "mapSelectorEntryActive");
+			mapSelector.classList.remove("mapSelectorEntryActive");
+		}
+	});
 }
 
 window.addEventListener('load', function() {
