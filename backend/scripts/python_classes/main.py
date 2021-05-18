@@ -9,6 +9,7 @@ if __name__=="__main__":
    
     gg_object = generate_geojson.Generate_geojson()
     #gg_object.for_each_month_map()
+    """
     m=0
     da = ["2020/01", "2020/02", "2020/03", "2020/04", "2020/05", "2020/06", "2020/07","2020/08","2020/09","2020/10","2020/11","2020/12","2021/01", "2021/02", "2021/03", "2021/04"]
     for d in da:
@@ -16,6 +17,15 @@ if __name__=="__main__":
         result = r.json() 
         gg_object.create_bike_stations(m, result)
         m +=1
+    
+    c_o = [10.665, 59.97]
+    increment_long = 10**(-4)*4.07696*2
+    increment_lat = 10**(-4)*2.04425*2
+    print(c_o[0]+increment_long*200)
+    print(c_o[1]+increment_lat*220)
+    """
+
+    gg_object.fake(0)
     #ROAD MAP:
     # Parse Oslo Bysikkel site to get the bikes-related data
     # Generate a geojson file filled with a matrix
