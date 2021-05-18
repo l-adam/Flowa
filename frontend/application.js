@@ -64,6 +64,29 @@ function layoutChangeStatistics() {
 	});
 }
 
+function initializeLayoutTimeline() {
+	var layoutTimes = [];
+
+	timelines.forEach((time, index) => {
+		var layoutMonth;
+		var layoutYear;
+
+		document.getElementById("timelineDescription")
+			.appendChild(layoutTimes[index] = document.createElement("div"))
+			.classList.add("time");
+
+		layoutTimes[index].appendChild(layoutMonth = document.createElement("div"))
+			.classList.add("month");
+		layoutTimes[index].appendChild(layoutYear = document.createElement("div"))
+			.classList.add("year");
+
+		layoutMonth.appendChild(document.createTextNode(time.label.month));
+		layoutYear.appendChild(document.createTextNode(time.label.year));
+		
+		layoutTimes[index].style.width = 100 * (1/timelines.length) + "%"
+	});
+}
+
 window.addEventListener('load', function() {
 	parseConfig().then(
 		function(value) {
@@ -75,6 +98,7 @@ window.addEventListener('load', function() {
 function initializeApplication() {
 	initializeLayoutDataSources();
 	initializeLayoutStatistics();
+	initializeLayoutTimeline();
 	initializeMap();
 	initializeHeatmap(dataSources[defaults.dataSourceIndex].colorScheme, -2, 2);
 	map.once('load', function() {
