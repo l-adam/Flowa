@@ -73,7 +73,7 @@
 				"casesNew": "231",
 				"casesRecovered": "17k",
 				"casesCasualties": "767",
-				"ranges": {
+				"legend": {
 					"bike_covid": {
 						"min": 10,
 						"max": 1000
@@ -91,7 +91,7 @@
 				"casesNew": "231",
 				"casesRecovered": "17k",
 				"casesCasualties": "767",
-				"ranges": {
+				"legend": {
 					"bike_covid": {
 						"min": 10,
 						"max": 1000
@@ -109,7 +109,7 @@
 				"casesNew": "231",
 				"casesRecovered": "17k",
 				"casesCasualties": "767",
-				"ranges": {
+				"legend": {
 					"bike_covid": {
 						"min": 10,
 						"max": 1000
@@ -127,7 +127,7 @@
 				"casesNew": "231",
 				"casesRecovered": "17k",
 				"casesCasualties": "767",
-				"ranges": {
+				"legend": {
 					"bike_covid": {
 						"min": 10,
 						"max": 1000
@@ -145,7 +145,7 @@
 				"casesNew": "231",
 				"casesRecovered": "17k",
 				"casesCasualties": "767",
-				"ranges": {
+				"legend": {
 					"bike_covid": {
 						"min": 10,
 						"max": 1000
@@ -163,7 +163,7 @@
 				"casesNew": "231",
 				"casesRecovered": "17k",
 				"casesCasualties": "767",
-				"ranges": {
+				"legend": {
 					"bike_covid": {
 						"min": 10,
 						"max": 1000
@@ -181,7 +181,7 @@
 				"casesNew": "231",
 				"casesRecovered": "17k",
 				"casesCasualties": "767",
-				"ranges": {
+				"legend": {
 					"bike_covid": {
 						"min": 10,
 						"max": 1000
@@ -199,7 +199,7 @@
 				"casesNew": "231",
 				"casesRecovered": "17k",
 				"casesCasualties": "767",
-				"ranges": {
+				"legend": {
 					"bike_covid": {
 						"min": 10,
 						"max": 1000
@@ -217,7 +217,7 @@
 				"casesNew": "231",
 				"casesRecovered": "17k",
 				"casesCasualties": "767",
-				"ranges": {
+				"legend": {
 					"bike_covid": {
 						"min": 10,
 						"max": 1000
@@ -235,7 +235,7 @@
 				"casesNew": "231",
 				"casesRecovered": "17k",
 				"casesCasualties": "767",
-				"ranges": {
+				"legend": {
 					"bike_covid": {
 						"min": 10,
 						"max": 1000
@@ -253,7 +253,7 @@
 				"casesNew": "231",
 				"casesRecovered": "17k",
 				"casesCasualties": "767",
-				"ranges": {
+				"legend": {
 					"bike_covid": {
 						"min": 10,
 						"max": 1000
@@ -271,7 +271,7 @@
 				"casesNew": "231",
 				"casesRecovered": "17k",
 				"casesCasualties": "767",
-				"ranges": {
+				"legend": {
 					"bike_covid": {
 						"min": 10,
 						"max": 1000
@@ -289,7 +289,7 @@
 				"casesNew": "231",
 				"casesRecovered": "17k",
 				"casesCasualties": "767",
-				"ranges": {
+				"legend": {
 					"bike_covid": {
 						"min": 10,
 						"max": 1000
