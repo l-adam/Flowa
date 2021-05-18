@@ -18,6 +18,17 @@
 				"analyzedProperty": "probability",
 				"minStop": -2,
 				"maxStop": 2
+			},
+			{
+				"id": "fake_data",
+				"label": "fake dataset",
+				"colorScheme": [
+					"#0000FF",
+					"#FF7700"
+				],
+				"analyzedProperty": "value",
+				"minStop": 10,
+				"maxStop": 15
 			}
 		]
 	},

@@ -46,7 +46,7 @@ class Generate_geojson():
 
         self.compt = [0,0,0,0,0]
         self.compt_it = 0
-
+        self.ind = 0
     #indice_starting_month in [0:11]
     # filled with NEW ids
     def for_each_month_map(self):
@@ -351,3 +351,125 @@ class Generate_geojson():
     # if you need it, generate ltn_dico the same way ntl_dico has been generated in new_to_legacy()
     def legacy_to_new(self, legacy_id):
         return self.ltn_dico[str(legacy_id)]
+
+    # generates a geojson file with fake shit
+    def fake(self, map_number):
+        #print("start fake() ")
+        #générer n points random dans la matrice
+        c_o = [10.665, 59.97] # = [longitude, latitude]
+        # 10.665 -> 10.828078399999999
+        # entre 66500 et 82807 /10**5
+        # 59.97 -> 60.059947
+        # 59 970 000 -> 60 059 947 / 10**6
+        # entre 5994 et 97000 /10**5
+        random_points = []
+        for i in range(10):
+            random_long = 10 + random.randint(66500,82807)/10**5
+            random_lat = random.randint(59970000, 60059947)/10**6
+            random_points.append((random_long, random_lat))
+        print("random_points: ",random_points)
+
+        geojson = {
+                    "type" : "FeatureCollection",
+                    "features" : [
+                        
+                    ]
+        }
+        # c_o[0] + 10**(-4)*4.07696*lon_indice
+        # c_o[1] - 10**(-4)*2.04425*lat_indice
+        increment_long = 10**(-4)*4.07696*2
+        increment_lat = 10**(-4)*2.04425*2
+        for lat_indice in range(220):
+            for lon_indice in range(200):
+                fake_value = self.get_fake_value(random_points, c_o[0] + 10**(-4)*4.07696*lon_indice,c_o[1] - 10**(-4)*2.04425*lat_indice)
+                geojson["features"].append({
+                                            "type" : "Feature",
+                                "geometry" : {
+                                    "type" : "Polygon",
+                                    #bg, hg, hd, bd, bg
+                                    "coordinates" : [[
+                                        
+                                        [
+                                        c_o[0] + increment_long*lon_indice,
+                                        c_o[1] - increment_lat*lat_indice
+                                        ],
+                                        [
+                                        c_o[0] + increment_long*(lon_indice + 1),
+                                        c_o[1] - increment_lat*lat_indice
+                                        ],
+                                        [
+                                        c_o[0] + increment_long*(lon_indice+1),
+                                        c_o[1] - increment_lat*(lat_indice+1) 
+                                        ],
+                                        [
+                                        c_o[0] + increment_long*lon_indice,
+                                        c_o[1] - increment_lat*(lat_indice+1) 
+                                        ],
+                                        [
+                                        c_o[0] + increment_long*lon_indice,
+                                        c_o[1] - increment_lat*lat_indice
+                                        ]
+                                        
+                                    ]]
+                                },
+                                "properties" : {
+                                    #bg, bd, hg
+                                    #"center" : get_center_rectangle(c_o[1] - increment_lat*lat_indice, c_o[0] + increment_long*lon_indice, c_o[1] - increment_lat*(lat_indice+1), c_o[0] + increment_long*(lon_indice + 1)),
+                                    "value": fake_value
+                                   }
+
+                            })
+
+        with open('fake_data' + str(map_number) +'.geojson', 'w') as f:
+            string_final1 = str(geojson)
+            string_final2 = string_final1.replace("'",'"')
+            f.write(string_final2)
+            #print("end fake() ")
+    
+    def get_fake_value(self, list_points, longi, lati):
+        #value ranging from 0 to 20
+
+        value = 10
+        for point in list_points:
+            dist = self.init_tools.distance(lati, longi, point[1], point[0])
+
+            self.ind +=1
+            #break?
+            if dist<0.9:
+                value = 0
+            if dist < 0.8:
+                value = 1
+            if dist<0.7:
+                value = 2
+            if dist<0.6:
+                value = 3
+            if dist<0.5:
+                value = 5
+            if dist<0.4:
+                value = 6
+            if dist<0.3:
+                value = 7
+            if dist<0.2:
+                value =  8        
+            if dist<0.1:
+                value = 9
+
+            if dist<0.09:
+                value = 11
+            if dist < 0.08:
+                value = 12
+            if dist<0.07:
+                value = 13
+            if dist<0.06:
+                value = 14
+            if dist<0.05:
+                value = 15
+            if dist<0.04:
+                value = 17
+            if dist<0.03:
+                value = 18
+            if dist<0.02:
+                value =  19        
+            if dist<0.01:
+                value = 20
+        return value
