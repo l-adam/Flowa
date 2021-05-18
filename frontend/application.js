@@ -82,9 +82,24 @@ function initializeLayoutTimeline() {
 
 		layoutMonth.appendChild(document.createTextNode(time.label.month));
 		layoutYear.appendChild(document.createTextNode(time.label.year));
-		
-		layoutTimes[index].style.width = 100 * (1/timelines.length) + "%"
+
+		layoutTimes[index].style.width = 100 * (1 / timelines.length) + "%"
 	});
+}
+
+function initializeLayoutLegend() {
+	var legendRange = {};
+	var currentLegend = timelines[current.timelineIndex].legend[current.dataSource.id];
+
+	document.getElementById("legendText")
+		.appendChild(legendRange.min = document.createElement("div"));
+	legendRange.min.appendChild(document.createTextNode("<" + currentLegend.min));
+	legendRange.min.id = "legendMinText";
+
+	document.getElementById("legendText")
+		.appendChild(legendRange.max = document.createElement("div"));
+	legendRange.max.appendChild(document.createTextNode("<" + currentLegend.max));
+	legendRange.max.id = "legendMaxText";
 }
 
 window.addEventListener('load', function() {
@@ -99,6 +114,7 @@ function initializeApplication() {
 	initializeLayoutDataSources();
 	initializeLayoutStatistics();
 	initializeLayoutTimeline();
+	initializeLayoutLegend();
 	initializeMap();
 	initializeHeatmap(dataSources[defaults.dataSourceIndex].colorScheme, -2, 2);
 	map.once('load', function() {
