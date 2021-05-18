@@ -1,5 +1,6 @@
 var layoutMapSelector = [];
 var layoutStatisticsNumbers = [];
+var layoutLegend = {};
 
 function initializeLayoutDataSources() {
 	dataSources.forEach((dataSource, index) => {
@@ -88,18 +89,24 @@ function initializeLayoutTimeline() {
 }
 
 function initializeLayoutLegend() {
-	var legendRange = {};
 	var currentLegend = timelines[current.timelineIndex].legend[current.dataSource.id];
 
 	document.getElementById("legendText")
-		.appendChild(legendRange.min = document.createElement("div"));
-	legendRange.min.appendChild(document.createTextNode("<" + currentLegend.min));
-	legendRange.min.id = "legendMinText";
+		.appendChild(layoutLegend.min = document.createElement("div"));
+	layoutLegend.min.appendChild(document.createTextNode("<" + currentLegend.min));
+	layoutLegend.min.id = "legendMinText";
 
 	document.getElementById("legendText")
-		.appendChild(legendRange.max = document.createElement("div"));
-	legendRange.max.appendChild(document.createTextNode("<" + currentLegend.max));
-	legendRange.max.id = "legendMaxText";
+		.appendChild(layoutLegend.max = document.createElement("div"));
+	layoutLegend.max.appendChild(document.createTextNode("<" + currentLegend.max));
+	layoutLegend.max.id = "legendMaxText";
+}
+
+function layoutChangeLegend() {
+	var currentLegend = timelines[current.timelineIndex].legend[current.dataSource.id];
+
+	layoutLegend.min.textContent = "<" + currentLegend.min;
+	layoutLegend.max.textContent = "<" + currentLegend.max;
 }
 
 window.addEventListener('load', function() {
