@@ -1,17 +1,19 @@
-var mapSelector = [];
+var layoutMapSelector = [];
+var layoutStatisticsNumbers = [];
 
-function initializeLayout() {
+function initializeLayoutDataSources() {
 	dataSources.forEach((dataSource, index) => {
 		document.getElementById("mapSelector")
-			.appendChild(mapSelector[index] = document.createElement("div"))
+			.appendChild(layoutMapSelector[index] = document.createElement("div"))
 			.classList.add("mapSelectorEntry");
 
 		if (defaults.dataSourceIndex == index) {
-			mapSelector[index].classList.replace("mapSelectorEntry", "mapSelectorEntryActive");
+			layoutMapSelector[index].classList
+				.replace("mapSelectorEntry", "mapSelectorEntryActive");
 		}
 
-		mapSelector[index].appendChild(document.createTextNode(dataSource.label));
-		mapSelector[index].addEventListener("click", function() {
+		layoutMapSelector[index].appendChild(document.createTextNode(dataSource.label));
+		layoutMapSelector[index].addEventListener("click", function() {
 			layoutChangeDataSource(index)
 		});
 	});
@@ -31,14 +33,34 @@ function layoutChangeDataSource(dataSourceIndex) {
 		dataSources[dataSourceIndex].maxStop);
 	//timelines[current.timelineIndex].legend[dataSources[index].id]
 
-	mapSelector.forEach((mapSelector, index) => {
+	layoutMapSelector.forEach((layoutMapSelector, index) => {
+		layoutMapSelector.classList
+			.add("mapSelectorEntry", "mapSelectorEntryActive");
+
 		if (index == dataSourceIndex) {
-			mapSelector.classList.add("mapSelectorEntry", "mapSelectorEntryActive");
-			mapSelector.classList.remove("mapSelectorEntry");
+			layoutMapSelector.classList.remove("mapSelectorEntry");
 		} else {
-			mapSelector.classList.add("mapSelectorEntry", "mapSelectorEntryActive");
-			mapSelector.classList.remove("mapSelectorEntryActive");
+			layoutMapSelector.classList.remove("mapSelectorEntryActive");
 		}
+	});
+}
+
+function initializeLayoutStatistics() {
+	Object.keys(timelines[current.timelineIndex].statistics).forEach((statistic, index) => {
+		document.getElementById(statistic)
+			.appendChild(layoutStatisticsNumbers[index] = document.createElement("div"))
+			.classList.add("statisticsNumber");
+
+		layoutStatisticsNumbers[index].id = statistic + "Number";
+		layoutStatisticsNumbers[index]
+			.appendChild(document
+				.createTextNode(timelines[current.timelineIndex].statistics[statistic]));
+	});
+}
+
+function layoutChangeStatistics() {
+	Object.keys(timelines[current.timelineIndex].statistics).forEach((statistic, index) => {
+		layoutStatisticsNumbers[index].textContent = timelines[current.timelineIndex].statistics[statistic];
 	});
 }
 
@@ -51,7 +73,8 @@ window.addEventListener('load', function() {
 });
 
 function initializeApplication() {
-	initializeLayout();
+	initializeLayoutDataSources();
+	initializeLayoutStatistics();
 	initializeMap();
 	initializeHeatmap(dataSources[defaults.dataSourceIndex].colorScheme, -2, 2);
 	map.once('load', function() {
