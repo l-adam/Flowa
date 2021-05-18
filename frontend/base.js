@@ -71,14 +71,21 @@ function addGeoJSONSource(heatmapId, GeoJSONdata) {
 	});
 }
 
-function initializeHeatmap(dataSourceOptions, colorScheme, minStop, maxStop) {
+function initializeHeatmap(colorScheme, minStop, maxStop) {
 	map.once('load', function() {
+		var dataSourceOptions = {
+			'index': defaults.dataSourceIndex,
+			'type': 'source',
+			'timelineIndex': defaults.timelineIndex
+		};
+
 		firstSymbolId = findFirstLayer();
 
 		var geoJSONUrl = parseGeoJSONUrl(dataSourceOptions);
 
 		current.dataSource = dataSources[dataSourceOptions.index];
 		current.heatmapId = heatmapIds[0];
+		current.timelineIndex = defaults.timelineIndex;
 
 		addGeoJSONSource(heatmapIds[0], geoJSONUrl);
 		addGeoJSONSource(heatmapIds[1], '/frontend/assets/null.geojson');

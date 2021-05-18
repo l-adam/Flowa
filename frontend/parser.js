@@ -28,7 +28,7 @@ function getJSON(url) {
 	return resp;
 }
 
-function parseConfig() {
+async function parseConfig() {
 	config = getJSON(configUrl);
 
 	dataSourcesPath = config.serverConfiguration.dataSourcesPath;
@@ -43,6 +43,8 @@ function parseConfig() {
 	generateIndices(dataOverlays);
 
 	assetsConfig = getJSON(assetsConfigUrl);
+	
+	return 0;
 }
 
 function parseGeoJSONUrl({

@@ -12,10 +12,11 @@
 		<script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.min.js'></script>
 		<link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.css' type='text/css'>
 		<link href="./styles/map.css" rel="stylesheet">
+		<script src="parser.js"></script>
 		<script src="./js/mapbox-gl.js"></script>
 		<script src="./js/chroma.min.js"></script>
 		<script src="base.js"></script>
-		<script src="parser.js"></script>
+		<script src="application.js"></script>
 	</head>
 	<body>
 		<div id="content">
@@ -46,17 +47,7 @@
 			<div class="contentFrame">
 				<div id="mapView" class="flex">
 					<div id="mapSidebar">
-						<div id="mapSelector" class="flex">
-							<div class="mapSelectorEntryActive">
-								Positives
-							</div>
-							<div class="mapSelectorEntry">
-								Deaths
-							</div>
-							<div class="mapSelectorEntry">
-								Vaccinated
-							</div>
-						</div>
+						<div id="mapSelector" class="flex"></div>
 						<div id="mapSearch" class="textbox">
 							<img src="./assets/website/location.svg" class="textboxIcon" alt="Location"> <input type="text" name="mapSearchText" value="Majorstuen, Oslo, Norway" id="mapSearchText" class="textboxText">
 						</div>
