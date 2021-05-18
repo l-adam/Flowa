@@ -18,6 +18,17 @@
 				"analyzedProperty": "probability",
 				"minStop": -2,
 				"maxStop": 2
+			},
+			{
+				"id": "fake_data",
+				"label": "Fake data",
+				"colorScheme": [
+					"#0000FF",
+					"#FF7700"
+				],
+				"analyzedProperty": "probability",
+				"minStop": -2,
+				"maxStop": 2
 			}
 		]
 	},
@@ -61,7 +72,17 @@
 				"casesTotal": "116k",
 				"casesNew": "231",
 				"casesRecovered": "17k",
-				"casesCasualties": "767"
+				"casesCasualties": "767",
+				"ranges": {
+					"bike_covid": {
+						"min": 10,
+						"max": 1000
+					},
+					"fake_data": {
+						"min": 10,
+						"max": 1000
+					}
+				}
 			},
 			{
 				"id": "2020-05",
@@ -69,7 +90,17 @@
 				"casesTotal": "116k",
 				"casesNew": "231",
 				"casesRecovered": "17k",
-				"casesCasualties": "767"
+				"casesCasualties": "767",
+				"ranges": {
+					"bike_covid": {
+						"min": 10,
+						"max": 1000
+					},
+					"fake_data": {
+						"min": 10,
+						"max": 1000
+					}
+				}
 			},
 			{
 				"id": "2020-06",
@@ -77,7 +108,17 @@
 				"casesTotal": "116k",
 				"casesNew": "231",
 				"casesRecovered": "17k",
-				"casesCasualties": "767"
+				"casesCasualties": "767",
+				"ranges": {
+					"bike_covid": {
+						"min": 10,
+						"max": 1000
+					},
+					"fake_data": {
+						"min": 10,
+						"max": 1000
+					}
+				}
 			},
 			{
 				"id": "2020-07",
@@ -85,7 +126,17 @@
 				"casesTotal": "116k",
 				"casesNew": "231",
 				"casesRecovered": "17k",
-				"casesCasualties": "767"
+				"casesCasualties": "767",
+				"ranges": {
+					"bike_covid": {
+						"min": 10,
+						"max": 1000
+					},
+					"fake_data": {
+						"min": 10,
+						"max": 1000
+					}
+				}
 			},
 			{
 				"id": "2020-08",
@@ -93,7 +144,17 @@
 				"casesTotal": "116k",
 				"casesNew": "231",
 				"casesRecovered": "17k",
-				"casesCasualties": "767"
+				"casesCasualties": "767",
+				"ranges": {
+					"bike_covid": {
+						"min": 10,
+						"max": 1000
+					},
+					"fake_data": {
+						"min": 10,
+						"max": 1000
+					}
+				}
 			},
 			{
 				"id": "2020-09",
@@ -101,7 +162,17 @@
 				"casesTotal": "116k",
 				"casesNew": "231",
 				"casesRecovered": "17k",
-				"casesCasualties": "767"
+				"casesCasualties": "767",
+				"ranges": {
+					"bike_covid": {
+						"min": 10,
+						"max": 1000
+					},
+					"fake_data": {
+						"min": 10,
+						"max": 1000
+					}
+				}
 			},
 			{
 				"id": "2020-10",
@@ -109,7 +180,17 @@
 				"casesTotal": "116k",
 				"casesNew": "231",
 				"casesRecovered": "17k",
-				"casesCasualties": "767"
+				"casesCasualties": "767",
+				"ranges": {
+					"bike_covid": {
+						"min": 10,
+						"max": 1000
+					},
+					"fake_data": {
+						"min": 10,
+						"max": 1000
+					}
+				}
 			},
 			{
 				"id": "2020-11",
@@ -117,7 +198,17 @@
 				"casesTotal": "116k",
 				"casesNew": "231",
 				"casesRecovered": "17k",
-				"casesCasualties": "767"
+				"casesCasualties": "767",
+				"ranges": {
+					"bike_covid": {
+						"min": 10,
+						"max": 1000
+					},
+					"fake_data": {
+						"min": 10,
+						"max": 1000
+					}
+				}
 			},
 			{
 				"id": "2020-12",
@@ -125,7 +216,17 @@
 				"casesTotal": "116k",
 				"casesNew": "231",
 				"casesRecovered": "17k",
-				"casesCasualties": "767"
+				"casesCasualties": "767",
+				"ranges": {
+					"bike_covid": {
+						"min": 10,
+						"max": 1000
+					},
+					"fake_data": {
+						"min": 10,
+						"max": 1000
+					}
+				}
 			},
 			{
 				"id": "2021-01",
@@ -133,7 +234,17 @@
 				"casesTotal": "116k",
 				"casesNew": "231",
 				"casesRecovered": "17k",
-				"casesCasualties": "767"
+				"casesCasualties": "767",
+				"ranges": {
+					"bike_covid": {
+						"min": 10,
+						"max": 1000
+					},
+					"fake_data": {
+						"min": 10,
+						"max": 1000
+					}
+				}
 			},
 			{
 				"id": "2021-02",
@@ -141,7 +252,17 @@
 				"casesTotal": "116k",
 				"casesNew": "231",
 				"casesRecovered": "17k",
-				"casesCasualties": "767"
+				"casesCasualties": "767",
+				"ranges": {
+					"bike_covid": {
+						"min": 10,
+						"max": 1000
+					},
+					"fake_data": {
+						"min": 10,
+						"max": 1000
+					}
+				}
 			},
 			{
 				"id": "2021-03",
@@ -149,7 +270,17 @@
 				"casesTotal": "116k",
 				"casesNew": "231",
 				"casesRecovered": "17k",
-				"casesCasualties": "767"
+				"casesCasualties": "767",
+				"ranges": {
+					"bike_covid": {
+						"min": 10,
+						"max": 1000
+					},
+					"fake_data": {
+						"min": 10,
+						"max": 1000
+					}
+				}
 			},
 			{
 				"id": "2021-04",
@@ -157,7 +288,17 @@
 				"casesTotal": "116k",
 				"casesNew": "231",
 				"casesRecovered": "17k",
-				"casesCasualties": "767"
+				"casesCasualties": "767",
+				"ranges": {
+					"bike_covid": {
+						"min": 10,
+						"max": 1000
+					},
+					"fake_data": {
+						"min": 10,
+						"max": 1000
+					}
+				}
 			}
 		]
 	},
