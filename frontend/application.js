@@ -84,8 +84,16 @@ function initializeLayoutTimeline() {
 		layoutMonth.appendChild(document.createTextNode(time.label.month));
 		layoutYear.appendChild(document.createTextNode(time.label.year));
 
-		layoutTimes[index].style.width = 100 * (1 / timelines.length) + "%"
+		layoutTimes[index].style.width = 100 * (1 / timelines.length) + "%";
 	});
+
+	var ruleWebKit = '#timeline::-webkit-slider-thumb { width: ' + 100 * (1 / timelines.length) + '%!important}';
+	var ruleMozilla = '#timeline::-moz-range-thumb { width: ' + 100 * (1 / timelines.length) + '%!important}';
+
+	try {
+		document.styleSheets[3].insertRule(ruleWebKit, 0);
+		document.styleSheets[3].insertRule(ruleMozilla, 0);
+	} catch (err) {}
 }
 
 function initializeLayoutLegend() {
