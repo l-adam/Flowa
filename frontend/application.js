@@ -93,7 +93,7 @@ function initializeLayoutTimeline() {
 
 	layoutTimeline.value = Math.round(current.timelineIndex * 1200 / (timelines.length - 1));
 
-	layoutTimeline.onmouseup = function() {
+	layoutTimeline.onclick = function() {
 		current.timelineIndex = Math.round(timeline.value /
 			(1200 / (timelines.length - 1)));
 		layoutTimeline.value = Math.round(current.timelineIndex * 1200 / (timelines.length - 1));
