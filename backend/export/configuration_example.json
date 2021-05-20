@@ -17,7 +17,11 @@
 				],
 				"analyzedProperty": "probability",
 				"minStop": -2,
-				"maxStop": 2
+				"maxStop": 2,
+				"legend": {
+					"title": "Cases density",
+					"description": "Do we need one?"
+				}
 			},
 			{
 				"id": "fake_data",
@@ -28,7 +32,11 @@
 				],
 				"analyzedProperty": "value",
 				"minStop": 10,
-				"maxStop": 15
+				"maxStop": 15,
+				"legend": {
+					"title": "Cases density",
+					"description": "Do we need one?"
+				}
 			}
 		]
 	},
