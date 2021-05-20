@@ -12,8 +12,6 @@ function initializeMap() {
 	});
 
 	map.addControl(new mapboxgl.FullscreenControl(), 'top-right');
-	map.addControl(new MapControlLayers(), 'top-right');
-	map.addControl(new MapControlSettings(), 'top-right');
 
 	const mapButtonFullscreen = document.getElementsByClassName("mapboxgl-ctrl-fullscreen")[0];
 	mapButtonFullscreen.addEventListener("click", () => {
