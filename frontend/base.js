@@ -149,9 +149,11 @@ function addOverlayLayer(overlay, visibility, minStop, maxStop) {
 		'type': 'symbol',
 		'source': overlay.id,
 		'layout': {
+			'icon-allow-overlap': true,
 			'icon-image': iconProperties.ids,
 			'icon-size': iconProperties.sizes,
 			'visibility': visibility,
+			'text-allow-overlap': true,
 			'text-field': ['get', overlay.analyzedProperty],
 			'text-font': [
 				'Open Sans Semibold',
