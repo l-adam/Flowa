@@ -216,8 +216,13 @@ function initializeOverlays() {
 				parseGeoJSONUrl(dataOverlayOptions), dataOverlay.colorScheme);
 
 			addOverlayLayer(dataOverlay, dataOverlay.defaultVisibility,
-				dataOverlay.minStop, dataOverlay.maxStop)
+				dataOverlay.minStop, dataOverlay.maxStop);
 		});
+}
+
+function changeOverlay(index) {
+	var dataOverlay = current.dataOverlays[index];
+	map.setLayoutProperty(dataOverlay.id, 'visibility', dataOverlay.visibility);
 }
 
 function loadAssets() {

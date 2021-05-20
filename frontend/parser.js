@@ -41,17 +41,22 @@ async function parseConfig() {
 
 	generateIndices(dataSources);
 	generateIndices(dataOverlays);
-	
+
 	parseDefaults();
 
 	assetsConfig = getJSON(assetsConfigUrl);
-	
+
 	return 0;
 }
 
 function parseDefaults() {
 	current.dataSource = dataSources[defaults.dataSourceIndex];
 	current.timelineIndex = defaults.timelineIndex;
+	current.dataOverlays = dataOverlays;
+
+	dataOverlays.forEach((dataOverlay, index) => {
+		current.dataOverlays[index].visibility = dataOverlay.defaultVisibility;
+	});
 }
 
 function parseGeoJSONUrl({

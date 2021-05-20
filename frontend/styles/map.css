@@ -200,7 +200,7 @@ body {
 	margin-top: 14px;
 }
 
-.overlays {
+#overlays {
 	width: auto;
 	background: #FFFFFF;
 	box-shadow: -4px 4px 20px #E1E1E1;

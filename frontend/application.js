@@ -1,6 +1,7 @@
 var layoutMapSelector = [];
 var layoutStatisticsNumbers = [];
 var layoutLegend = {};
+var layoutOverlays = [];
 
 function initializeLayoutDataSources() {
 	dataSources.forEach((dataSource, index) => {
@@ -137,6 +138,39 @@ function layoutChangeLegend() {
 	layoutLegend.max.textContent = "<" + currentLegend.max;
 }
 
+function initializeLayoutOverlays() {
+	current.dataOverlays.forEach((overlay, index) => {
+		var layoutOverlayContainer;
+
+		document.getElementById("overlays")
+			.appendChild(layoutOverlayContainer = document.createElement("div"))
+			.classList.add("overlay");
+
+		var html = "<label><input type=\"checkbox\"><span>";
+
+		layoutOverlayContainer.innerHTML = html + overlay.label + "</span></label>";
+		layoutOverlays[index] = layoutOverlayContainer.getElementsByTagName("input")[0];
+
+		layoutOverlays[index].addEventListener("click", function() {
+			if (layoutOverlays[index].checked == true) {
+				overlay.visibility = 'visible';
+			} else {
+				overlay.visibility = 'none';
+			}
+
+			layoutChangeOverlays(index);
+		});
+
+		if (overlay.defaultVisibility == 'visible') {
+			layoutOverlays[index].checked = true;
+		}
+	});
+}
+
+function layoutChangeOverlays(index) {
+	changeOverlay(index);
+}
+
 window.addEventListener('load', function() {
 	parseConfig().then(
 		function(value) {
@@ -150,6 +184,7 @@ function initializeApplication() {
 	initializeLayoutStatistics();
 	initializeLayoutTimeline();
 	initializeLayoutLegend();
+	initializeLayoutOverlays();
 	initializeMap();
 	initializeHeatmap(dataSources[defaults.dataSourceIndex].colorScheme, -2, 2);
 	map.once('load', function() {
