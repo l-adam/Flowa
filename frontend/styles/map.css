@@ -145,7 +145,7 @@ body {
 	border: 1px solid #646464;
 	box-sizing: border-box;
 	filter: drop-shadow(0px 0px 1px rgba(0, 0, 0, 0.48))
-	drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.12));
+		drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.12));
 	border-radius: 10px;
 	margin-top: 14px;
 	margin-right: auto;
@@ -174,20 +174,6 @@ body {
 	object-fit: none;
 }
 
-#mapSearchButton {
-	background: #0000FF;
-	width: 44px;
-	height: 44px;
-	border-radius: 10px;
-	margin-left: 14px;
-	margin-top: auto;
-	justify-content: center;
-}
-
-#mapSearchButton img {
-	object-fit: none;
-}
-
 #mapContainer {
 	flex: auto;
 	height: auto;
@@ -211,7 +197,50 @@ body {
 	line-height: 32px;
 	align-items: center;
 	color: #0000FF;
-	margin-top: 22px;
+	margin-top: 14px;
+}
+
+.overlays {
+	width: auto;
+	background: #FFFFFF;
+	box-shadow: -4px 4px 20px #E1E1E1;
+	border-radius: 10px;
+	margin-top: 16px;
+	display: flex;
+	flex-direction: column;
+	padding: 11px 16px 11px 16px;
+}
+
+.overlay {
+	font-family: Lato;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 18px;
+	line-height: 2;
+	color: #646464;
+}
+
+label {
+	cursor: pointer;
+}
+
+input[type="checkbox"] {
+	position: absolute;
+	opacity: 0;
+}
+
+input[type="checkbox"]+span:before {
+	font: 14pt FontAwesome;
+	content: '\00f096';
+	display: inline-block;
+	width: 14pt;
+	padding: 2px 0 0 3px;
+	margin-right: 8px;
+}
+
+input[type="checkbox"]:checked+span:before {
+	content: '\00f046';
+	color: #0000FF;
 }
 
 .statistics {
@@ -262,17 +291,17 @@ body {
 	color: #6666FF;
 }
 
-#legendBar{
+#legendBar {
 	width: 100%;
 	height: 24px;
 	background: linear-gradient(270deg, #FFA466 0%,
 		rgba(255, 255, 255, 0) 100%), #0000FF;
-	box-shadow: -4px 4px 4px #E1E1E1;
-	border-radius: 10px;
-	margin-top: 13px;
-	display: flex;
-	align-items: center;
-}
+		box-shadow: -4px 4px 4px #E1E1E1;
+		border-radius: 10px;
+		margin-top: 13px;
+		display: flex;
+		align-items: center;
+	}
 
 #legendMin {
 	margin-left: 11px;
@@ -303,11 +332,11 @@ body {
 }
 
 #timeline {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 100%;
-    height: 25px;
-    outline: none;
+	-webkit-appearance: none;
+	appearance: none;
+	width: 100%;
+	height: 25px;
+	outline: none;
 	margin-top: 20px;
 	background: #E1E1E1;
 	box-shadow: 0px 3px 4px #E1E1E1;
@@ -365,7 +394,6 @@ body {
 	line-height: 20px;
 	letter-spacing: -0.015em;
 	color: #323232;
-	
 }
 
 .mapButton {
