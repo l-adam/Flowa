@@ -23,6 +23,8 @@ function findFirstLayer() {
 function changeHeatmap(GeoJSONdata, minStop, maxStop) {
 	var heatmapOff;
 	var heatmapOn;
+	var minStop = current.dataSource.minStop;
+	var maxStop = current.dataSource.maxStop;
 
 	if (current.heatmapId == heatmapIds[0]) {
 		heatmapOff = heatmapIds[0];
@@ -36,9 +38,9 @@ function changeHeatmap(GeoJSONdata, minStop, maxStop) {
 
 	setHeatmap(heatmapOn, GeoJSONdata);
 
-	setHeatmapColorScale(current.colorScheme, minStop, maxStop);
+	setHeatmapColorScale(heatmapOn, current.colorScheme, minStop, maxStop);
 
-	map.once('data', function() {
+	map.once('idle', function() {
 		switchHeatmapVisibility(heatmapOff, heatmapOn);
 	});
 }
@@ -84,6 +86,7 @@ function initializeHeatmap(colorScheme, minStop, maxStop) {
 		var geoJSONUrl = parseGeoJSONUrl(dataSourceOptions);
 
 		current.dataSource = dataSources[dataSourceOptions.index];
+		current.dataSourceIndex = dataSourceOptions.index;
 		current.heatmapId = heatmapIds[0];
 		current.timelineIndex = defaults.timelineIndex;
 
@@ -93,7 +96,7 @@ function initializeHeatmap(colorScheme, minStop, maxStop) {
 		addSourceLayer(heatmapIds[0], 'visible', minStop, maxStop);
 		addSourceLayer(heatmapIds[1], 'none', minStop, maxStop);
 
-		setHeatmapColorScale(colorScheme, minStop, maxStop);
+		setHeatmapColorScale(current.heatmapId, colorScheme, minStop, maxStop);
 	})
 }
 
@@ -101,15 +104,13 @@ function setHeatmap(heatmapId, GeoJSONdata) {
 	map.getSource(heatmapId).setData(GeoJSONdata);
 }
 
-function setHeatmapColorScale(colorScheme, minStop, maxStop) {
+function setHeatmapColorScale(heatmapId, colorScheme, minStop, maxStop) {
 	var fillColor = {
 		property: current.dataSource.analyzedProperty,
 		stops: generateColorScale(colorScheme, minStop, maxStop)
 	};
 
-	heatmapIds.forEach(heatmapId => {
-		map.setPaintProperty(heatmapId, 'fill-color', fillColor);
-	});
+	map.setPaintProperty(heatmapId, 'fill-color', fillColor);
 
 	current.colorScheme = colorScheme;
 }

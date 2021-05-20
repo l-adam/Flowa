@@ -21,29 +21,23 @@ function initializeLayoutDataSources() {
 }
 
 function layoutChangeDataSource(dataSourceIndex) {
-	var dataSourceOptions = {
-		'index': dataSourceIndex,
-		'type': 'source',
-		'timelineIndex': current.timelineIndex
-	};
+	if (current.dataSourceIndex != dataSourceIndex) {
+		current.dataSource = dataSources[dataSourceIndex];
+		current.dataSourceIndex = dataSourceIndex;
 
-	var geoJSONUrl = parseGeoJSONUrl(dataSourceOptions);
+		layoutMapSelector.forEach((layoutMapSelector, index) => {
+			layoutMapSelector.classList
+				.add("mapSelectorEntry", "mapSelectorEntryActive");
 
-	current.dataSource = dataSources[dataSourceIndex];
-	changeHeatmap(geoJSONUrl, dataSources[dataSourceIndex].minStop,
-		dataSources[dataSourceIndex].maxStop);
-	//timelines[current.timelineIndex].legend[dataSources[index].id]
+			if (index == dataSourceIndex) {
+				layoutMapSelector.classList.remove("mapSelectorEntry");
+			} else {
+				layoutMapSelector.classList.remove("mapSelectorEntryActive");
+			}
+		});
 
-	layoutMapSelector.forEach((layoutMapSelector, index) => {
-		layoutMapSelector.classList
-			.add("mapSelectorEntry", "mapSelectorEntryActive");
-
-		if (index == dataSourceIndex) {
-			layoutMapSelector.classList.remove("mapSelectorEntry");
-		} else {
-			layoutMapSelector.classList.remove("mapSelectorEntryActive");
-		}
-	});
+		layoutUpdate();
+	}
 }
 
 function initializeLayoutStatistics() {
@@ -91,9 +85,35 @@ function initializeLayoutTimeline() {
 	var ruleMozilla = '#timeline::-moz-range-thumb { width: ' + 100 * (1 / timelines.length) + '%!important}';
 
 	try {
-		document.styleSheets[3].insertRule(ruleWebKit, 0);
-		document.styleSheets[3].insertRule(ruleMozilla, 0);
+		document.styleSheets[0].insertRule(ruleWebKit, 0);
+		document.styleSheets[0].insertRule(ruleMozilla, 0);
 	} catch (err) {}
+
+	var layoutTimeline = document.getElementById("timeline");
+
+	layoutTimeline.value = Math.round(current.timelineIndex * 1200 / (timelines.length - 1));
+
+	layoutTimeline.onmouseup = function() {
+		current.timelineIndex = Math.round(timeline.value /
+			(1200 / (timelines.length - 1)));
+		layoutTimeline.value = Math.round(current.timelineIndex * 1200 / (timelines.length - 1));
+		layoutUpdate();
+	}
+}
+
+function layoutUpdate() {
+	var dataSourceOptions = {
+		'index': current.dataSourceIndex,
+		'type': 'source',
+		'timelineIndex': current.timelineIndex
+	};
+
+	var geoJSONUrl = parseGeoJSONUrl(dataSourceOptions);
+
+	changeHeatmap(geoJSONUrl);
+
+	layoutChangeStatistics();
+	layoutChangeLegend();
 }
 
 function initializeLayoutLegend() {

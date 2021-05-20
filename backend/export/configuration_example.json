@@ -369,6 +369,6 @@
 	},
 	"defaults": {
 		"dataSourceIndex": 0,
-		"timelineIndex": 0
+		"timelineIndex": 1
 	}
 }
