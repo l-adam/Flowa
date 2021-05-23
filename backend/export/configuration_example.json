@@ -88,8 +88,8 @@
 				},
 				"legend": {
 					"bike_covid": {
-						"min": 10,
-						"max": 1000
+						"min": "Poorly correlated",
+						"max": "Highly correlated"
 					},
 					"fake_data": {
 						"min": 10,

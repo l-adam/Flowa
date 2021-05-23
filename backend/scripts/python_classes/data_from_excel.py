@@ -113,7 +113,8 @@ class Data_from_excel():
     from csv import reader
     # for each bike station, which hub? (returns a dictionnary)
     # returns 'Name_station' : [(lat, long), distance_closest_test_center, 'Name_closest_test_center']
-    # (no? )CARREFULL : currently using legacy names, can easely use the latest ones with 'legacy_new_station_id_mapping.csv' but useless
+    # CARREFULL : currently using legacy names, can easely use the latest ones with 'legacy_new_station_id_mapping.csv' but useless
+    # if you change lines 144, 146 and 147 to use new names it will screw up the generation of the maps.
     def station_hub(self):
         #print("start station_hub()")
         dic_station_hub = {}
@@ -140,10 +141,10 @@ class Data_from_excel():
                         if distance<distance_min:
                             distance_min = distance
                             closest_place = place_name
-                    ltn = self.legacy_to_new_dico()
+                    #ltn = self.legacy_to_new_dico()
                     try:
-                        new_name = ltn[station[0]]
-                        dic_station_hub[new_name]= [(float(station[1]), float(station[2])), distance_min, closest_place]
+                        #new_name = ltn[station[0]]
+                        dic_station_hub[station[0]]= [(float(station[1]), float(station[2])), distance_min, closest_place]
                     except:
                         pass
                 dont_want_1st_line+=1
