@@ -122,20 +122,20 @@ function initializeLayoutLegend() {
 
 	document.getElementById("legendText")
 		.appendChild(layoutLegend.min = document.createElement("div"));
-	layoutLegend.min.appendChild(document.createTextNode("<" + currentLegend.min));
+	layoutLegend.min.appendChild(document.createTextNode(currentLegend.min));
 	layoutLegend.min.id = "legendMinText";
 
 	document.getElementById("legendText")
 		.appendChild(layoutLegend.max = document.createElement("div"));
-	layoutLegend.max.appendChild(document.createTextNode("<" + currentLegend.max));
+	layoutLegend.max.appendChild(document.createTextNode(currentLegend.max));
 	layoutLegend.max.id = "legendMaxText";
 }
 
 function layoutChangeLegend() {
 	var currentLegend = timelines[current.timelineIndex].legend[current.dataSource.id];
 
-	layoutLegend.min.textContent = "<" + currentLegend.min;
-	layoutLegend.max.textContent = "<" + currentLegend.max;
+	layoutLegend.min.textContent = currentLegend.min;
+	layoutLegend.max.textContent = currentLegend.max;
 }
 
 function initializeLayoutOverlays() {
