@@ -16,8 +16,8 @@
 					"#FF7700"
 				],
 				"analyzedProperty": "probability",
-				"minStop": -2,
-				"maxStop": 2,
+				"minStop": 0,
+				"maxStop": 4,
 				"legend": {
 					"title": "Cases density",
 					"description": "Do we need one?"
@@ -35,7 +35,7 @@
 				"maxStop": 15,
 				"legend": {
 					"title": "Cases density",
-					"description": "Do we need one?"
+					"description": "Do we need one? I dont think so"
 				}
 			}
 		]

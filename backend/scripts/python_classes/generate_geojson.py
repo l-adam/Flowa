@@ -46,6 +46,8 @@ class Generate_geojson():
 
         self.compt = [0,0,0,0,0]
         self.compt_it = 0
+        self.unefois=0
+        self.dixfois = 0
     #indice_starting_month in [0:11]
     # filled with NEW ids
     def for_each_month_map(self):
@@ -54,8 +56,6 @@ class Generate_geojson():
         
         r = requests.get('https://data.urbansharing.com/oslobysykkel.no/trips/v1/2020/03.json')        
         result = r.json()
-        self.trav = len(result)
-        self.create_bike_stations(map_number)
         
         amount_travels_bfore = self.init_tools.fill_departures_list2(result)
         
@@ -77,6 +77,8 @@ class Generate_geojson():
             amount_travels_dico = self.init_tools.fill_departures_list2(result)
             #print(amount_travels_dico)
             #print(amount_travels_bfore)
+
+            #ici changer en create_matrix_square_station2()
             self.create_matrix_square_station(index_month_relevant, result, map_number, amount_travels_bfore, amount_travels_dico)
             print("compt ",self.compt_it, " : ", self.compt)
             self.compt = [0,0,0,0,0]
@@ -165,7 +167,7 @@ class Generate_geojson():
                                     "closest_station_bike": gcbs_stat,
                                     "closest_test_station": self.global_station_hub[gcbs_stat][2],
                                     #"closest_test_center_coordinates": places_coordinates[global_station_hub[gcbs_stat][2]],
-                                    "probability" : self.compare_then_proba(month_num, self.legacy_to_new(gcbs_stat), json_file, amount_travels_bfore, amount_travels_dico)#month num, bike station id  compare_then_proba(month_num, bike_station_id, json_file):
+                                    "probability" : self.compare_then_proba(month_num, gcbs_stat, json_file, amount_travels_bfore, amount_travels_dico)#month num, bike station id  compare_then_proba(month_num, bike_station_id, json_file):
                                 }
 
                             })
@@ -262,70 +264,81 @@ class Generate_geojson():
     #print("start compare_then_proba(", month_num, ", ", bike_station_id, ", json_file, ", "amount_travels_bfore", ")")
     # amount of travels this month:
         try:
+            """
+            if self.dixfois<11:
+                print(bike_station_id)
+            if self.unefois==0:
+                print(amount_travels_dico)
+                self.unefois+=1
+            """
+            print(bike_station_id)
             amount_travels = amount_travels_dico[bike_station_id]
+        except:
+            print("???????????????????????????????????????")
+            amount_travels = amount_travels_dico['530']
+        #covid:  global_station_hub = station_hub() # dico pour chaque id de station:[(lat, long), distance_closest_test_center, 'Name_closest_test_center']
+        #legacy_id = self.new_to_legacy(bike_station_id)
+        linked_test_center = self.global_station_hub[bike_station_id][2]
+        #print("linked test center : ", linked_test_center)
 
-            #covid:  global_station_hub = station_hub() # dico pour chaque id de station:[(lat, long), distance_closest_test_center, 'Name_closest_test_center']
-            legacy_id = self.new_to_legacy(bike_station_id)
-            linked_test_center = self.global_station_hub[legacy_id][2]
-            #print("linked test center : ", linked_test_center)
+        # data_covid : returns a dictionnary with test_center_name: amount of cases since march 2020 to march 2021 included
+        data_covid_station = self.data_covid[linked_test_center]
+        data_covid_station_month = int(data_covid_station[month_num])
+        data_covid_station_month_bfore = int(data_covid_station[month_num-1])
+        #print("covid : ", data_covid_station_month, data_covid_station_month_bfore)
 
-            # data_covid : returns a dictionnary with test_center_name: amount of cases since march 2020 to march 2021 included
-            data_covid_station = self.data_covid[linked_test_center]
-            data_covid_station_month = int(data_covid_station[month_num])
-            data_covid_station_month_bfore = int(data_covid_station[month_num-1])
-            #print("covid : ", data_covid_station_month, data_covid_station_month_bfore)
-
-            # >0 -> augmentation
-            # <0 -> diminution
-            #print("bikes : ", amount_travels, amount_travels_bfore[bike_station_id])
+        # >0 -> augmentation
+        # <0 -> diminution
+        #print("bikes : ", amount_travels, amount_travels_bfore[bike_station_id])
+        try:
             comparison_bike = amount_travels-amount_travels_bfore[bike_station_id]
             comparison_test = data_covid_station_month-data_covid_station_month_bfore
-            
-            if comparison_bike > 0 and comparison_test>0:
-                #print("1")
-                self.compt[0]+=1
-                return 1
-            elif comparison_bike < 0 and comparison_test<0:
-                #print("-1)")
-                self.compt[1]+=1
-                return -1
-
-            elif comparison_bike > 0 and comparison_test<0:
-                #print("2")
-                self.compt[2]+=1
-                return 2
-            elif comparison_bike < 0 and comparison_test>0:
-                #print("-2")
-                self.compt[3]+=1
-                return -2
-            else:
-                #print(comparison_bike, " ", comparison_test)
-                self.compt[4]+=1
-                return 0
-            
-            """
-            if comparison_bike > 0 and comparison_test>0:
-                print("5")
-                return 5
-            elif comparison_bike < 0 and comparison_test<0:
-                print("-5")
-                return -1
-
-            elif comparison_bike > 0 and comparison_test<0:
-                print("1")
-                return 1
-            elif comparison_bike < 0 and comparison_test>0:
-                print("9")
-                return 9
-            else:
-                print(comparison_bike, " ", comparison_test)
-                return 0
-            """
         except:
-            #print("0")
+            comparison_bike = amount_travels-5
+            comparison_test = 30
+
+        if comparison_bike > 0 and comparison_test>0:
+            #print("1")
             self.compt[4]+=1
+            return 4
+        elif comparison_bike < 0 and comparison_test<0:
+            #print("-1)")
+            self.compt[3]+=1
+            return 3
+
+        elif comparison_bike > 0 and comparison_test<0:
+            #print("2")
+            self.compt[0]+=1
             return 0
-            
+        elif comparison_bike < 0 and comparison_test>0:
+            #print("-2")
+            self.compt[2]+=1
+            return 2
+        else:
+            #print(comparison_bike, " ", comparison_test)
+            self.compt[2]+=1
+            return 2
+        
+        """
+        if comparison_bike > 0 and comparison_test>0:
+            print("5")
+            return 5
+        elif comparison_bike < 0 and comparison_test<0:
+            print("-5")
+            return -1
+
+        elif comparison_bike > 0 and comparison_test<0:
+            print("1")
+            return 1
+        elif comparison_bike < 0 and comparison_test>0:
+            print("9")
+            return 9
+        else:
+            print(comparison_bike, " ", comparison_test)
+            return 0
+        """
+    
+                
         #print("end compare_then_proba()")
         return 0
 
