@@ -38,7 +38,7 @@ function changeHeatmap(GeoJSONdata, minStop, maxStop) {
 
 	setHeatmap(heatmapOn, GeoJSONdata);
 
-	setHeatmapColorScale(heatmapOn, current.colorScheme, minStop, maxStop);
+	setHeatmapColorScale(heatmapOn);
 
 	map.once('idle', function() {
 		switchHeatmapVisibility(heatmapOff, heatmapOn);
@@ -50,7 +50,7 @@ function switchHeatmapVisibility(heatmapOff, heatmapOn) {
 	map.setLayoutProperty(heatmapOn, 'visibility', 'visible');
 }
 
-function addSourceLayer(heatmapId, visibility, minStop, maxStop) {
+function addSourceLayer(heatmapId, visibility) {
 	map.addLayer({
 			'id': heatmapId,
 			'type': 'fill',
@@ -73,7 +73,7 @@ function addGeoJSONSource(heatmapId, GeoJSONdata) {
 	});
 }
 
-function initializeMapHeatmap(colorScheme, minStop, maxStop) {
+function initializeMapHeatmap(colorScheme) {
 	map.once('load', function() {
 		var dataSourceOptions = {
 			'index': defaults.dataSourceIndex,
@@ -93,10 +93,10 @@ function initializeMapHeatmap(colorScheme, minStop, maxStop) {
 		addGeoJSONSource(heatmapIds[0], geoJSONUrl);
 		addGeoJSONSource(heatmapIds[1], '/frontend/assets/null.geojson');
 
-		addSourceLayer(heatmapIds[0], 'visible', minStop, maxStop);
-		addSourceLayer(heatmapIds[1], 'none', minStop, maxStop);
+		addSourceLayer(heatmapIds[0], 'visible');
+		addSourceLayer(heatmapIds[1], 'none');
 
-		setHeatmapColorScale(current.heatmapId, colorScheme, minStop, maxStop);
+		setHeatmapColorScale(current.heatmapId);
 	})
 }
 
@@ -104,15 +104,16 @@ function setHeatmap(heatmapId, GeoJSONdata) {
 	map.getSource(heatmapId).setData(GeoJSONdata);
 }
 
-function setHeatmapColorScale(heatmapId, colorScheme, minStop, maxStop) {
+function setHeatmapColorScale(heatmapId) {
 	var fillColor = {
 		property: current.dataSource.analyzedProperty,
-		stops: generateColorScale(colorScheme, minStop, maxStop)
+		stops: generateColorScale(current.dataSource.colorScheme,
+			current.dataSource.minStop, current.dataSource.maxStop)
 	};
 
 	map.setPaintProperty(heatmapId, 'fill-color', fillColor);
 
-	current.colorScheme = colorScheme;
+	current.colorScheme = current.dataSource.colorScheme;
 }
 
 function* range(start, end, step) {
@@ -143,7 +144,7 @@ function addGeoJSONOverlay(overlay, GeoJSONdata) {
 	});
 }
 
-function addOverlayLayer(overlay, visibility, minStop, maxStop) {
+function addOverlayLayer(overlay) {
 	map.addLayer({
 		'id': overlay.id,
 		'type': 'symbol',
@@ -152,7 +153,7 @@ function addOverlayLayer(overlay, visibility, minStop, maxStop) {
 			'icon-allow-overlap': true,
 			'icon-image': iconProperties.ids,
 			'icon-size': iconProperties.sizes,
-			'visibility': visibility,
+			'visibility': overlay.defaultVisibility,
 			'text-allow-overlap': true,
 			'text-field': ['get', overlay.analyzedProperty],
 			'text-font': [
@@ -163,15 +164,14 @@ function addOverlayLayer(overlay, visibility, minStop, maxStop) {
 			'text-anchor': 'top'
 		},
 		'paint': {
-			'icon-color': generateColorMatch(overlay, overlay.colorScheme,
-				minStop, maxStop)
+			'icon-color': generateColorMatch(overlay)
 		}
 	});
 }
 
-function generateColorMatch(overlay, colorScheme, minStop, maxStop) {
-	var stops = Array.from(range(minStop, maxStop, 1));
-	var colors = chroma.scale(colorScheme).colors(stops.length);
+function generateColorMatch(overlay) {
+	var stops = Array.from(range(overlay.minStop, overlay.maxStop, 1));
+	var colors = chroma.scale(overlay.colorScheme).colors(stops.length);
 	var colorMatch = ['match', ['get', overlay.analyzedProperty]];
 
 	colors.forEach(
@@ -217,8 +217,7 @@ function initializeMapOverlays() {
 			addGeoJSONOverlay(dataOverlay,
 				parseGeoJSONUrl(dataOverlayOptions), dataOverlay.colorScheme);
 
-			addOverlayLayer(dataOverlay, dataOverlay.defaultVisibility,
-				dataOverlay.minStop, dataOverlay.maxStop);
+			addOverlayLayer(dataOverlay);
 		});
 }
 

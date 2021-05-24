@@ -186,7 +186,7 @@ function initializeApplication() {
 	initializeLayoutLegend();
 	initializeLayoutOverlays();
 	initializeMap();
-	initializeMapHeatmap(dataSources[defaults.dataSourceIndex].colorScheme, -2, 2);
+	initializeMapHeatmap();
 	map.once('load', function() {
 		initializeMapOverlays();
 	});
