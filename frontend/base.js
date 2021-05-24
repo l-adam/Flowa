@@ -73,7 +73,7 @@ function addGeoJSONSource(heatmapId, GeoJSONdata) {
 	});
 }
 
-function initializeHeatmap(colorScheme, minStop, maxStop) {
+function initializeMapHeatmap(colorScheme, minStop, maxStop) {
 	map.once('load', function() {
 		var dataSourceOptions = {
 			'index': defaults.dataSourceIndex,
@@ -202,7 +202,7 @@ function generateIconProperties() {
 	iconProperties.sizes.push(assetsConfig.mapAssets.defaults.overlayIcons.size);
 }
 
-function initializeOverlays() {
+function initializeMapOverlays() {
 	loadAssets();
 	generateIconProperties();
 
@@ -222,7 +222,7 @@ function initializeOverlays() {
 		});
 }
 
-function changeOverlay(index) {
+function changeMapOverlay(index) {
 	var dataOverlay = current.dataOverlays[index];
 	map.setLayoutProperty(dataOverlay.id, 'visibility', dataOverlay.visibility);
 }

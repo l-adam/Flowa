@@ -168,7 +168,7 @@ function initializeLayoutOverlays() {
 }
 
 function layoutChangeOverlays(index) {
-	changeOverlay(index);
+	changeMapOverlay(index);
 }
 
 window.addEventListener('load', function() {
@@ -186,8 +186,8 @@ function initializeApplication() {
 	initializeLayoutLegend();
 	initializeLayoutOverlays();
 	initializeMap();
-	initializeHeatmap(dataSources[defaults.dataSourceIndex].colorScheme, -2, 2);
+	initializeMapHeatmap(dataSources[defaults.dataSourceIndex].colorScheme, -2, 2);
 	map.once('load', function() {
-		initializeOverlays();
+		initializeMapOverlays();
 	});
 }
