@@ -20,7 +20,7 @@ function findFirstLayer() {
 	return firstSymbolId;
 }
 
-function changeHeatmap(GeoJSONdata, minStop, maxStop) {
+function changeHeatmap(GeoJSONdata) {
 	var heatmapOff;
 	var heatmapOn;
 	var minStop = current.dataSource.minStop;
