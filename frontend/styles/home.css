@@ -9,6 +9,7 @@
 
 #sectionOneText {
 	width: 60%;
+	z-index: 2;
 }
 
 .title {
@@ -46,7 +47,7 @@
 
 #introductionF {
 	background: url("../assets/website/f.svg") no-repeat;
-	width: 500px;
+	width: 38%;
 	height: 650px;
 	z-index: 1;
 	position: absolute;
