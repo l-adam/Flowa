@@ -203,22 +203,24 @@ function generateIconProperties() {
 }
 
 function initializeMapOverlays() {
-	loadAssets();
-	generateIconProperties();
+	map.once('load', function() {
+		loadAssets();
+		generateIconProperties();
 
-	dataOverlays.forEach(
-		(dataOverlay, index) => {
-			var dataOverlayOptions = {
-				'index': index,
-				'type': 'overlay',
-				'timelineIndex': defaults.timelineIndex
-			};
+		dataOverlays.forEach(
+			(dataOverlay, index) => {
+				var dataOverlayOptions = {
+					'index': index,
+					'type': 'overlay',
+					'timelineIndex': defaults.timelineIndex
+				};
 
-			addGeoJSONOverlay(dataOverlay,
-				parseGeoJSONUrl(dataOverlayOptions), dataOverlay.colorScheme);
+				addGeoJSONOverlay(dataOverlay,
+					parseGeoJSONUrl(dataOverlayOptions), dataOverlay.colorScheme);
 
-			addOverlayLayer(dataOverlay);
-		});
+				addOverlayLayer(dataOverlay);
+			});
+	})
 }
 
 function changeMapOverlay(index) {

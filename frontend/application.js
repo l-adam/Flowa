@@ -187,7 +187,5 @@ function initializeApplication() {
 	initializeLayoutOverlays();
 	initializeMap();
 	initializeMapHeatmap();
-	map.once('load', function() {
-		initializeMapOverlays();
-	});
+	initializeMapOverlays();
 }
