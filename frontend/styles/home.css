@@ -1,0 +1,153 @@
+#sectionOne {
+	margin-top: 50px;
+	margin-bottom: 50px;
+}
+
+.blank50 {
+	width: 50%;
+}
+
+#sectionOneText {
+	width: 60%;
+}
+
+.title {
+	font-family: Lato;
+	font-style: normal;
+	font-weight: 700;
+	font-size: 46px;
+	line-height: 1.5;
+	letter-spacing: -0.015em;
+	color: #3E3E3E;
+}
+
+.subtitle {
+	margin-top: 20px;
+	font-family: Lato;
+	font-style: normal;
+	font-weight: 700;
+	font-size: 24px;
+	line-height: 36px;
+	letter-spacing: -0.015em;
+	color: #3E3E3E;
+}
+
+#sectionOneDescription {
+	margin-top: 20px;
+	margin-bottom: 20px;
+	font-family: Lato;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 18px;
+	line-height: 30px;
+	letter-spacing: -0.015em;
+	color: #0000FF;
+}
+
+#introductionF{
+	background: url("../assets/website/f.svg") no-repeat;
+	width: 500px;
+	height: 650px;
+	z-index: 1;
+	position: absolute;
+}
+
+#sectionTwo {
+	background: linear-gradient(264.85deg, #FF5500 28.54%, rgba(255, 255, 255, 0) 86.88%), #6666FF;
+	width: 100%;
+	height: 484px;
+}
+
+#sectionTwo {
+	text-align: center;
+}
+
+.sectionTwo {
+	margin-left: auto;
+	margin-right: auto;
+	color: #FFFFFF;
+	width: 700px;
+}
+
+#sectionTwoTitle {
+	margin-top: auto;
+	font-size: 48px;
+}
+
+#sectionTwoDescription {
+	font-family: Lato;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 24px;
+	line-height: 29px;
+	display: flex;
+	align-items: center;
+	text-align: center;
+	letter-spacing: -0.015em;
+	color: #FFFFFF;
+	margin-top: 12px;
+}
+
+#subscribe {
+	width: 500px;
+	height: 45px;
+	background: #FFFFFF;
+	border-radius: 10px;
+	margin-top: 58px;
+	margin-bottom: auto;
+}
+
+.textboxText {
+	font-family: Lato;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 16px;
+	line-height: 19px;
+	letter-spacing: 0.12px;
+	color: #C8C8C8;
+	border: none;
+	flex: auto;
+	margin-inline: 8px;
+	outline: none;
+}
+
+#subscribeButton {
+	width: 138px;
+	height: 100%;
+	background: #0000FF;
+	border-radius: 10px;
+	font-family: Lato;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 16px;
+	line-height: 19px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	letter-spacing: -0.015em;
+	color: #FFFFFF;
+}
+
+#sectionOneButton {
+	margin-top: 29px;
+}
+
+.buttonTerciary {
+	width: 100px;
+	height: 34px;
+	border: 1px solid #323232;
+	box-sizing: border-box;
+	border-radius: 6px;
+	font-family: Lato;
+	font-style: normal;
+	font-weight: 500;
+	font-size: 15px;
+	line-height: 18px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	letter-spacing: -0.015em;
+	color: #323232;
+
+	
+}
