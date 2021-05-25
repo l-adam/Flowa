@@ -44,7 +44,7 @@
 	margin-bottom: auto;
 }
 
-#sectionTwo {
+.section {
 	padding-top: 90px;
 	max-width: 800px;
 	font-family: Lato;
@@ -70,7 +70,7 @@
 	margin-top: 8px;
 }
 
-#sectionTwoDescriptionTitle {
+.descriptionTitle {
 	font-weight: bold;
 }
 
@@ -82,15 +82,15 @@
 	margin-top: 30px;
 }
 
-.sectionTwoSelector {
-	width: 100%;
-}
-
 #sectionTwoSelectorsCity {
 	margin-inline: 14px;
 }
 
-.sectionTwoSelector select {
+.selector {
+	width: 100%;
+}
+
+.selector select {
 	height: 48px;
 	appearance: none;
 	-webkit-appearance: none;
@@ -180,4 +180,12 @@
 
 #sectionTwoStatisticsActiveNumber {
 	color: #FF5500;
+}
+
+#sectionThreeSelectors {
+	margin-top: 30px;
+}
+
+#sectionThreeSelectorsCity {
+	margin-inline: 14px;
 }
