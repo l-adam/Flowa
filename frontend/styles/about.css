@@ -29,6 +29,20 @@
 	margin-right: 80px;
 }
 
+.sectionContainerRight {
+	width: 47%;
+	height: 154px;
+	background: #FAFAFA;
+	box-shadow: -4px 4px 20px #E5E5E5;
+	border-radius: 20px 0px 0px 20px;
+	text-align: left;
+	display: flex;
+	flex-direction: column;
+	padding-left: 30px;
+	box-sizing: border-box;
+	margin-left: 80px;
+}
+
 .sectionContainerHeader {
 	margin-top: auto;
 }
@@ -50,4 +64,19 @@
 	letter-spacing: -0.015em;
 	color: #646464;
 	margin-right: auto;
+}
+
+.sectionContainerTextRight {
+	width: 50%;
+	max-width: 520px;
+	margin-top: 100px;
+	margin-bottom: 100px;
+	font-family: Lato;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 18px;
+	line-height: 22px;
+	letter-spacing: -0.015em;
+	color: #646464;
+	margin-left: auto;
 }
