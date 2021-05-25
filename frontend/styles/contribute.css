@@ -96,3 +96,133 @@
 	color: #646464;
 	margin-right: auto;
 }
+
+.sectionThreeContainer {
+	font-family: Lato;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 24px;
+	line-height: 29px;
+	letter-spacing: -0.015em;
+	color: #323232;
+	margin-bottom: 38px;
+}
+
+.sectionThreeContainerTitle {
+	text-align: right;
+	width: 20%;
+}
+
+.sectionThreeForm {
+	width: 640px;
+	background: #FAFAFA;
+	box-shadow: -4px 4px 20px #E5E5E5;
+	border-radius: 20px;
+	margin-left: 42px;
+	padding-inline: 36px;
+	padding-top: 25px;
+	padding-bottom: 42px;
+	box-sizing: border-box;
+}
+
+input, label {
+    display: block;
+}
+
+.sectionThreeForm label {
+	font-family: Lato;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 18px;
+	line-height: 22px;
+	letter-spacing: -0.015em;
+	color: #646464;
+	margin-bottom: 8px;
+}
+
+.sectionThreeForm div + div {
+	margin-top: 20px;
+}
+
+.sectionThreeForm input, textarea {
+	width: 100%;
+	height: 40px;
+	background: #FFFFFF;
+	border: 1px solid #969696;
+	box-sizing: border-box;
+	border-radius: 5px;
+	outline: none;
+	font-family: Lato;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 13px;
+	line-height: 16px;
+	letter-spacing: -0.015em;
+	color: #646464;
+	padding-inline: 15px;
+}
+
+.selector {
+	width: 100%;
+	font-family: Lato;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 18px;
+	line-height: 22px;
+	letter-spacing: -0.015em;
+	color: #646464;
+}
+
+.selector select {
+	margin-top: 8px;
+	height: 40px;
+	background: #FFFFFF;
+	border: 1px solid #969696;
+	box-sizing: border-box;
+	border-radius: 5px;
+	appearance: none;
+	-webkit-appearance: none;
+	outline: none;
+	font-family: Lato;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 13px;
+	line-height: 16px;
+	letter-spacing: -0.015em;
+	color: #646464;
+	padding-inline: 15px;
+	display: flex;
+	align-items: center;
+}
+
+#companyDescription {
+	align-items: top;
+	min-height: 100px;
+	padding-block: 8px;
+}
+
+
+
+.blue {
+	color: #0000FF;
+}
+
+#companyAttachmentContainer {
+	height: 170px;
+	background: #FFFFFF;
+	border: 1px solid #969696;
+	box-sizing: border-box;
+	border-radius: 5px;
+	text-align: center;
+	font-family: Lato;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 16px;
+	line-height: 19px;
+	letter-spacing: -0.015em;
+	color: #969696;
+}
+
+#companyAttachmentText {
+	margin-block: auto;;
+}
