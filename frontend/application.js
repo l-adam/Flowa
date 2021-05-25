@@ -98,6 +98,7 @@ function initializeLayoutTimeline() {
 		current.timelineIndex = Math.round(timeline.value /
 			(1200 / (timelines.length - 1)));
 		layoutTimeline.value = Math.round(current.timelineIndex * 1200 / (timelines.length - 1));
+		changeMapOverlayTime();
 		layoutUpdate();
 	}
 }
@@ -109,9 +110,10 @@ function layoutUpdate() {
 		'timelineIndex': current.timelineIndex
 	};
 
-	var geoJSONUrl = parseGeoJSONUrl(dataSourceOptions);
+	var geoJSONSourceUrl = parseGeoJSONUrl(dataSourceOptions);
 
-	changeHeatmap(geoJSONUrl);
+	changeHeatmap(parseGeoJSONUrl(dataSourceOptions));
+	
 
 	layoutChangeStatistics();
 	layoutChangeLegend();
@@ -168,7 +170,7 @@ function initializeLayoutOverlays() {
 }
 
 function layoutChangeOverlays(index) {
-	changeMapOverlay(index);
+	changeMapOverlayVisibility(index);
 }
 
 window.addEventListener('load', function() {

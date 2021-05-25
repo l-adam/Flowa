@@ -223,9 +223,22 @@ function initializeMapOverlays() {
 	})
 }
 
-function changeMapOverlay(index) {
+function changeMapOverlayVisibility(index) {
 	var dataOverlay = current.dataOverlays[index];
 	map.setLayoutProperty(dataOverlay.id, 'visibility', dataOverlay.visibility);
+}
+
+function changeMapOverlayTime() {
+	dataOverlays.forEach(
+		(dataOverlay, index) => {
+			var dataOverlayOptions = {
+				'index': index,
+				'type': 'overlay',
+				'timelineIndex': current.timelineIndex
+			};
+
+			map.getSource(dataOverlay.id).setData(parseGeoJSONUrl(dataOverlayOptions));
+		});
 }
 
 function loadAssets() {
