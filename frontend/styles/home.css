@@ -130,42 +130,6 @@
 	margin-top: 29px;
 }
 
-.buttonPrimary {
-	width: 100px;
-	background: #0000FF;
-	height: 34px;
-	box-sizing: border-box;
-	border-radius: 6px;
-	font-family: Lato;
-	font-style: normal;
-	font-weight: 500;
-	font-size: 15px;
-	line-height: 18px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	letter-spacing: -0.015em;
-	color: #FFFFFF;
-}
-
-.buttonTerciary {
-	width: 100px;
-	height: 34px;
-	border: 1px solid #323232;
-	box-sizing: border-box;
-	border-radius: 6px;
-	font-family: Lato;
-	font-style: normal;
-	font-weight: 500;
-	font-size: 15px;
-	line-height: 18px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	letter-spacing: -0.015em;
-	color: #323232;
-}
-
 #menu {
 	max-width: 890px;
 	width: 100%;
@@ -213,14 +177,10 @@
 	margin-right: 17px;
 }
 
-.header {
-	font-family: Lato;
-	font-style: normal;
-	font-weight: 900;
-	font-size: 64px;
-	line-height: 77px;
-	letter-spacing: -0.015em;
-	color: #0000FF;
+.section {
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .description {
@@ -231,12 +191,6 @@
 	line-height: 17px;
 	letter-spacing: -0.015em;
 	color: #646464;
-}
-
-.section {
-	display: flex;
-	justify-content: center;
-	align-items: center;
 }
 
 #sectionThree {

@@ -43,3 +43,141 @@
 	margin-top: 12px;
 	margin-bottom: auto;
 }
+
+#sectionTwo {
+	padding-top: 90px;
+	max-width: 800px;
+	font-family: Lato;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 18px;
+	line-height: 22px;
+	letter-spacing: -0.015em;
+	color: #646464;
+}
+
+#sectionTwoUpdate {
+	font-family: Lato;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 24px;
+	line-height: 29px;
+	letter-spacing: -0.015em;
+	color: #FF5500;
+}
+
+.description {
+	margin-top: 8px;
+}
+
+#sectionTwoDescriptionTitle {
+	font-weight: bold;
+}
+
+#sectionTwoButton {
+	margin-top: 20px;
+}
+
+#sectionTwoSelectors {
+	margin-top: 30px;
+}
+
+.sectionTwoSelector {
+	width: 100%;
+}
+
+#sectionTwoSelectorsCity {
+	margin-inline: 14px;
+}
+
+.sectionTwoSelector select {
+	height: 48px;
+	appearance: none;
+	-webkit-appearance: none;
+	background: #FFFFFF;
+	border: 2px solid #969696;
+	box-sizing: border-box;
+	border-radius: 10px;
+	outline: none;
+	font-family: Lato;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 18px;
+	line-height: 22px;
+	display: flex;
+	align-items: center;
+	letter-spacing: -0.015em;
+	color: #969696;
+	padding-left: 16px;
+	margin-top: 11px;
+}
+
+#sectionTwoStatistics {
+	margin-top: 40px;
+}
+
+.sectionTwoStatisticsColumn {
+	width: 100%;
+}
+
+.sectionTwoStatistic {
+	height: 168px;
+	background: #FAFAFA;
+	box-shadow: -4px 4px 20px #E1E1E1;
+	border-radius: 20px;
+	padding: 20px;
+	box-sizing: border-box;
+	margin-bottom: 24px;
+	display: flex;
+	flex-direction: column;
+}
+
+.sectionTwoStatisticsColumn + .sectionTwoStatisticsColumn {
+	margin-left: 24px;
+}
+
+.sectionTwoStatisticTitle {
+	font-family: Lato;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 24px;
+	line-height: 22px;
+	letter-spacing: -0.015em;
+	color: #323232;
+}
+
+.sectionTwoStatisticIncrease {
+	font-family: Lato;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 18px;
+	line-height: 22px;
+	text-align: right;
+	letter-spacing: -0.015em;
+	color: #969696;
+	margin-top: 28px;
+	margin-bottom: 20px;
+}
+
+.sectionTwoStatisticNumber {
+	font-family: Lato;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 64px;
+	line-height: 22px;
+	text-align: right;
+	letter-spacing: -0.015em;
+	color: #0000FF;
+}
+
+#sectionTwoStatisticsCasualtiesNumber {
+	color: #6666FF;
+}
+
+#sectionTwoStatisticsRecoveredNumber {
+	color: #FFA466;
+}
+
+#sectionTwoStatisticsActiveNumber {
+	color: #FF5500;
+}
