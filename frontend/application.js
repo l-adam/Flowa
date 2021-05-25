@@ -110,10 +110,7 @@ function layoutUpdate() {
 		'timelineIndex': current.timelineIndex
 	};
 
-	var geoJSONSourceUrl = parseGeoJSONUrl(dataSourceOptions);
-
 	changeHeatmap(parseGeoJSONUrl(dataSourceOptions));
-	
 
 	layoutChangeStatistics();
 	layoutChangeLegend();
