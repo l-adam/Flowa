@@ -110,7 +110,7 @@ function layoutUpdate() {
 		'timelineIndex': current.timelineIndex
 	};
 
-	changeHeatmap(parseGeoJSONUrl(dataSourceOptions));
+	changeHeatmap(dataSourceOptions);
 
 	layoutChangeStatistics();
 	layoutChangeLegend();

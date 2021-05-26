@@ -20,7 +20,7 @@ function findFirstLayer() {
 	return firstSymbolId;
 }
 
-function changeHeatmap(GeoJSONdata) {
+function changeHeatmap(dataSourceOptions) {
 	var heatmapOff;
 	var heatmapOn;
 	var minStop = current.dataSource.minStop;
@@ -36,12 +36,14 @@ function changeHeatmap(GeoJSONdata) {
 		current.heatmapId = heatmapIds[0];
 	}
 
-	setHeatmap(heatmapOn, GeoJSONdata);
+	parseGeoJSONZip(dataSourceOptions).then(function(GeoJSONdata) {
+		setHeatmap(heatmapOn, GeoJSONdata);
 
-	setHeatmapColorScale(heatmapOn);
+		setHeatmapColorScale(heatmapOn);
 
-	map.once('idle', function() {
-		switchHeatmapVisibility(heatmapOff, heatmapOn);
+		map.once('idle', function() {
+			switchHeatmapVisibility(heatmapOff, heatmapOn);
+		});
 	});
 }
 
@@ -83,20 +85,22 @@ function initializeMapHeatmap(colorScheme) {
 
 		firstSymbolId = findFirstLayer();
 
-		var geoJSONUrl = parseGeoJSONUrl(dataSourceOptions);
 
 		current.dataSource = dataSources[dataSourceOptions.index];
 		current.dataSourceIndex = dataSourceOptions.index;
 		current.heatmapId = heatmapIds[0];
 		current.timelineIndex = defaults.timelineIndex;
 
-		addGeoJSONSource(heatmapIds[0], geoJSONUrl);
-		addGeoJSONSource(heatmapIds[1], '/frontend/assets/null.geojson');
 
-		addSourceLayer(heatmapIds[0], 'visible');
-		addSourceLayer(heatmapIds[1], 'none');
+		parseGeoJSONZip(dataSourceOptions).then(function(geoJSONdata) {
+			addGeoJSONSource(heatmapIds[0], geoJSONdata);
+			addGeoJSONSource(heatmapIds[1], '/frontend/assets/null.geojson');
 
-		setHeatmapColorScale(current.heatmapId);
+			addSourceLayer(heatmapIds[0], 'visible');
+			addSourceLayer(heatmapIds[1], 'none');
+
+			setHeatmapColorScale(current.heatmapId);
+		});
 	})
 }
 
@@ -215,10 +219,11 @@ function initializeMapOverlays() {
 					'timelineIndex': defaults.timelineIndex
 				};
 
-				addGeoJSONOverlay(dataOverlay,
-					parseGeoJSONUrl(dataOverlayOptions), dataOverlay.colorScheme);
+				parseGeoJSONUrl(dataOverlayOptions).then(function(geoJSONdata) {
+					addGeoJSONOverlay(dataOverlay, geoJSONdata, dataOverlay.colorScheme);
 
-				addOverlayLayer(dataOverlay);
+					addOverlayLayer(dataOverlay);
+				});
 			});
 	})
 }
@@ -237,7 +242,9 @@ function changeMapOverlayTime() {
 				'timelineIndex': current.timelineIndex
 			};
 
-			map.getSource(dataOverlay.id).setData(parseGeoJSONUrl(dataOverlayOptions));
+			parseGeoJSONUrl(dataOverlayOptions).then(function(geoJSONdata) {
+				map.getSource(dataOverlay.id).setData(geoJSONdata);
+			});
 		});
 }
 
