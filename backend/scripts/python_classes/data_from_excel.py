@@ -11,7 +11,7 @@ class Data_from_excel():
         self.station_hub_result = {}
         self.ltn = self.legacy_to_new_dico()
 
-        self.places_coordinates = {'Gamle Oslo':(59.899237, 10.734767), 'Grünerløkka':(59.921875, 10.771906), 'Sagene':(59.937439, 10.760452), 
+        self.places_coordinates = {'Gamle Oslo':(59.899237, 10.734767), 'Grunerlokka':(59.921875, 10.771906), 'Sagene':(59.937439, 10.760452), 
                         'St. Hanshaugen':(59.92795, 10.738958), 'Frogner':(59.917606, 10.710252), 'Ullern':(59.924469, 10.65988), 
                         'Vestre Aker':(59.9583, 10.670319), 'Nordre Aker':(59.953638, 10.756412), 'Bjerke':(59.940668, 10.808725), 
                         'Grorud':(59.961424, 10.880549), 'Stovner':(59.958595, 10.927285), 'Alna':(59.93092, 10.85403), 
