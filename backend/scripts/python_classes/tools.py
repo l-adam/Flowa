@@ -10,6 +10,13 @@ import datetime
 from datetime import time
 import requests
 
+"""
+import tarfile
+import lzma
+"""
+import zipfile
+import bz2
+
 class Tools():
     def __init__(self):
         self.newId_usesMonth = {}
@@ -134,4 +141,27 @@ class Tools():
         self.newId_usesMonth = test_center_amount
         return test_center_amount
 
-            
+    
+    def compress(self):
+        #python_classes
+        #curr_dir = os.getcwd()
+        os.chdir("../") 
+        curr_dir = os.path.normpath(os.getcwd() + os.sep + os.pardir)#backend
+        curr_dir = os.path.normpath(curr_dir + "/export/sources/")
+        list_files = os.listdir(curr_dir)
+        list_files = list_files[0:13]
+
+        print(curr_dir)
+        geojson_zip = zipfile.ZipFile(curr_dir + 'geojson_archived.zip', 'w')
+
+
+        for folder, subfolders, files in os.walk(curr_dir):
+ 
+            for file in files:
+                #if file.startswith('bike'):
+                geojson_zip.write(os.path.join(folder, file), os.path.relpath(os.path.join(folder,file), curr_dir), 
+                compress_type = zipfile.ZIP_BZIP2, compresslevel=9)
+        
+        geojson_zip.close()
+
+        return(curr_dir, list_files)
