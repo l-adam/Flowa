@@ -15,7 +15,7 @@ class Data_from_excel():
                         'St. Hanshaugen':(59.92795, 10.738958), 'Frogner':(59.917606, 10.710252), 'Ullern':(59.924469, 10.65988), 
                         'Vestre Aker':(59.9583, 10.670319), 'Nordre Aker':(59.953638, 10.756412), 'Bjerke':(59.940668, 10.808725), 
                         'Grorud':(59.961424, 10.880549), 'Stovner':(59.958595, 10.927285), 'Alna':(59.93092, 10.85403), 
-                        'Østensjø':(59.887563, 10.832748), 'Nordstrand':(59.859314, 10.801257), 'Søndre Nordstrand':(59.845535, 10.807981)}
+                        'Ostensjo':(59.887563, 10.832748), 'Nordstrand':(59.859314, 10.801257), 'Sondre Nordstrand':(59.845535, 10.807981)}
 
         self.places_name = list(self.places_coordinates.keys())
 

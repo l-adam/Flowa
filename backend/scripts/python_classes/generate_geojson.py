@@ -15,9 +15,16 @@ from datetime import time
 class Generate_geojson():
     def __init__(self, title = None):
 
+        # 'Bjerke':(59.940668, 10.808725)
+        #'Gamle Oslo':(59.899237, 10.734767)
+        self.string_month = ['bike_covid_2020-04.geojson', 'bike_covid_2020-05.geojson', 'bike_covid_2020-06.geojson', 
+        'bike_covid_2020-07.geojson', 'bike_covid_2020-08.geojson', 'bike_covid_2020-09.geojson', 'bike_covid_2020-10.geojson', 
+        'bike_covid_2020-11.geojson', 'bike_covid_2020-12.geojson', 'bike_covid_2021-01.geojson', 'bike_covid_2021-02.geojson', 
+        'bike_covid_2021-03.geojson', 'bike_covid_2021-04.geojson']
+
         self.places_coordinates = {'Gamle Oslo':(59.899237, 10.734767), 'Grunerlokka':(59.921875, 10.771906), 'Sagene':(59.937439, 10.760452), 
                         'St. Hanshaugen':(59.92795, 10.738958), 'Frogner':(59.917606, 10.710252), 'Ullern':(59.924469, 10.65988), 
-                        'Vestre Aker':(59.9583, 10.670319), 'Nordre Aker':(59.953638, 10.756412), 'Bjerke':(59.940668, 10.808725), 
+                        'Vestre Aker':(59.9583, 10.670319), 'Nordre Aker':(59.953638, 10.756412), 'Bjerke':(59.943668, 10.808725), 
                         'Grorud':(59.961424, 10.880549), 'Stovner':(59.958595, 10.927285), 'Alna':(59.93092, 10.85403), 
                         'Ostensjo':(59.887563, 10.832748), 'Nordstrand':(59.859314, 10.801257), 'Sondre Nordstrand':(59.845535, 10.807981)}
         self.places_name = list(self.places_coordinates.keys())
@@ -61,6 +68,7 @@ class Generate_geojson():
         
 
         index_month = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12']
+        
         i_month = 3
         str_i_month = index_month[i_month]
         index_month_relevant=1
@@ -172,7 +180,7 @@ class Generate_geojson():
 
                             })
 
-        with open('try_map_number' + str(map_number) +'.geojson', 'w') as f:
+        with open(self.string_month[map_number], 'w') as f:
             string_final1 = str(geojson)
             string_final2 = string_final1.replace("'",'"')
             f.write(string_final2)
@@ -180,7 +188,7 @@ class Generate_geojson():
 
 
 # generates a geojson file with the coordinates of all the test stations
-    def create_test_stations(self):
+    def create_test_stations(self, month):
         print("start create_test_stations() ")
         geojson = {
                     "type" : "FeatureCollection",
@@ -475,3 +483,13 @@ class Generate_geojson():
                 biggest_value = value
         
         return biggest_value
+
+
+    def get_dansleau(self):
+        nom_ccnc ={}
+        for place in self.places_coordinates:
+            nom_ccnc[place] = self.places_coordinates[place][0]
+
+        dic2=dict(sorted(nom_ccnc.items(),key= lambda x:x[1]))
+        print(dic2)
+        return nom_ccnc
