@@ -28,6 +28,30 @@ function getJSON(url) {
 	return resp;
 }
 
+function getJSONZip(url, filename) {
+	var geoJSONData;
+
+	var promise = new JSZip.external.Promise(function(resolve, reject) {
+		JSZipUtils.getBinaryContent(url + '.zip', function(err, data) {
+			if (err) {
+				reject(err);
+			} else {
+				resolve(data);
+			}
+		});
+	});
+
+	geoJSONData = promise.then(JSZip.loadAsync)
+		.then(function(zip) {
+			return zip.file(filename).async("string");
+		})
+		.then(function success(text) {
+			return JSON.parse(text);
+		}, function error(e) {});
+
+	return geoJSONData;
+}
+
 async function parseConfig() {
 	config = getJSON(configUrl);
 
@@ -79,7 +103,37 @@ function parseGeoJSONUrl({
 	geoJSONUrl = dataPath + dataName + '_' +
 		timelines[timelineIndex].id + '.geojson';
 
-	return geoJSONUrl;
+	return new Promise((resolve) => {
+		resolve(geoJSONUrl);
+	});
+}
+
+function parseGeoJSONZip({
+	index,
+	type,
+	timelineIndex
+}) {
+	var geoJSON;
+	var geoJSONUrl = '';
+	var geoJSONFile = '';
+	var dataName;
+	var dataPath;
+
+	if (type == 'source') {
+		dataName = dataSources[index].id;
+		dataPath = dataSourcesPath;
+	} else if (type == 'overlay') {
+		dataName = dataOverlays[index].id;
+		dataPath = dataOverlaysPath;
+	}
+
+	geoJSONFile = dataName + '_' +
+		timelines[timelineIndex].id + '.geojson';
+
+	geoJSONUrl = dataPath + geoJSONFile;
+
+	geoJSON = getJSONZip(geoJSONUrl, geoJSONFile);
+	return geoJSON;
 }
 
 function generateIndices(data) {
