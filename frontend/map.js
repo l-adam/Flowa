@@ -19,15 +19,15 @@ function initializeMap() {
 	});
 
 	function resize() {
-		map.resize();
+		map.resize(); //Make sure the map changes size after entering full screen 
 	}
 
-	var geocoder = new MapboxGeocoder({ // Initialize the geocoder
+	var geocoder = new MapboxGeocoder({ // Initialize the map search
 		accessToken: mapboxgl.accessToken, // Set the access token
 		mapboxgl: mapboxgl, // Set the mapbox-gl instance
 		marker: false, // Do not use the default marker style
 		placeholder: 'Search', // Placeholder text for the search bar
-		bbox: [10.343942, 59.118721, 11.343942, 60.918721], // Boundary for Berkeley
+		bbox: [10.343942, 59.118721, 11.343942, 60.918721], // Boundaries of Oslo
 		proximity: {
 			longitude: 10.7439428,
 			latitude: 59.918721

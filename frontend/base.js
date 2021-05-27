@@ -85,12 +85,10 @@ function initializeMapHeatmap(colorScheme) {
 
 		firstSymbolId = findFirstLayer();
 
-
 		current.dataSource = dataSources[dataSourceOptions.index];
 		current.dataSourceIndex = dataSourceOptions.index;
 		current.heatmapId = heatmapIds[0];
 		current.timelineIndex = defaults.timelineIndex;
-
 
 		parseGeoJSONZip(dataSourceOptions).then(function(geoJSONdata) {
 			addGeoJSONSource(heatmapIds[0], geoJSONdata);
