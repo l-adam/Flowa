@@ -6,12 +6,18 @@ import requests
 
 
 if __name__=="__main__":
-    
+    string_month = ['bike_covid_2020-04.geojson', 'bike_covid_2020-05.geojson', 'bike_covid_2020-06.geojson', 
+        'bike_covid_2020-07.geojson', 'bike_covid_2020-08.geojson', 'bike_covid_2020-09.geojson', 'bike_covid_2020-10.geojson', 
+        'bike_covid_2020-11.geojson', 'bike_covid_2020-12.geojson', 'bike_covid_2021-01.geojson', 'bike_covid_2021-02.geojson', 
+        'bike_covid_2021-03.geojson', 'bike_covid_2021-04.geojson']
+    """    
     gg_object = generate_geojson.Generate_geojson()
     #gg_object.for_each_month_map()
     #gg_object.create_test_stations(3)
+    """
     tools_object = tools.Tools()
-    tools_object.compress()
+    for name in string_month:
+        tools_object.compress2(name)
     #print(res1, res2)
     """
     m=0

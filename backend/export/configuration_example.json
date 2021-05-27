@@ -115,8 +115,8 @@
 						"max": "Highly correlated"
 					},
 					"fake_data": {
-						"min": "Poorly correlated",
-						"max": "Highly correlated"
+						"min": 5,
+						"max": 212
 					}
 				}
 			},
@@ -138,8 +138,8 @@
 						"max": "Highly correlated"
 					},
 					"fake_data": {
-						"min": "Poorly correlated",
-						"max": "Highly correlated"
+						"min": 13,
+						"max": 198
 					}
 				}
 			},
@@ -161,8 +161,8 @@
 						"max": "Highly correlated"
 					},
 					"fake_data": {
-						"min": "Poorly correlated",
-						"max": "Highly correlated"
+						"min": 1,
+						"max": 320
 					}
 				}
 			},
@@ -184,8 +184,8 @@
 						"max": "Highly correlated"
 					},
 					"fake_data": {
-						"min": "Poorly correlated",
-						"max": "Highly correlated"
+						"min": 38,
+						"max": 267
 					}
 				}
 			},
@@ -207,8 +207,8 @@
 						"max": "Highly correlated"
 					},
 					"fake_data": {
-						"min": "Poorly correlated",
-						"max": "Highly correlated"
+						"min": 21,
+						"max": 413
 					}
 				}
 			},
@@ -230,8 +230,8 @@
 						"max": "Highly correlated"
 					},
 					"fake_data": {
-						"min": "Poorly correlated",
-						"max": "Highly correlated"
+						"min": 5,
+						"max": 344
 					}
 				}
 			},
@@ -253,8 +253,8 @@
 						"max": "Highly correlated"
 					},
 					"fake_data": {
-						"min": "Poorly correlated",
-						"max": "Highly correlated"
+						"min": 127,
+						"max": 512
 					}
 				}
 			},
@@ -276,8 +276,8 @@
 						"max": "Highly correlated"
 					},
 					"fake_data": {
-						"min": "Poorly correlated",
-						"max": "Highly correlated"
+						"min": 27,
+						"max": 455
 					}
 				}
 			},
@@ -299,8 +299,8 @@
 						"max": "Highly correlated"
 					},
 					"fake_data": {
-						"min": "Poorly correlated",
-						"max": "Highly correlated"
+						"min": 66,
+						"max": 300
 					}
 				}
 			},
@@ -322,8 +322,8 @@
 						"max": "Highly correlated"
 					},
 					"fake_data": {
-						"min": "Poorly correlated",
-						"max": "Highly correlated"
+						"min": 102,
+						"max": 409
 					}
 				}
 			},
@@ -345,8 +345,8 @@
 						"max": "Highly correlated"
 					},
 					"fake_data": {
-						"min": "Poorly correlated",
-						"max": "Highly correlated"
+						"min": 4,
+						"max": 353
 					}
 				}
 			},
@@ -368,8 +368,8 @@
 						"max": "Highly correlated"
 					},
 					"fake_data": {
-						"min": "Poorly correlated",
-						"max": "Highly correlated"
+						"min": 52,
+						"max": 296
 					}
 				}
 			}
