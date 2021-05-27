@@ -167,27 +167,27 @@ class Tools():
         return(curr_dir, list_files)
     
         def compress2(self, name):
-        #python_classes
-        #curr_dir = os.getcwd()
-        os.chdir("../") 
-        curr_dir = os.path.normpath(os.getcwd() + os.sep + os.pardir)#backend
-       
-        curr_dir = os.path.normpath(curr_dir + "/export/sources/")
-        print(curr_dir)
-        list_files = os.listdir(os.getcwd())
-        list_files = list_files[0:13]
-
-        print(curr_dir)
-        geojson_zip = zipfile.ZipFile(os.getcwd() +'/'+ name + '.zip', 'w')
-
-
-        for folder, subfolders, files in os.walk(curr_dir):
- 
-            for file in files:
-                if file.startswith(name):
-                    geojson_zip.write(os.path.join(folder, file), os.path.relpath(os.path.join(folder,file), curr_dir), 
-                    compress_type = zipfile.ZIP_BZIP2, compresslevel=9)
+            #python_classes
+            #curr_dir = os.getcwd()
+            os.chdir("../") 
+            curr_dir = os.path.normpath(os.getcwd() + os.sep + os.pardir)#backend
         
-        geojson_zip.close()
+            curr_dir = os.path.normpath(curr_dir + "/export/sources/")
+            print(curr_dir)
+            list_files = os.listdir(os.getcwd())
+            list_files = list_files[0:13]
 
-        return(curr_dir, list_files)
+            print(curr_dir)
+            geojson_zip = zipfile.ZipFile(os.getcwd() +'/'+ name + '.zip', 'w')
+
+
+            for folder, subfolders, files in os.walk(curr_dir):
+    
+                for file in files:
+                    if file.startswith(name):
+                        geojson_zip.write(os.path.join(folder, file), os.path.relpath(os.path.join(folder,file), curr_dir), 
+                        compress_type = zipfile.ZIP_BZIP2, compresslevel=9)
+            
+            geojson_zip.close()
+
+            return(curr_dir, list_files)

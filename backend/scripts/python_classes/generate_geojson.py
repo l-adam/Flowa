@@ -123,7 +123,7 @@ class Generate_geojson():
             
     # generates a geojson file with the link between the different data sources
     def create_matrix_square_station(self, month_num, json_file, map_number, amount_travels_bfore, amount_travels_dico):
-        c_o = [10.665, 59.97] # = [longitude, latitude]
+        c_o = [10.635, 59.94] # = [longitude, latitude]
         #print("start create_matrix_square_station() ")
         geojson = {
                     "type" : "FeatureCollection",
@@ -135,50 +135,54 @@ class Generate_geojson():
         # c_o[1] - 10**(-4)*2.04425*lat_indice
         increment_long = 10**(-4)*4.07696*2
         increment_lat = 10**(-4)*2.04425*2
-        for lat_indice in range(220):
-            for lon_indice in range(200):
-                # here it can be optimised:
-                gcbs_stat = self.get_closest_bike_station(self.init_tools.get_center_rectangle(c_o[1] - increment_lat*lat_indice, c_o[0] + increment_long*lon_indice, c_o[1] - increment_lat*(lat_indice+1), c_o[0] + increment_long*(lon_indice + 1))[0],self.init_tools.get_center_rectangle(c_o[1] - increment_lat*lat_indice, c_o[0] + increment_long*lon_indice, c_o[1] - increment_lat*(lat_indice+1), c_o[0] + increment_long*(lon_indice + 1))[1])[0]
-                geojson["features"].append({
-                                            "type" : "Feature",
-                                "geometry" : {
-                                    "type" : "Polygon",
-                                    #bg, hg, hd, bd, bg
-                                    "coordinates" : [[
-                                        
-                                        [
-                                        c_o[0] + increment_long*lon_indice,
-                                        c_o[1] - increment_lat*lat_indice
-                                        ],
-                                        [
-                                        c_o[0] + increment_long*(lon_indice + 1),
-                                        c_o[1] - increment_lat*lat_indice
-                                        ],
-                                        [
-                                        c_o[0] + increment_long*(lon_indice+1),
-                                        c_o[1] - increment_lat*(lat_indice+1) 
-                                        ],
-                                        [
-                                        c_o[0] + increment_long*lon_indice,
-                                        c_o[1] - increment_lat*(lat_indice+1) 
-                                        ],
-                                        [
-                                        c_o[0] + increment_long*lon_indice,
-                                        c_o[1] - increment_lat*lat_indice
-                                        ]
-                                        
-                                    ]]
-                                },
-                                "properties" : {
-                                    #bg, bd, hg
-                                    #"center" : get_center_rectangle(c_o[1] - increment_lat*lat_indice, c_o[0] + increment_long*lon_indice, c_o[1] - increment_lat*(lat_indice+1), c_o[0] + increment_long*(lon_indice + 1)),
-                                    "closest_station_bike": gcbs_stat,
-                                    "closest_test_station": self.global_station_hub[gcbs_stat][2],
-                                    #"closest_test_center_coordinates": places_coordinates[global_station_hub[gcbs_stat][2]],
-                                    "probability" : self.compare_then_proba(month_num, self.legacy_to_new(gcbs_stat), json_file, amount_travels_bfore, amount_travels_dico)#month num, bike station id  compare_then_proba(month_num, bike_station_id, json_file):
-                                }
+        #220, 200
+        for lat_indice in range(350):
+            for lon_indice in range(300):
+                if lon_indice>150 and lat_indice>160:
+                    pass
+                else:
+                    # here it can be optimised:
+                    gcbs_stat = self.get_closest_bike_station(self.init_tools.get_center_rectangle(c_o[1] - increment_lat*lat_indice, c_o[0] + increment_long*lon_indice, c_o[1] - increment_lat*(lat_indice+1), c_o[0] + increment_long*(lon_indice + 1))[0],self.init_tools.get_center_rectangle(c_o[1] - increment_lat*lat_indice, c_o[0] + increment_long*lon_indice, c_o[1] - increment_lat*(lat_indice+1), c_o[0] + increment_long*(lon_indice + 1))[1])[0]
+                    geojson["features"].append({
+                                                "type" : "Feature",
+                                    "geometry" : {
+                                        "type" : "Polygon",
+                                        #bg, hg, hd, bd, bg
+                                        "coordinates" : [[
+                                            
+                                            [
+                                            c_o[0] + increment_long*lon_indice,
+                                            c_o[1] - increment_lat*lat_indice
+                                            ],
+                                            [
+                                            c_o[0] + increment_long*(lon_indice + 1),
+                                            c_o[1] - increment_lat*lat_indice
+                                            ],
+                                            [
+                                            c_o[0] + increment_long*(lon_indice+1),
+                                            c_o[1] - increment_lat*(lat_indice+1) 
+                                            ],
+                                            [
+                                            c_o[0] + increment_long*lon_indice,
+                                            c_o[1] - increment_lat*(lat_indice+1) 
+                                            ],
+                                            [
+                                            c_o[0] + increment_long*lon_indice,
+                                            c_o[1] - increment_lat*lat_indice
+                                            ]
+                                            
+                                        ]]
+                                    },
+                                    "properties" : {
+                                        #bg, bd, hg
+                                        #"center" : get_center_rectangle(c_o[1] - increment_lat*lat_indice, c_o[0] + increment_long*lon_indice, c_o[1] - increment_lat*(lat_indice+1), c_o[0] + increment_long*(lon_indice + 1)),
+                                        "closest_station_bike": gcbs_stat,
+                                        "closest_test_station": self.global_station_hub[gcbs_stat][2],
+                                        #"closest_test_center_coordinates": places_coordinates[global_station_hub[gcbs_stat][2]],
+                                        "probability" : self.compare_then_proba(month_num, self.legacy_to_new(gcbs_stat), json_file, amount_travels_bfore, amount_travels_dico)#month num, bike station id  compare_then_proba(month_num, bike_station_id, json_file):
+                                    }
 
-                            })
+                                })
 
         with open(self.string_month[map_number], 'w') as f:
             string_final1 = str(geojson)

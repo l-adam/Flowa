@@ -10,15 +10,18 @@ if __name__=="__main__":
         'bike_covid_2020-07.geojson', 'bike_covid_2020-08.geojson', 'bike_covid_2020-09.geojson', 'bike_covid_2020-10.geojson', 
         'bike_covid_2020-11.geojson', 'bike_covid_2020-12.geojson', 'bike_covid_2021-01.geojson', 'bike_covid_2021-02.geojson', 
         'bike_covid_2021-03.geojson', 'bike_covid_2021-04.geojson']
-    """    
+     
     gg_object = generate_geojson.Generate_geojson()
-    #gg_object.for_each_month_map()
+    gg_object.for_each_month_map()
     #gg_object.create_test_stations(3)
+    
+
     """
     tools_object = tools.Tools()
     for name in string_month:
         tools_object.compress2(name)
-    #print(res1, res2)
+
+    """
     """
     m=0
     da = ["2020/01", "2020/02", "2020/03", "2020/04", "2020/05", "2020/06", "2020/07","2020/08","2020/09","2020/10","2020/11","2020/12","2021/01", "2021/02", "2021/03", "2021/04"]
