@@ -5,11 +5,17 @@
 				"id": "pin",
 				"url": "/frontend/assets/map/overlays/pin.png",
 				"size": 0.33
+			},
+			{
+				"id": "test_stations",
+				"url": "/frontend/assets/map/overlays/pin2_shadow.png",
+				"size": 0.5
 			}
 		],
 		"defaults": {
 			"overlayIcons": {
 				"id": "pin",
+				"url": "/frontend/assets/map/overlays/pin.png",
 				"size": 0.33
 			}
 		}

@@ -4,7 +4,6 @@ const opacity = 0.5;
 var current = {};
 var firstSymbolId;
 var heatmapIds = ['heatmap', 'heatmap2'];
-var iconProperties;
 
 // Find the index of the first symbol layer in the map style
 function findFirstLayer() {
@@ -147,26 +146,38 @@ function addGeoJSONOverlay(overlay, GeoJSONdata) {
 }
 
 function addOverlayLayer(overlay) {
+	var iconProperties = getIconProperties(overlay.id);
+
 	map.addLayer({
 		'id': overlay.id,
 		'type': 'symbol',
 		'source': overlay.id,
 		'layout': {
 			'icon-allow-overlap': true,
-			'icon-image': iconProperties.ids,
-			'icon-size': iconProperties.sizes,
+			'icon-image': iconProperties.id,
+			'icon-size': iconProperties.size,
+			'icon-anchor': 'bottom',
 			'visibility': overlay.defaultVisibility,
 			'text-allow-overlap': true,
 			'text-field': ['get', overlay.analyzedProperty],
 			'text-font': [
-				'Open Sans Semibold',
-				'Arial Unicode MS Bold'
+				'literal', [
+					'Lato Bold',
+					'Open Sans Semibold',
+					'Arial Unicode MS Bold'
+				]
 			],
-			'text-offset': [0, 1.25],
-			'text-anchor': 'top'
+			'text-offset': [0.25, -3.25],
+			'text-size': 28,
+			'text-variable-anchor': ['bottom-left']
+
 		},
 		'paint': {
-			'icon-color': generateColorMatch(overlay)
+			'icon-color': generateColorMatch(overlay),
+			'text-color': generateColorMatch(overlay),
+			'text-halo-color': 'black',
+			'text-halo-width': 1,
+			'text-halo-blur': 4
 		}
 	});
 }
@@ -187,27 +198,28 @@ function generateColorMatch(overlay) {
 	return colorMatch;
 }
 
-function generateIconProperties() {
-	iconProperties = {};
+function getIconProperties(id) {
+	var iconProperties = {};
 
-	iconProperties.ids = ['match', ['get', 'id']];
-	iconProperties.sizes = ['match', ['get', 'id']];
-
-	assetsConfig.mapAssets.overlayIcons.forEach(
-		(icon, index) => {
-			iconProperties.ids.push(icon.id, icon.id);
-			iconProperties.sizes.push(icon.id, icon.size);
+	assetsConfig.mapAssets.overlayIcons.forEach((overlayIcon) => {
+		if (overlayIcon.id == id) {
+			iconProperties.id = overlayIcon.id;
+			iconProperties.size = overlayIcon.size;
+			return iconProperties;
 		}
-	);
+	});
 
-	iconProperties.ids.push(assetsConfig.mapAssets.defaults.overlayIcons.id);
-	iconProperties.sizes.push(assetsConfig.mapAssets.defaults.overlayIcons.size);
+	if (!iconProperties.hasOwnProperty('id')) {
+		iconProperties.id = assetsConfig.mapAssets.defaults.overlayIcons.id;
+		iconProperties.size = assetsConfig.mapAssets.defaults.overlayIcons.size;
+	}
+
+	return iconProperties;
 }
 
 function initializeMapOverlays() {
 	map.once('load', function() {
 		loadAssets();
-		generateIconProperties();
 
 		dataOverlays.forEach(
 			(dataOverlay, index) => {
@@ -254,7 +266,7 @@ function loadAssets() {
 				function(error, image) {
 					if (error) throw error;
 					map.addImage(overlayIcon.id, image, {
-						'sdf': true
+						'sdf': false //change to true to enable native coloring
 					});
 				});
 		});

@@ -48,8 +48,8 @@
 				"id": "test_stations",
 				"label": "Oslo covid test stations",
 				"colorScheme": [
-					"#0000FF",
-					"#FF7700"
+					"#FFFFFF",
+					"#FFFFFF"
 				],
 				"analyzedProperty": "cases_this_month",
 				"defaultVisibility": "visible",
@@ -60,8 +60,8 @@
 				"id": "bike_stations",
 				"label": "Bike stations",
 				"colorScheme": [
-					"#0000FF",
-					"#FF7700"
+					"#FFFFFF",
+					"#FFFFFF"
 				],
 				"analyzedProperty": "probability",
 				"defaultVisibility": "none",
