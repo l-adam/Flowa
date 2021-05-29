@@ -5,6 +5,16 @@
 	margin-top: 90px;
 }
 
+.title {
+	font-family: Lato;
+	font-style: normal;
+	font-weight: 700;
+	font-size: 46px;
+	line-height: 1.5;
+	letter-spacing: -0.015em;
+	color: #3E3E3E;
+}
+
 .description {
 	font-family: Lato;
 	font-style: normal;
@@ -23,6 +33,39 @@
 	line-height: 22px;
 	letter-spacing: -0.015em;
 	color: #646464;
+}
+
+#introduction {
+	background: linear-gradient(264.85deg, #FF5500 28.54%, rgba(255, 255, 255, 0) 86.88%), #6666FF;
+	width: 100%;
+	height: 400px;
+	text-align: center;
+}
+
+.introduction {
+	margin-left: auto;
+	margin-right: auto;
+	color: #FFFFFF;
+	width: 700px;
+}
+
+#introductionTitle {
+	margin-top: auto;
+	font-size: 48px;
+}
+
+#introductionDescription {
+	font-family: Lato;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 24px;
+	line-height: 29px;
+	align-items: center;
+	text-align: center;
+	letter-spacing: -0.015em;
+	color: #FFFFFF;
+	margin-top: 12px;
+	margin-bottom: auto;
 }
 
 .sectionContainer {
