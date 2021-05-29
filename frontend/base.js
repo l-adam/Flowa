@@ -162,22 +162,18 @@ function addOverlayLayer(overlay) {
 			'text-field': ['get', overlay.analyzedProperty],
 			'text-font': [
 				'literal', [
-					'Lato Bold',
+					'Lato Regular',
 					'Open Sans Semibold',
 					'Arial Unicode MS Bold'
 				]
 			],
-			'text-offset': [0.25, -3.25],
-			'text-size': 28,
-			'text-variable-anchor': ['bottom-left']
-
+			'text-size': 16,
+			'text-justify': 'right'
 		},
 		'paint': {
 			'icon-color': generateColorMatch(overlay),
 			'text-color': generateColorMatch(overlay),
-			'text-halo-color': 'black',
-			'text-halo-width': 1,
-			'text-halo-blur': 4
+			'text-translate': [24, -19]
 		}
 	});
 }
@@ -193,7 +189,7 @@ function generateColorMatch(overlay) {
 		}
 	);
 
-	colorMatch.push('#FF0000');
+	colorMatch.push(colors[colors.length - 1]);
 
 	return colorMatch;
 }

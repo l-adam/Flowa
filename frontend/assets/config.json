@@ -2,21 +2,26 @@
 	"mapAssets": {
 		"overlayIcons": [
 			{
-				"id": "pin",
-				"url": "/frontend/assets/map/overlays/pin.png",
-				"size": 0.33
+				"id": "pin3",
+				"url": "/frontend/assets/map/overlays/pin3.png",
+				"size": 0.25
 			},
 			{
 				"id": "test_stations",
-				"url": "/frontend/assets/map/overlays/pin2_shadow.png",
-				"size": 0.5
+				"url": "/frontend/assets/map/overlays/test_stations.png",
+				"size": 0.25
+			},
+			{
+				"id": "bike_stations",
+				"url": "/frontend/assets/map/overlays/bike_stations.png",
+				"size": 0.25
 			}
 		],
 		"defaults": {
 			"overlayIcons": {
-				"id": "pin",
-				"url": "/frontend/assets/map/overlays/pin.png",
-				"size": 0.33
+				"id": "pin3",
+				"url": "/frontend/assets/map/overlays/pin3.png",
+				"size": 0.25
 			}
 		}
 	}
