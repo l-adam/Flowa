@@ -19,6 +19,9 @@ class Data_from_excel():
 
         self.places_name = list(self.places_coordinates.keys())
 
+        self.string_month = ['2020-04', '2020-05', '2020-06', '2020-07', '2020-08', '2020-09', '2020-10', '2020-11', '2020-12', '2021-01', 
+        '2021-02', '2021-03', '2021-04']
+
     # Reads the pdf file "pdf_name" and generates "table_cases_oslo.csv" which contains the amount of cases per month per station
     def read_pdf_download_csv(pdf_name):
         pdf_name = "Statusrapport koronastatistikk 13. april 2021.pdf" #page 6
@@ -181,3 +184,78 @@ class Data_from_excel():
         dct = {v: k for k, v in dct.items()}
         print("\n",dct)
         return dct
+    
+    # returns a dictionnary with test_center_name: amount of cases since march 2020 to march 2021 included
+    def dico_stats(self):
+        
+        dic_stats = {}
+        deaths = []
+        start_line24=0
+        excel_title = "../tables_covid/table_cases_oslo2.csv"
+        with open(excel_title, 'r') as read_obj:
+            # pass the file object to reader() to get the reader object
+            csv_reader = reader(read_obj)
+            for line in read_obj:
+                if start_line24>21 and start_line24<37:
+                    list1 = list(line.split(";")) 
+                    """
+                    for i in range(1,4):
+                        list1.pop(-1)
+                    """
+                    list1.pop(-1)
+                    name_test_center = list1[0] 
+
+                    if start_line24==23:
+                        #name_test_center="Grünerløkka"
+                        name_test_center="Grunerlokka"
+                    if start_line24==34:
+                        #name_test_center="Østensjø"
+                        name_test_center="Ostensjo"
+                    if start_line24==36:
+                        #name_test_center="Søndre Nordstrand"
+                        name_test_center="Sondre Nordstrand"
+      
+                    
+                    dic_stats[name_test_center] = list1[-1]
+                if start_line24==37:
+                    list1 = list(line.split(";")) 
+                    list1.pop(0)
+                    list1.pop(-1)
+                    list1.pop(-1)
+                    deaths = list1
+
+                start_line24 +=1 
+        return dic_stats, deaths
+    
+    def json_stats(self):
+        dico_stats, deaths = self.dico_stats()
+        dico_stats_keys = list(dico_stats.keys())
+        json = {
+
+	"totalCases": {
+		"header": "Total Cases",
+		"description": "total amount of cases since the beginning of march 2020",
+		"items": [
+		]
+	}
+        }
+
+        for key in dico_stats_keys:
+            json["totalCases"]["items"].append({"name_station": key, "amount":dico_stats[key]})
+
+        json["totalDeaths"] = {
+        		"header": "Total Deaths",
+		"description": "total amount of deaths since the beginning of march 2020",
+		"items": [
+
+		]
+        }
+
+        for month in range(13):
+            json["totalDeaths"]["items"].append({"month": self.string_month[month], "amount": deaths[month]})
+
+        with open('statistics.json', 'w') as f:
+            string_final1 = str(json)
+            string_final2 = string_final1.replace("'",'"')
+            f.write(string_final2)
+        

@@ -16,8 +16,8 @@ if __name__=="__main__":
     #gg_object.create_test_stations(3)
     
 
-    for m in range(13):
-        gg_object.create_test_stations(m)
+    dfeo = data_from_excel.Data_from_excel()
+    dfeo.json_stats()
     """
     tools_object = tools.Tools()
     for name in string_month:
