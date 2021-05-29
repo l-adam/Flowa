@@ -141,11 +141,96 @@
 	width: 130px;
 }
 
-#sectionFour {
-	max-width: 850px;
-	align-items: flex-start;
+#who {
+	width: 100%;
+	height: auto;
+	padding: 0;
+	margin-left: auto;
 }
 
-#sectionFourDescription {
-	margin-block: 20px;
+#who > .vertical {
+	margin-left: auto;
+	padding: 32px;
+	box-sizing: border-box;
+}
+
+#whoText {
+	margin-left: auto;
+	text-align: justify;
+}
+
+#photoTeam {
+	width: 50%;
+	max-width: 760px;
+	height: auto;
+	box-sizing: border-box;
+	margin-right: auto;
+}
+
+#photoTeam > img {
+	width: 70%;
+	background: #FAFAFA;
+	box-shadow: -4px 4px 20px #E5E5E5;
+	border-radius: 5px;
+}
+
+#sectionFourLeft {
+	width: 50%;
+	height: auto;
+	margin-right: 80px;
+}
+
+#sectionFourText {
+	margin-left: auto;
+	max-width: 520px;
+	margin-top: 32px;
+	text-align: justify;
+}
+
+.sectionFiveRow {
+	display: flex;
+}
+
+.sectionFiveRow + .sectionFiveRow {
+	margin-top: 42px
+}
+
+.teamPhoto {
+	max-width: 250px;
+	border-radius: 5px;
+	box-shadow: -4px 4px 20px #E5E5E5;
+}
+
+.teamMember + .teamMember {
+	margin-left: 60px;
+}
+
+.teamName {
+	font-family: Lato;
+	font-style: normal;
+	font-weight: 900;
+	font-size: 24px;
+	letter-spacing: -0.015em;
+	color: #0000FF;
+	margin-top: 20px;
+}
+
+.teamFunction {
+	font-family: Lato;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 24px;
+	letter-spacing: -0.015em;
+	color: #323232;
+	margin-top: 8px;
+}
+
+.teamCountry {
+	font-family: Lato;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 18px;
+	letter-spacing: -0.015em;
+	color: #646464;
+	margin-top: 6px;
 }
