@@ -189,3 +189,11 @@
 #sectionThreeSelectorsCity {
 	margin-inline: 14px;
 }
+
+#sectionThreeGraph {
+	margin-top: 48px;
+}
+
+#sectionThreeGraph img {
+	width: 100%;
+}
