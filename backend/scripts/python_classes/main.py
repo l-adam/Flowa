@@ -12,10 +12,12 @@ if __name__=="__main__":
         'bike_covid_2021-03.geojson', 'bike_covid_2021-04.geojson']
      
     gg_object = generate_geojson.Generate_geojson()
-    gg_object.for_each_month_map()
+    #gg_object.for_each_month_map()
     #gg_object.create_test_stations(3)
     
 
+    for m in range(13):
+        gg_object.create_test_stations(m)
     """
     tools_object = tools.Tools()
     for name in string_month:

@@ -17,12 +17,12 @@ class Generate_geojson():
 
         # 'Bjerke':(59.940668, 10.808725)
         #'Gamle Oslo':(59.899237, 10.734767)
-        self.string_month = ['bike_covid_2020-04.geojson', 'bike_covid_2020-05.geojson', 'bike_covid_2020-06.geojson', 
-        'bike_covid_2020-07.geojson', 'bike_covid_2020-08.geojson', 'bike_covid_2020-09.geojson', 'bike_covid_2020-10.geojson', 
-        'bike_covid_2020-11.geojson', 'bike_covid_2020-12.geojson', 'bike_covid_2021-01.geojson', 'bike_covid_2021-02.geojson', 
-        'bike_covid_2021-03.geojson', 'bike_covid_2021-04.geojson']
+        self.string_month = ['2020-04.geojson', '2020-05.geojson', '2020-06.geojson', 
+        '2020-07.geojson', '2020-08.geojson', '2020-09.geojson', '2020-10.geojson', 
+        '2020-11.geojson', '2020-12.geojson', '2021-01.geojson', '2021-02.geojson', 
+        '2021-03.geojson', '2021-04.geojson']
 
-        self.places_coordinates = {'Gamle Oslo':(59.899237, 10.734767), 'Grunerlokka':(59.921875, 10.771906), 'Sagene':(59.937439, 10.760452), 
+        self.places_coordinates = {'Gamle Oslo':(59.90500, 10.739767), 'Grunerlokka':(59.921875, 10.771906), 'Sagene':(59.937439, 10.760452), 
                         'St. Hanshaugen':(59.92795, 10.738958), 'Frogner':(59.917606, 10.710252), 'Ullern':(59.924469, 10.65988), 
                         'Vestre Aker':(59.9583, 10.670319), 'Nordre Aker':(59.953638, 10.756412), 'Bjerke':(59.943668, 10.808725), 
                         'Grorud':(59.961424, 10.880549), 'Stovner':(59.958595, 10.927285), 'Alna':(59.93092, 10.85403), 
@@ -184,7 +184,7 @@ class Generate_geojson():
 
                                 })
 
-        with open(self.string_month[map_number], 'w') as f:
+        with open('bike_covid_' + self.string_month[map_number], 'w') as f:
             string_final1 = str(geojson)
             string_final2 = string_final1.replace("'",'"')
             f.write(string_final2)
@@ -218,7 +218,7 @@ class Generate_geojson():
 
                         })
         
-        with open('test_stations.geojson', 'w') as f:
+        with open('test_stations_' + self.string_month[month], 'w') as f:
             string_final1 = str(geojson)
             string_final2 = string_final1.replace("'",'"')
             f.write(string_final2)
@@ -259,7 +259,7 @@ class Generate_geojson():
 
                         })
 
-        with open('bike_stations' + str(month) + '.geojson', 'w') as f:
+        with open('bike_stations' + self.string_month[month], 'w') as f:
             string_final1 = str(geojson)
             string_final2 = string_final1.replace("'",'"')
             f.write(string_final2)
