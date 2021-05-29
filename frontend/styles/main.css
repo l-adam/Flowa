@@ -111,14 +111,16 @@ body {
 	letter-spacing: -0.015em;
 	color: #FFFFFF;
 	cursor: pointer;
+	transition: background 0.25s;
 }
 
 .buttonPrimary:hover {
-	background: #CCCCFF !important;
+	background: #CCCCFF;
 }
 
 .buttonPrimary:active {
-	background: #6666FF !important;
+	background: #6666FF;
+	transition: background 0s;
 }
 
 .buttonSecondary {
@@ -138,14 +140,16 @@ body {
 	letter-spacing: -0.015em;
 	color: #FFFFFF;
 	cursor: pointer;
+	transition: background 0.25s;
 }
 
 .buttonSecondary:hover {
-	background: #FFE1CC !important;
+	background: #FFE1CC;
 }
 
 .buttonSecondary:active {
-	background: #FFA466 !important;
+	background: #FFA466;
+	transition: background 0s;
 }
 
 .buttonTerciary {
@@ -165,17 +169,19 @@ body {
 	letter-spacing: -0.015em;
 	color: #323232;
 	cursor: pointer;
+	transition: background 0.25s, border 0.25s, color 0.25s;
 }
 
 .buttonTerciary:hover {
-	border: 1px solid #E1E1E1 !important;
-	color: #E1E1E1 !important;
+	border: 1px solid #E1E1E1;
+	color: #E1E1E1;
 }
 
 .buttonTerciary:active {
-	border: 1px solid #646464 !important;
-	background: #646464 !important;
-	color: #FFFFFF !important;
+	border: 1px solid #646464;
+	background: #646464;
+	color: #FFFFFF;
+	transition: background 0s, border 0s, color 0s;
 }
 
 .footer {
