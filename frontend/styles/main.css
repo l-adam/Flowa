@@ -112,6 +112,7 @@ body {
 	color: #FFFFFF;
 	cursor: pointer;
 	transition: background 0.25s;
+	text-decoration: none;
 }
 
 .buttonPrimary:hover {
@@ -141,6 +142,7 @@ body {
 	color: #FFFFFF;
 	cursor: pointer;
 	transition: background 0.25s;
+	text-decoration: none;
 }
 
 .buttonSecondary:hover {
@@ -170,6 +172,7 @@ body {
 	color: #323232;
 	cursor: pointer;
 	transition: background 0.25s, border 0.25s, color 0.25s;
+	text-decoration: none;
 }
 
 .buttonTerciary:hover {

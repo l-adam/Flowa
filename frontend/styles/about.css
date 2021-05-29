@@ -90,6 +90,7 @@
 #whatButton {
 	margin-top: 16px;
 	margin-left: auto;
+	display: none; /*Temporarily hidden*/
 }
 
 #whyButton {
