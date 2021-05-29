@@ -102,11 +102,15 @@
 	font-size: 16px;
 	line-height: 19px;
 	letter-spacing: 0.12px;
-	color: #C8C8C8;
+	color: #646464;
 	border: none;
 	flex: auto;
 	margin-inline: 8px;
 	outline: none;
+}
+
+.textboxText::placeholder {
+	color: #C8C8C8;
 }
 
 #subscribeButton {
