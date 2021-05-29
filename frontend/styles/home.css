@@ -112,18 +112,8 @@
 #subscribeButton {
 	width: 138px;
 	height: 100%;
-	background: #0000FF;
 	border-radius: 10px;
-	font-family: Lato;
-	font-style: normal;
-	font-weight: normal;
 	font-size: 16px;
-	line-height: 19px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	letter-spacing: -0.015em;
-	color: #FFFFFF;
 }
 
 #sectionOneButton {
