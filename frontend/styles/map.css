@@ -34,6 +34,7 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	transition: background 0.25s;
 }
 
 .mapSelectorEntryActive {
@@ -46,11 +47,12 @@
 }
 
 .mapSelectorEntry:hover {
-	background: #CCCCFF;;
+	background: #CCCCFF;
 }
 
 .mapSelectorEntry:active {
-	background: #0000FF;;
+	background: #6666FF;
+	transition: background 0s;
 }
 
 .textbox {
