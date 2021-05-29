@@ -46,7 +46,7 @@
 		"items": [
 			{
 				"id": "test_stations",
-				"label": "Oslo covid test stations",
+				"label": "COVID-19 Test Stations",
 				"colorScheme": [
 					"#FFFFFF",
 					"#FFFFFF"
@@ -58,7 +58,7 @@
 			},
 			{
 				"id": "bike_stations",
-				"label": "Bike stations",
+				"label": "Bike Stations",
 				"colorScheme": [
 					"#FFFFFF",
 					"#FFFFFF"
