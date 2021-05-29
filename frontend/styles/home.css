@@ -33,6 +33,26 @@
 	color: #3E3E3E;
 }
 
+.description {
+	font-family: Lato;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 18px;
+	line-height: 22px;
+	letter-spacing: -0.015em;
+	color: #323232;
+}
+
+.text {
+	font-family: Lato;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 18px;
+	line-height: 22px;
+	letter-spacing: -0.015em;
+	color: #646464;
+}
+
 #sectionOneDescription {
 	margin-top: 20px;
 	margin-bottom: 20px;
@@ -177,16 +197,6 @@
 	align-items: center;
 }
 
-.description {
-	font-family: Lato;
-	font-style: normal;
-	font-weight: normal;
-	font-size: 14px;
-	line-height: 17px;
-	letter-spacing: -0.015em;
-	color: #646464;
-}
-
 #sectionThree {
 	height: 609px;
 }
@@ -228,4 +238,153 @@
 	margin-right: auto;
 	position: relative;
 	left: -80px;
+}
+
+.section {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: 90px;
+}
+
+.sectionContainerRight {
+	width: 50%;
+	height: auto;
+	background: #FAFAFA;
+	box-shadow: -4px 4px 20px #E5E5E5;
+	border-radius: 20px 0px 0px 20px;
+	text-align: left;
+	padding: 24px;
+	box-sizing: border-box;
+	margin-left: 80px;
+}
+
+.sectionContainerHeader {
+	margin-top: auto;
+}
+
+.sectionContainerDescription {
+	margin-bottom: auto;
+}
+
+.sectionContainerTextRight {
+	width: 35%;
+	max-width: 520px;
+	margin-left: auto;
+	text-align: justify;
+}
+
+#sectionFourDescription {
+	font-family: Lato;
+	font-style: normal;
+	font-weight: 900;
+	font-size: 18px;
+	line-height: 22px;
+	letter-spacing: -0.015em;
+	color: #0000FF;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+#sectionFourButton {
+	margin-top: 10px;
+	margin-bottom: 20px;
+}
+
+.sectionFourFrame {
+	width: 100%;
+	height: 60px;
+	background: #FFFFFF;
+	box-shadow: -4px 6px 20px #E5E5E5;
+	border-radius: 10px;
+	margin-bottom: 10px;
+	display: flex;
+	padding-inline: 22px;
+	box-sizing: border-box;
+	font-family: Lato;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 18px;
+	line-height: 22px;
+	letter-spacing: -0.015em;
+	color: #323232;
+}
+
+.sectionFourFrame > * {
+	margin-top: auto;
+	margin-bottom: auto
+}
+
+.sectionFourIconFrame {
+	width: 30px;
+	height: 30px;
+	background: #6666FF;
+	border-radius: 5px;
+	margin-right: 16px;
+	display: flex;
+}
+
+.sectionFourIconFrame img {
+	margin: auto;
+}
+
+.sectionFourFrameUpdate {
+	font-family: Lato;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 14px;
+	line-height: 17px;
+	letter-spacing: -0.015em;
+	color: #FF5500;
+	margin-left: auto;
+}
+
+#newCasesIcon {
+	background: #6666FF;
+}
+
+#vaccinesIcon {
+	background: #CCCCFF;
+}
+
+#mapUpdateIcon {
+	background: #FFA466;
+}
+
+.sectionFourGraphFrame {
+	width: fit-content;
+	height: fit-content;
+	background: #FFFFFF;
+	box-shadow: -4px 6px 20px #E1E1E1;
+	border-radius: 10px;
+	display: flex;
+	flex-direction: column;
+	padding: 25px;
+	box-sizing: border-box;
+	text-align: center;
+	font-family: Lato;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 16px;
+	letter-spacing: -0.015em;
+	color: #323232;
+}
+
+.sectionFourGraphFrame img {
+	zoom: 50%;
+	width: 100%;
+	margin-bottom: 25px;
+}
+
+.sectionFourGraphsRow {
+	display: flex;
+	width: 100%;
+}
+
+.sectionFourGraphsRow + .sectionFourGraphsRow {
+	margin-top: 25px;
+}
+
+.sectionFourGraphsRow > div + div {
+	margin-left: 24px;
 }
