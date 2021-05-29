@@ -238,3 +238,24 @@ body {
 .footer img {
 	margin-left: 23px;
 }
+
+.disclaimer {
+	font-family: Lato;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 10px;
+	letter-spacing: -0.015em;
+	color: #FFFFFF;
+	background: #C8C8C8;
+	border-radius: 5px;
+	width: fit-content;
+	height: 22px;
+	padding-inline: 6px;
+	margin-top: 10px;
+	display: flex;
+}
+
+.disclaimer > * {
+	margin-top: auto;
+	margin-bottom: auto;
+}

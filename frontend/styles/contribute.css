@@ -97,7 +97,7 @@
 	margin-right: auto;
 }
 
-#sectionThreeHeader {
+#sectionThreeDisclaimer {
 	margin-bottom: 50px;
 }
 
@@ -253,6 +253,10 @@ input, label {
 	margin-right: auto;
 	margin-top: 6px;
 	margin-bottom: 40px;
+}
+
+#sectionFourDisclaimer {
+	margin-right: auto;
 }
 
 .sectionFourFrame {
