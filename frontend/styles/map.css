@@ -424,3 +424,7 @@ input[type="checkbox"]:checked+span:before {
 .mapboxgl-ctrl-geocoder--icon {
 	margin-top: 55% !important;
 }
+
+#footer {
+	margin-top: 52px;
+}
