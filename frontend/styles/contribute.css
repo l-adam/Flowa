@@ -130,7 +130,7 @@
 }
 
 input, label {
-    display: block;
+	display: block;
 }
 
 .sectionThreeForm label {
@@ -205,8 +205,6 @@ input, label {
 	padding-block: 8px;
 }
 
-
-
 .blue {
 	color: #0000FF;
 }
@@ -229,4 +227,8 @@ input, label {
 
 #companyAttachmentText {
 	margin-block: auto;;
+}
+
+#sectionThreeButton {
+	margin-left: auto;
 }
