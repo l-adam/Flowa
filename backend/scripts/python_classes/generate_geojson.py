@@ -75,7 +75,8 @@ class Generate_geojson():
     
         amount_travels_month =[]
         
-        for i in range(10):
+        #for i in range(10):
+        for i in range(1):
             
             str_i_month = index_month[i_month]
             print("str:", str_i_month)
@@ -99,7 +100,7 @@ class Generate_geojson():
             print("imonth: ",i_month)
             
             map_number +=1
-            
+        """    
         for i in range(3):
             
             str_i_month = index_month[i_month]
@@ -120,11 +121,13 @@ class Generate_geojson():
             i_month = i_month%12
             
             map_number +=1
-            
+        """
+
     # generates a geojson file with the link between the different data sources
     def create_matrix_square_station(self, month_num, json_file, map_number, amount_travels_bfore, amount_travels_dico):
-        c_o = [10.635, 59.94] # = [longitude, latitude]
-        #print("start create_matrix_square_station() ")
+        #c_o = [10.635, 59.94] # = [longitude, latitude]
+        c_o = [10.615, 59.975]
+        print("start create_matrix_square_station() ")
         geojson = {
                     "type" : "FeatureCollection",
                     "features" : [
@@ -136,9 +139,9 @@ class Generate_geojson():
         increment_long = 10**(-4)*4.07696*2
         increment_lat = 10**(-4)*2.04425*2
         #220, 200
-        for lat_indice in range(350):
-            for lon_indice in range(300):
-                if lon_indice>150 and lat_indice>160:
+        for lat_indice in range(400):#hauteur
+            for lon_indice in range(390):#largeur
+                if lon_indice<170 and lat_indice>200:
                     pass
                 else:
                     # here it can be optimised:

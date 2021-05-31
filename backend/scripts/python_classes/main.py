@@ -12,12 +12,12 @@ if __name__=="__main__":
         'bike_covid_2021-03.geojson', 'bike_covid_2021-04.geojson']
      
     gg_object = generate_geojson.Generate_geojson()
-    #gg_object.for_each_month_map()
+    gg_object.for_each_month_map()
     #gg_object.create_test_stations(3)
     
 
-    dfeo = data_from_excel.Data_from_excel()
-    dfeo.json_stats()
+    #dfeo = data_from_excel.Data_from_excel()
+    #dfeo.json_stats()
     """
     tools_object = tools.Tools()
     for name in string_month:
@@ -39,11 +39,7 @@ if __name__=="__main__":
     print(c_o[0]+increment_long*200)
     print(c_o[1]+increment_lat*220)
     """
-    
-    """
-    for num in range(8):
-        gg_object.fake(num)
-    """
+
     #ROAD MAP:
     # Parse Oslo Bysikkel site to get the bikes-related data
     # Generate a geojson file filled with a matrix
