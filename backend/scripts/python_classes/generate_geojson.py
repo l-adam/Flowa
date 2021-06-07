@@ -34,9 +34,6 @@ class Generate_geojson():
                         'Grorud':'grorud', 'Stovner':'stovner', 'Alna':'alna', 
                         'Ostensjo':'ostensjo', 'Nordstrand':'nordstrand', 'Sondre Nordstrand':'sondre_nordstrand'}
 
-        # working directory
-        self.data_dir = "C:\\Users\\virgi\\Desktop\\cours_imt\\A2\\S4 norway\\Project 6\\python_part"
-
         self.alphabet = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
         self.months = ['Jan','Feb','March','April','May','June','July','Aug','Sept','Oct','Nov','Dec']
 

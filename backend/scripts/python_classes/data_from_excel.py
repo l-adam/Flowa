@@ -2,11 +2,16 @@ from csv import reader
 
 import os
 import PyPDF2
+import tabula
 
 class Data_from_excel():
-    def __init__(self,data_dir="C:\\Users\\virgi\\Desktop\\cours_imt\\A2\\S4 norway\\Project 6\\python_part", excel_filename='table_cases_oslo.xlsx'):
-        self.data_dir = data_dir
-        self.excel_filename = excel_filename
+    def __init__(self):
+        
+        # working directory (here python_classes)
+        wd = os.getcwd()
+        os.chdir('../tables_covid') 
+        self.data_dir = os.getcwd()
+
         #self.station_hub_result = self.station_hub()
         self.station_hub_result = {}
         self.ltn = self.legacy_to_new_dico()
@@ -23,7 +28,7 @@ class Data_from_excel():
         '2021-02', '2021-03', '2021-04']
 
     # Reads the pdf file "pdf_name" and generates "table_cases_oslo.csv" which contains the amount of cases per month per station
-    def read_pdf_download_csv(pdf_name):
+    def read_pdf_download_csv(self):
         pdf_name = "Statusrapport koronastatistikk 13. april 2021.pdf" #page 6
         print("********** read_pdf_download_csv('" + pdf_name + "') **********")
         # creating a pdf file object (on ouvre le fichier en code binaire)
@@ -33,14 +38,11 @@ class Data_from_excel():
         pdfReader = PyPDF2.PdfFileReader(pdfFileObj) 
         nbPages = pdfReader.numPages
 
-        if not os.path.isdir(self.data_dir + "/tables_covid"):
-            os.mkdir(data_dir + "/tables_covid")
         tables = tabula.read_pdf(pdf_name, pages = 6)
-        folder_name = self.data_dir + "/tables_covid"
-        page_id_titre = "table_cases_oslo.xlsx"
+        page_id_titre = "table_cases_oslo3.xlsx"
         
         # Conversion des tableaux en excel
-        tables[0].to_excel(os.path.join(folder_name, page_id_titre), index=False)
+        tables[0].to_excel(os.path.join(self.data_dir, page_id_titre), index=False)
         print("\nread_pdf_download(" + pdf_name + ") done")
 
     # returns a dictionnary with test_center_name: amount of cases since march 2020 to march 2021 included
