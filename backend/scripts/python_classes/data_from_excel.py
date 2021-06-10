@@ -229,6 +229,7 @@ class Data_from_excel():
                 start_line24 +=1 
         return dic_stats, deaths
     
+    # creates a json file with the statistics of death and cases from/of covid-19
     def json_stats(self):
         dico_stats, deaths = self.dico_stats()
         dico_stats_keys = list(dico_stats.keys())

@@ -442,6 +442,7 @@ class Generate_geojson():
             f.write(string_final2)
             #print("end fake() ")
     
+    #returns a number depending on how far (longi, lati) is from the closest point of list_points
     def get_fake_value(self, list_points, longi, lati):
         #value ranging from 0 to 20
         # 0.07 -> 0.12
@@ -503,6 +504,7 @@ class Generate_geojson():
         print(dic2)
         return nom_ccnc
 
+    # reads the bike_covid geojson files and merge the polygons with the same value to make final files smaller
     def read_zone(self):
         #https://stackoverflow.com/questions/34325030/merging-two-geojson-polygons-in-python
         indices_rz = [0,2,3,4]
