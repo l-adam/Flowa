@@ -14,10 +14,10 @@ if __name__=="__main__":
     gg_object = generate_geojson.Generate_geojson()
     #gg_object.for_each_month_map()
     #gg_object.create_test_stations(3)
-    
 
-    dfeo = data_from_excel.Data_from_excel()
-    print(dfeo.read_pdf_download_csv())
+    gg_object.read_zone()
+
+    #dfeo = data_from_excel.Data_from_excel()
     #dfeo.json_stats()
     """
     tools_object = tools.Tools()

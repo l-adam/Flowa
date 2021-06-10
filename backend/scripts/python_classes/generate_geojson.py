@@ -10,6 +10,10 @@ import os
 import datetime
 from datetime import time
 
+import geojson	
+from shapely.geometry import Polygon
+from shapely.ops import cascaded_union
+
 #use
 
 class Generate_geojson():
@@ -72,8 +76,8 @@ class Generate_geojson():
     
         amount_travels_month =[]
         
-        #for i in range(10):
         for i in range(1):
+       
             
             str_i_month = index_month[i_month]
             print("str:", str_i_month)
@@ -143,6 +147,7 @@ class Generate_geojson():
                 else:
                     # here it can be optimised:
                     gcbs_stat = self.get_closest_bike_station(self.init_tools.get_center_rectangle(c_o[1] - increment_lat*lat_indice, c_o[0] + increment_long*lon_indice, c_o[1] - increment_lat*(lat_indice+1), c_o[0] + increment_long*(lon_indice + 1))[0],self.init_tools.get_center_rectangle(c_o[1] - increment_lat*lat_indice, c_o[0] + increment_long*lon_indice, c_o[1] - increment_lat*(lat_indice+1), c_o[0] + increment_long*(lon_indice + 1))[1])[0]
+                    ctb = self.compare_then_proba(month_num, self.legacy_to_new(gcbs_stat), json_file, amount_travels_bfore, amount_travels_dico)#month num, bike station id  compare_then_proba(month_num, bike_station_id, json_file):
                     geojson["features"].append({
                                                 "type" : "Feature",
                                     "geometry" : {
@@ -179,7 +184,7 @@ class Generate_geojson():
                                         "closest_station_bike": gcbs_stat,
                                         "closest_test_station": self.global_station_hub[gcbs_stat][2],
                                         #"closest_test_center_coordinates": places_coordinates[global_station_hub[gcbs_stat][2]],
-                                        "probability" : self.compare_then_proba(month_num, self.legacy_to_new(gcbs_stat), json_file, amount_travels_bfore, amount_travels_dico)#month num, bike station id  compare_then_proba(month_num, bike_station_id, json_file):
+                                        "probability" : ctb
                                     }
 
                                 })
@@ -497,3 +502,85 @@ class Generate_geojson():
         dic2=dict(sorted(nom_ccnc.items(),key= lambda x:x[1]))
         print(dic2)
         return nom_ccnc
+
+    def read_zone(self):
+        #https://stackoverflow.com/questions/34325030/merging-two-geojson-polygons-in-python
+        indices_rz = [0,2,3,4]
+        polys0 = []
+        polys2 = []
+        polys3 = []
+        polys4 = []
+        # working directory (here python_classes)
+        wd = os.getcwd()
+        os.chdir('../../export/sources') 
+        geojsons_folder = os.getcwd()
+
+        #for str_m in self.string_month:
+        #    doc_name = 'bike_covid_' + str_m
+        name_file = 'bike_covid_' + self.string_month[0]
+        with open(geojsons_folder + '/' + name_file) as f:
+            geojson_file = geojson.load(f)
+            features = geojson_file['features']
+            for dic in features :
+                comparison_number = dic['properties']['probability']
+                poly_coordinates = dic['geometry']['coordinates'] # [[[lat1, long1], [lat2, long2]]]
+                
+                list_poly_coordinates = poly_coordinates[0]
+                list_poly_coordinates_rw = []
+                for coord in list_poly_coordinates:
+                    list_poly_coordinates_rw.append((coord[0], coord[1]))
+                #print(comparison_number)
+                #print(list_poly_coordinates_rw)
+
+                if comparison_number ==4:
+                    polys4.append(Polygon(list_poly_coordinates_rw))
+
+                elif comparison_number ==3:
+                    polys3.append(Polygon(list_poly_coordinates_rw))
+
+
+                elif comparison_number ==0:
+                    polys0.append(Polygon(list_poly_coordinates_rw))
+
+                elif comparison_number ==2:
+                    polys2.append(Polygon(list_poly_coordinates_rw))
+        
+        mergedPolygon = poly1.union(poly2)
+
+        # using geojson module to convert from WKT back into GeoJSON format
+        geojson_out = geojson.Feature(geometry=mergedPolygon, properties={})
+        """
+        u0 = cascaded_union(polys0)
+        u2 = cascaded_union(polys2)
+        u3 = cascaded_union(polys3)
+        u4 = cascaded_union(polys4)
+        unions = [u0, u2, u3, u4]
+        """
+        geojson_w = {
+                    "type" : "FeatureCollection",
+                    "features" : [
+                        
+                    ]
+        }
+
+        for i in range(4):
+            geojson_w["features"].append({
+                                        "type" : "Feature",
+                            "geometry" : {
+                                "type" : "Polygon",
+                                "coordinates" : 
+                                    unions[i]
+                                
+                            },
+                            "properties" : {
+                                "value": indices_rz[i]
+                                }
+
+                        })
+
+        with open('bike_covid_' + '2020-04.geojson', 'w') as f:
+            string_final1 = str(geojson_w)
+            string_final2 = string_final1.replace("'",'"')
+            f.write(string_final2)
+            #print("end fake() ")
+    
