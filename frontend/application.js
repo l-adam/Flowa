@@ -2,6 +2,7 @@ var layoutMapSelector = [];
 var layoutStatisticsNumbers = [];
 var layoutLegend = {};
 var layoutOverlays = [];
+var layoutTimeline;
 
 function initializeLayoutDataSources() {
 	dataSources.forEach((dataSource, index) => {
@@ -90,17 +91,25 @@ function initializeLayoutTimeline() {
 		document.styleSheets[0].insertRule(ruleMozilla, 0);
 	} catch (err) {}
 
-	var layoutTimeline = document.getElementById("timeline");
+	layoutTimeline = document.getElementById("timeline");
 
 	layoutTimeline.value = Math.round(current.timelineIndex * 1200 / (timelines.length - 1));
 
 	layoutTimeline.onclick = function() {
-		current.timelineIndex = Math.round(timeline.value /
-			(1200 / (timelines.length - 1)));
-		layoutTimeline.value = Math.round(current.timelineIndex * 1200 / (timelines.length - 1));
-		changeMapOverlayTime();
-		layoutUpdate();
-	}
+		layoutChangeTimeline();
+	};
+	
+	layoutTimeline.ontouchend = function() {
+		setTimeout(layoutChangeTimeline, 10);
+	};
+}
+
+function layoutChangeTimeline() {
+	current.timelineIndex = Math.round(timeline.value /
+		(1200 / (timelines.length - 1)));
+	layoutTimeline.value = Math.round(current.timelineIndex * 1200 / (timelines.length - 1));
+	changeMapOverlayTime();
+	layoutUpdate();
 }
 
 function layoutUpdate() {
