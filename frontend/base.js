@@ -40,9 +40,7 @@ function changeHeatmap(dataSourceOptions) {
 
 		setHeatmapColorScale(heatmapOn);
 
-		map.once('idle', function() {
-			switchHeatmapVisibility(heatmapOff, heatmapOn);
-		});
+		switchHeatmapVisibility(heatmapOff, heatmapOn);
 	});
 }
 
