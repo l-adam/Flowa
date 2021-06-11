@@ -76,7 +76,7 @@ class Generate_geojson():
     
         amount_travels_month =[]
         
-        for i in range(1):
+        for i in range(10):
        
             
             str_i_month = index_month[i_month]
@@ -101,7 +101,7 @@ class Generate_geojson():
             print("imonth: ",i_month)
             
             map_number +=1
-        """    
+           
         for i in range(3):
             
             str_i_month = index_month[i_month]
@@ -122,7 +122,7 @@ class Generate_geojson():
             i_month = i_month%12
             
             map_number +=1
-        """
+        
 
     # generates a geojson file with the link between the different data sources
     def create_matrix_square_station(self, month_num, json_file, map_number, amount_travels_bfore, amount_travels_dico):
@@ -369,7 +369,7 @@ class Generate_geojson():
         return self.ltn_dico[str(legacy_id)]
 
     # generates a geojson file with fake shit
-    def fake(self, map_number):
+    def fake(self, end_name):
         #print("start fake() ")
         #générer n points random dans la matrice
         c_o = [10.665, 59.97] # = [longitude, latitude]
@@ -395,48 +395,58 @@ class Generate_geojson():
         # c_o[1] - 10**(-4)*2.04425*lat_indice
         increment_long = 10**(-4)*4.07696*2
         increment_lat = 10**(-4)*2.04425*2
+        """
+        #44000 squares
         for lat_indice in range(220):
             for lon_indice in range(200):
-                fake_value = self.get_fake_value(random_points, c_o[0] + 10**(-4)*4.07696*lon_indice,c_o[1] - 10**(-4)*2.04425*lat_indice)
-                geojson["features"].append({
-                                            "type" : "Feature",
-                                "geometry" : {
-                                    "type" : "Polygon",
-                                    #bg, hg, hd, bd, bg
-                                    "coordinates" : [[
-                                        
-                                        [
-                                        c_o[0] + increment_long*lon_indice,
-                                        c_o[1] - increment_lat*lat_indice
-                                        ],
-                                        [
-                                        c_o[0] + increment_long*(lon_indice + 1),
-                                        c_o[1] - increment_lat*lat_indice
-                                        ],
-                                        [
-                                        c_o[0] + increment_long*(lon_indice+1),
-                                        c_o[1] - increment_lat*(lat_indice+1) 
-                                        ],
-                                        [
-                                        c_o[0] + increment_long*lon_indice,
-                                        c_o[1] - increment_lat*(lat_indice+1) 
-                                        ],
-                                        [
-                                        c_o[0] + increment_long*lon_indice,
-                                        c_o[1] - increment_lat*lat_indice
-                                        ]
-                                        
-                                    ]]
-                                },
-                                "properties" : {
-                                    #bg, bd, hg
-                                    #"center" : get_center_rectangle(c_o[1] - increment_lat*lat_indice, c_o[0] + increment_long*lon_indice, c_o[1] - increment_lat*(lat_indice+1), c_o[0] + increment_long*(lon_indice + 1)),
-                                    "value": fake_value
-                                   }
 
-                            })
+        """
+        #156000 squares - 170*200 = 122000
+        for lat_indice in range(400):#hauteur
+            for lon_indice in range(390):#largeur
+                if lon_indice<170 and lat_indice>200:
+                    pass
+                else:
+                    fake_value = self.get_fake_value(random_points, c_o[0] + 10**(-4)*4.07696*lon_indice,c_o[1] - 10**(-4)*2.04425*lat_indice)
+                    geojson["features"].append({
+                                                "type" : "Feature",
+                                    "geometry" : {
+                                        "type" : "Polygon",
+                                        #bg, hg, hd, bd, bg
+                                        "coordinates" : [[
+                                            
+                                            [
+                                            c_o[0] + increment_long*lon_indice,
+                                            c_o[1] - increment_lat*lat_indice
+                                            ],
+                                            [
+                                            c_o[0] + increment_long*(lon_indice + 1),
+                                            c_o[1] - increment_lat*lat_indice
+                                            ],
+                                            [
+                                            c_o[0] + increment_long*(lon_indice+1),
+                                            c_o[1] - increment_lat*(lat_indice+1) 
+                                            ],
+                                            [
+                                            c_o[0] + increment_long*lon_indice,
+                                            c_o[1] - increment_lat*(lat_indice+1) 
+                                            ],
+                                            [
+                                            c_o[0] + increment_long*lon_indice,
+                                            c_o[1] - increment_lat*lat_indice
+                                            ]
+                                            
+                                        ]]
+                                    },
+                                    "properties" : {
+                                        #bg, bd, hg
+                                        #"center" : get_center_rectangle(c_o[1] - increment_lat*lat_indice, c_o[0] + increment_long*lon_indice, c_o[1] - increment_lat*(lat_indice+1), c_o[0] + increment_long*(lon_indice + 1)),
+                                        "value": fake_value
+                                    }
 
-        with open('fake_data' + str(map_number) +'.geojson', 'w') as f:
+                                })
+
+        with open('fake_data_' + end_name , 'w') as f:
             string_final1 = str(geojson)
             string_final2 = string_final1.replace("'",'"')
             f.write(string_final2)
@@ -505,6 +515,7 @@ class Generate_geojson():
         return nom_ccnc
 
     # reads the bike_covid geojson files and merge the polygons with the same value to make final files smaller
+    # Before runnung this program you need to make sure the folder backend/export/sources contains all the files bike_covid_date.geojson 
     def read_zone(self):
         #https://stackoverflow.com/questions/34325030/merging-two-geojson-polygons-in-python
         indices_rz = [0,2,3,4]
@@ -519,70 +530,204 @@ class Generate_geojson():
 
         #for str_m in self.string_month:
         #    doc_name = 'bike_covid_' + str_m
-        name_file = 'bike_covid_' + self.string_month[0]
-        with open(geojsons_folder + '/' + name_file) as f:
-            geojson_file = geojson.load(f)
-            features = geojson_file['features']
-            for dic in features :
-                comparison_number = dic['properties']['probability']
-                poly_coordinates = dic['geometry']['coordinates'] # [[[lat1, long1], [lat2, long2]]]
-                
-                list_poly_coordinates = poly_coordinates[0]
-                list_poly_coordinates_rw = []
-                for coord in list_poly_coordinates:
-                    list_poly_coordinates_rw.append((coord[0], coord[1]))
-                #print(comparison_number)
-                #print(list_poly_coordinates_rw)
+        global_end=''
+        for end_name in self.string_month:
 
-                if comparison_number ==4:
-                    polys4.append(Polygon(list_poly_coordinates_rw))
+            name_file = 'bike_covid_' + end_name
+            global_end = end_name
+            with open(geojsons_folder + '/' + name_file) as f:
+                geojson_file = geojson.load(f)
+                features = geojson_file['features']
+                for dic in features :
+                    comparison_number = dic['properties']['probability']
+                    poly_coordinates = dic['geometry']['coordinates'] # [[[lat1, long1], [lat2, long2]]]
+                    
+                    list_poly_coordinates = poly_coordinates[0]
+                    list_poly_coordinates_rw = []
+                    for coord in list_poly_coordinates:
+                        list_poly_coordinates_rw.append((coord[0], coord[1]))
+                    #print(comparison_number)
+                    #print(list_poly_coordinates_rw)
 
-                elif comparison_number ==3:
-                    polys3.append(Polygon(list_poly_coordinates_rw))
+                    if comparison_number ==4:
+                        polys4.append(Polygon(list_poly_coordinates_rw))
+
+                    elif comparison_number ==3:
+                        polys3.append(Polygon(list_poly_coordinates_rw))
 
 
-                elif comparison_number ==0:
-                    polys0.append(Polygon(list_poly_coordinates_rw))
+                    elif comparison_number ==0:
+                        polys0.append(Polygon(list_poly_coordinates_rw))
 
-                elif comparison_number ==2:
-                    polys2.append(Polygon(list_poly_coordinates_rw))
-        
-        mergedPolygon = poly1.union(poly2)
+                    elif comparison_number ==2:
+                        polys2.append(Polygon(list_poly_coordinates_rw))  
+                f.close()        
+            
+            u0 = cascaded_union(polys0)
+            u2 = cascaded_union(polys2)
+            u3 = cascaded_union(polys3)
+            u4 = cascaded_union(polys4)
+            unions = [u0, u2, u3, u4]
+            
+            features = []
+            for i in range(4):
+                geojson_out = geojson.Feature(geometry=unions[i], properties={"probability": indices_rz[i]})
+                features.append(geojson_out)
 
-        # using geojson module to convert from WKT back into GeoJSON format
-        geojson_out = geojson.Feature(geometry=mergedPolygon, properties={})
-        """
-        u0 = cascaded_union(polys0)
-        u2 = cascaded_union(polys2)
-        u3 = cascaded_union(polys3)
-        u4 = cascaded_union(polys4)
-        unions = [u0, u2, u3, u4]
-        """
-        geojson_w = {
-                    "type" : "FeatureCollection",
-                    "features" : [
-                        
-                    ]
-        }
-
-        for i in range(4):
-            geojson_w["features"].append({
-                                        "type" : "Feature",
-                            "geometry" : {
-                                "type" : "Polygon",
-                                "coordinates" : 
-                                    unions[i]
-                                
-                            },
-                            "properties" : {
-                                "value": indices_rz[i]
-                                }
-
-                        })
-
-        with open('bike_covid_' + '2020-04.geojson', 'w') as f:
-            string_final1 = str(geojson_w)
-            string_final2 = string_final1.replace("'",'"')
-            f.write(string_final2)
-            #print("end fake() ")
+            feature_collection = geojson.FeatureCollection(features)
+            with open('bike_covid2_' + global_end, 'w') as f2:
+                string_final1 = str(feature_collection)
+                string_final2 = string_final1.replace("'",'"')
+                f2.write(string_final2)
+                #print("end fake() ")
+                f2.close()
+            polys0 = []
+            polys2 = []
+            polys3 = []
+            polys4 = []
     
+    # same algorithm as above but for the fake source
+    def read_zone_fake(self):
+        #https://stackoverflow.com/questions/34325030/merging-two-geojson-polygons-in-python
+        indices_rz = [0, 1, 2, 3, 5, 6, 7, 8, 9,10, 11, 12, 13, 14, 15, 17, 18, 19, 20]
+        polys0 = []
+        polys1 = []
+        polys2 = []
+        polys3 = []
+        polys5 = []
+        polys6 = []
+        polys7 = []
+        polys8 = []
+        polys9 = []
+        polys10 = []
+        polys11 = []
+        polys12 = []
+        polys13 = []
+        polys14 = []
+        polys15 = []
+        polys17 = []
+        polys18 = []
+        polys19 = []
+        polys20 = []
+        # working directory (here python_classes)
+        wd = os.getcwd()
+        os.chdir('../../export/sources') 
+        geojsons_folder = os.getcwd()
+
+        #for str_m in self.string_month:
+        #    doc_name = 'bike_covid_' + str_m
+        global_end=''
+        for end_name in self.string_month:
+
+            name_file = 'fake_data_' + end_name
+            global_end = end_name
+            with open(geojsons_folder + '/' + name_file) as f:
+                geojson_file = geojson.load(f)
+                features = geojson_file['features']
+
+                # for every square of the matrix
+                for dic in features :
+                    #the value is
+                    comparison_number = dic['properties']['value']
+                    poly_coordinates = dic['geometry']['coordinates'] # [[[lat1, long1], [lat2, long2]]]
+                    
+                    #the list of the coordinates is
+                    list_poly_coordinates = poly_coordinates[0]
+                    #initialising the list of the coordinates within brackets:
+                    list_poly_coordinates_rw = []
+                    for coord in list_poly_coordinates:
+                        list_poly_coordinates_rw.append((coord[0], coord[1]))
+
+                    # pas de 4, 10, 16
+                    if comparison_number ==0:
+                        polys0.append(Polygon(list_poly_coordinates_rw))
+                    elif comparison_number ==1:
+                        polys1.append(Polygon(list_poly_coordinates_rw))
+                    elif comparison_number ==2:
+                        polys2.append(Polygon(list_poly_coordinates_rw))
+                    elif comparison_number ==3:
+                        polys3.append(Polygon(list_poly_coordinates_rw))  
+                    elif comparison_number ==5:
+                        polys5.append(Polygon(list_poly_coordinates_rw))  
+                    elif comparison_number ==6:
+                        polys6.append(Polygon(list_poly_coordinates_rw))  
+                    elif comparison_number ==7:
+                        polys7.append(Polygon(list_poly_coordinates_rw))  
+                    elif comparison_number ==8:
+                        polys8.append(Polygon(list_poly_coordinates_rw))  
+                    elif comparison_number ==9:
+                        polys9.append(Polygon(list_poly_coordinates_rw)) 
+                    elif comparison_number ==10:
+                        polys10.append(Polygon(list_poly_coordinates_rw))  
+                    elif comparison_number ==11:
+                        polys11.append(Polygon(list_poly_coordinates_rw))  
+                    elif comparison_number ==12:
+                        polys12.append(Polygon(list_poly_coordinates_rw))  
+                    elif comparison_number ==13:
+                        polys13.append(Polygon(list_poly_coordinates_rw))  
+                    elif comparison_number ==14:
+                        polys14.append(Polygon(list_poly_coordinates_rw))  
+                    elif comparison_number ==15:
+                        polys15.append(Polygon(list_poly_coordinates_rw))  
+                    elif comparison_number ==17:
+                        polys17.append(Polygon(list_poly_coordinates_rw))  
+                    elif comparison_number ==18:
+                        polys18.append(Polygon(list_poly_coordinates_rw))  
+                    elif comparison_number ==19:
+                        polys19.append(Polygon(list_poly_coordinates_rw))  
+                    elif comparison_number ==20:
+                        polys20.append(Polygon(list_poly_coordinates_rw))  
+                f.close()        
+            
+            u0 = cascaded_union(polys0)
+            u1 = cascaded_union(polys1)
+            u2 = cascaded_union(polys2)
+            u3 = cascaded_union(polys3)
+            u5 = cascaded_union(polys5)
+            u6 = cascaded_union(polys6)
+            u7 = cascaded_union(polys7)
+            u8 = cascaded_union(polys8)
+            u9 = cascaded_union(polys9)
+            u10 = cascaded_union(polys10)
+            u11 = cascaded_union(polys11)
+            u12 = cascaded_union(polys12)
+            u13 = cascaded_union(polys13)
+            u14 = cascaded_union(polys14)
+            u15 = cascaded_union(polys15)
+            u17 = cascaded_union(polys17)
+            u18 = cascaded_union(polys18)
+            u19 = cascaded_union(polys19)
+            u20 = cascaded_union(polys20)
+            unions = [u0, u1, u2, u3, u5, u6, u7, u8, u9, u10, u11, u12, u13, u14, u15, u17, u18, u19, u20]
+            
+            features = []
+            for i in range(19):
+                geojson_out = geojson.Feature(geometry=unions[i], properties={"value": indices_rz[i]})
+                features.append(geojson_out)
+
+            feature_collection = geojson.FeatureCollection(features)
+            with open('fake_data2_' + global_end, 'w') as f2:
+                string_final1 = str(feature_collection)
+                string_final2 = string_final1.replace("'",'"')
+                f2.write(string_final2)
+                #print("end fake() ")
+                f2.close()
+            polys0 = []
+            polys1 = []
+            polys2 = []
+            polys3 = []
+            polys5 = []
+            polys6 = []
+            polys7 = []
+            polys8 = []
+            polys9 = []
+            polys10 = []
+            polys11 = []
+            polys12 = []
+            polys13 = []
+            polys14 = []
+            polys15 = []
+            polys17 = []
+            polys18 = []
+            polys19 = []
+            polys20 = []

@@ -10,12 +10,18 @@ if __name__=="__main__":
         'bike_covid_2020-07.geojson', 'bike_covid_2020-08.geojson', 'bike_covid_2020-09.geojson', 'bike_covid_2020-10.geojson', 
         'bike_covid_2020-11.geojson', 'bike_covid_2020-12.geojson', 'bike_covid_2021-01.geojson', 'bike_covid_2021-02.geojson', 
         'bike_covid_2021-03.geojson', 'bike_covid_2021-04.geojson']
+    string_month2 = ['2020-04.geojson', '2020-05.geojson', '2020-06.geojson', 
+        '2020-07.geojson', '2020-08.geojson', '2020-09.geojson', '2020-10.geojson', 
+        '2020-11.geojson', '2020-12.geojson', '2021-01.geojson', '2021-02.geojson', 
+        '2021-03.geojson', '2021-04.geojson']
      
     gg_object = generate_geojson.Generate_geojson()
     #gg_object.for_each_month_map()
-    #gg_object.create_test_stations(3)
+    #for s_m in string_month2:
+    gg_object.read_zone_fake()
+    
+    #gg_object.read_zone_fake()
 
-    gg_object.read_zone()
 
     #dfeo = data_from_excel.Data_from_excel()
     #dfeo.json_stats()
