@@ -73,21 +73,21 @@ function addGeoJSONSource(heatmapId, GeoJSONdata) {
 }
 
 function initializeMapHeatmap(colorScheme) {
-	map.once('load', function() {
-		var dataSourceOptions = {
-			'index': defaults.dataSourceIndex,
-			'type': 'source',
-			'timelineIndex': defaults.timelineIndex
-		};
+	var dataSourceOptions = {
+		'index': defaults.dataSourceIndex,
+		'type': 'source',
+		'timelineIndex': defaults.timelineIndex
+	};
 
-		firstSymbolId = findFirstLayer();
+	current.dataSource = dataSources[dataSourceOptions.index];
+	current.dataSourceIndex = dataSourceOptions.index;
+	current.heatmapId = heatmapIds[0];
+	current.timelineIndex = defaults.timelineIndex;
 
-		current.dataSource = dataSources[dataSourceOptions.index];
-		current.dataSourceIndex = dataSourceOptions.index;
-		current.heatmapId = heatmapIds[0];
-		current.timelineIndex = defaults.timelineIndex;
+	parseGeoJSONZip(dataSourceOptions).then(function(geoJSONdata) {
+		map.once('load', function() {
+			firstSymbolId = findFirstLayer();
 
-		parseGeoJSONZip(dataSourceOptions).then(function(geoJSONdata) {
 			addGeoJSONSource(heatmapIds[0], geoJSONdata);
 			addGeoJSONSource(heatmapIds[1], '/frontend/assets/null.geojson');
 
@@ -95,8 +95,8 @@ function initializeMapHeatmap(colorScheme) {
 			addSourceLayer(heatmapIds[1], 'none');
 
 			setHeatmapColorScale(current.heatmapId);
-		});
-	})
+		})
+	});
 }
 
 function setHeatmap(heatmapId, GeoJSONdata) {
@@ -212,24 +212,24 @@ function getIconProperties(id) {
 }
 
 function initializeMapOverlays() {
-	map.once('load', function() {
-		loadAssets();
+	loadAssets();
 
-		dataOverlays.forEach(
-			(dataOverlay, index) => {
-				var dataOverlayOptions = {
-					'index': index,
-					'type': 'overlay',
-					'timelineIndex': defaults.timelineIndex
-				};
+	dataOverlays.forEach(
+		(dataOverlay, index) => {
+			var dataOverlayOptions = {
+				'index': index,
+				'type': 'overlay',
+				'timelineIndex': defaults.timelineIndex
+			};
 
-				parseGeoJSONUrl(dataOverlayOptions).then(function(geoJSONdata) {
+			parseGeoJSONUrl(dataOverlayOptions).then(function(geoJSONdata) {
+				map.once('load', function() {
 					addGeoJSONOverlay(dataOverlay, geoJSONdata, dataOverlay.colorScheme);
 
 					addOverlayLayer(dataOverlay);
 				});
 			});
-	})
+		});
 }
 
 function changeMapOverlayVisibility(index) {
