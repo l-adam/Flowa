@@ -13,12 +13,12 @@ function initializeMap() {
 
 	map.addControl(new mapboxgl.FullscreenControl(), 'top-right');
 
-	map.once('load', function() {
-		const mapButtonFullscreen = document.getElementsByClassName("mapboxgl-ctrl-fullscreen")[0];
+	const mapButtonFullscreen = document.getElementsByClassName("mapboxgl-ctrl-fullscreen")[0];
+	if (typeof mapButtonFullscreen != 'undefined') {
 		mapButtonFullscreen.addEventListener("click", () => {
 			setTimeout(resize, 500);
 		});
-	});
+	}
 
 	function resize() {
 		map.resize(); //Make sure the map changes size after entering full screen 
