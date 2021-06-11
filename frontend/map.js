@@ -13,9 +13,11 @@ function initializeMap() {
 
 	map.addControl(new mapboxgl.FullscreenControl(), 'top-right');
 
-	const mapButtonFullscreen = document.getElementsByClassName("mapboxgl-ctrl-fullscreen")[0];
-	mapButtonFullscreen.addEventListener("click", () => {
-		setTimeout(resize, 500);
+	map.once('load', function() {
+		const mapButtonFullscreen = document.getElementsByClassName("mapboxgl-ctrl-fullscreen")[0];
+		mapButtonFullscreen.addEventListener("click", () => {
+			setTimeout(resize, 500);
+		});
 	});
 
 	function resize() {
