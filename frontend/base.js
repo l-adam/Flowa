@@ -222,7 +222,7 @@ function initializeMapOverlays() {
 				'timelineIndex': defaults.timelineIndex
 			};
 
-			parseGeoJSONUrl(dataOverlayOptions).then(function(geoJSONdata) {
+			parseGeoJSONZip(dataOverlayOptions).then(function(geoJSONdata) {
 				map.once('load', function() {
 					addGeoJSONOverlay(dataOverlay, geoJSONdata, dataOverlay.colorScheme);
 
@@ -246,7 +246,7 @@ function changeMapOverlayTime() {
 				'timelineIndex': current.timelineIndex
 			};
 
-			parseGeoJSONUrl(dataOverlayOptions).then(function(geoJSONdata) {
+			parseGeoJSONZip(dataOverlayOptions).then(function(geoJSONdata) {
 				map.getSource(dataOverlay.id).setData(geoJSONdata);
 			});
 		});
