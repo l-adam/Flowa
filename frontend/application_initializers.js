@@ -1,3 +1,11 @@
+//
+//  application_initializers.js
+//  Flowa
+//
+//  Created by Adam Lewczuk.
+//  Copyright 2021 Adam Lewczuk. All rights reserved.
+//
+
 var layoutMapSelector = [];
 var layoutStatisticsNumbers = [];
 var layoutLegend = {};
@@ -22,26 +30,6 @@ function initializeLayoutDataSources() {
 	});
 }
 
-function layoutChangeDataSource(dataSourceIndex) {
-	if (current.dataSourceIndex != dataSourceIndex) {
-		current.dataSource = dataSources[dataSourceIndex];
-		current.dataSourceIndex = dataSourceIndex;
-
-		layoutMapSelector.forEach((layoutMapSelector, index) => {
-			layoutMapSelector.classList
-				.add("mapSelectorEntry", "mapSelectorEntryActive");
-
-			if (index == dataSourceIndex) {
-				layoutMapSelector.classList.remove("mapSelectorEntry");
-			} else {
-				layoutMapSelector.classList.remove("mapSelectorEntryActive");
-			}
-		});
-
-		layoutUpdate();
-	}
-}
-
 function initializeLayoutStatistics() {
 	Object.keys(timelines[current.timelineIndex].statistics).forEach((statistic, index) => {
 		document.getElementById(statistic)
@@ -52,12 +40,6 @@ function initializeLayoutStatistics() {
 		layoutStatisticsNumbers[index]
 			.appendChild(document
 				.createTextNode(timelines[current.timelineIndex].statistics[statistic]));
-	});
-}
-
-function layoutChangeStatistics() {
-	Object.keys(timelines[current.timelineIndex].statistics).forEach((statistic, index) => {
-		layoutStatisticsNumbers[index].textContent = timelines[current.timelineIndex].statistics[statistic];
 	});
 }
 
@@ -98,31 +80,10 @@ function initializeLayoutTimeline() {
 	layoutTimeline.onclick = function() {
 		layoutChangeTimeline();
 	};
-	
+
 	layoutTimeline.ontouchend = function() {
 		setTimeout(layoutChangeTimeline, 10);
 	};
-}
-
-function layoutChangeTimeline() {
-	current.timelineIndex = Math.round(timeline.value /
-		(1200 / (timelines.length - 1)));
-	layoutTimeline.value = Math.round(current.timelineIndex * 1200 / (timelines.length - 1));
-	changeMapOverlayTime();
-	layoutUpdate();
-}
-
-function layoutUpdate() {
-	var dataSourceOptions = {
-		'index': current.dataSourceIndex,
-		'type': 'source',
-		'timelineIndex': current.timelineIndex
-	};
-
-	changeHeatmap(dataSourceOptions);
-
-	layoutChangeStatistics();
-	layoutChangeLegend();
 }
 
 function initializeLayoutLegend() {
@@ -137,13 +98,6 @@ function initializeLayoutLegend() {
 		.appendChild(layoutLegend.max = document.createElement("div"));
 	layoutLegend.max.appendChild(document.createTextNode(currentLegend.max));
 	layoutLegend.max.id = "legendMaxText";
-}
-
-function layoutChangeLegend() {
-	var currentLegend = timelines[current.timelineIndex].legend[current.dataSource.id];
-
-	layoutLegend.min.textContent = currentLegend.min;
-	layoutLegend.max.textContent = currentLegend.max;
 }
 
 function initializeLayoutOverlays() {
@@ -173,10 +127,6 @@ function initializeLayoutOverlays() {
 			layoutOverlays[index].checked = true;
 		}
 	});
-}
-
-function layoutChangeOverlays(index) {
-	changeMapOverlayVisibility(index);
 }
 
 window.addEventListener('load', function() {

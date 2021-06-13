@@ -1,11 +1,17 @@
-const defaultColorScheme = ['#0000FF', '#FF7700'];
-const opacity = 0.5;
+//
+//  base.js
+//  Flowa
+//
+//  Created by Adam Lewczuk.
+//  Copyright 2021 Adam Lewczuk. All rights reserved.
+//
 
-var current = {};
-var firstSymbolId;
-var heatmapIds = ['heatmap', 'heatmap2'];
+var current = {}; //data structure for storing the current state of the map
+var firstSymbolId; // The index of the first symbol layer in the map style
+var heatmapIds = ['heatmap', 'heatmap2']; //layers used to display heatmaps
 
 // Find the index of the first symbol layer in the map style
+// This is to display a MapBox source below other map elements (e.g. streets)
 function findFirstLayer() {
 	var layers = map.getStyle().layers;
 
@@ -19,109 +25,11 @@ function findFirstLayer() {
 	return firstSymbolId;
 }
 
-function changeHeatmap(dataSourceOptions) {
-	var heatmapOff;
-	var heatmapOn;
-	var minStop = current.dataSource.minStop;
-	var maxStop = current.dataSource.maxStop;
-
-	if (current.heatmapId == heatmapIds[0]) {
-		heatmapOff = heatmapIds[0];
-		heatmapOn = heatmapIds[1]
-		current.heatmapId = heatmapIds[1];
-	} else {
-		heatmapOff = heatmapIds[1];
-		heatmapOn = heatmapIds[0]
-		current.heatmapId = heatmapIds[0];
-	}
-
-	parseGeoJSONZip(dataSourceOptions).then(function(GeoJSONdata) {
-		setHeatmap(heatmapOn, GeoJSONdata);
-
-		setHeatmapColorScale(heatmapOn);
-
-		switchHeatmapVisibility(heatmapOff, heatmapOn);
-	});
-}
-
-function switchHeatmapVisibility(heatmapOff, heatmapOn) {
-	map.setLayoutProperty(heatmapOff, 'visibility', 'none');
-	map.setLayoutProperty(heatmapOn, 'visibility', 'visible');
-}
-
-function addSourceLayer(heatmapId, visibility) {
-	map.addLayer({
-			'id': heatmapId,
-			'type': 'fill',
-			'source': heatmapId,
-			'layout': {
-				'visibility': visibility
-			},
-			'paint': {
-				'fill-opacity': opacity,
-				'fill-antialias': false
-			},
-		},
-		firstSymbolId);
-}
-
-function addGeoJSONSource(heatmapId, GeoJSONdata) {
-	map.addSource(heatmapId, {
-		'type': 'geojson',
-		'data': GeoJSONdata
-	});
-}
-
-function initializeMapHeatmap(colorScheme) {
-	var dataSourceOptions = {
-		'index': defaults.dataSourceIndex,
-		'type': 'source',
-		'timelineIndex': defaults.timelineIndex
-	};
-
-	current.dataSource = dataSources[dataSourceOptions.index];
-	current.dataSourceIndex = dataSourceOptions.index;
-	current.heatmapId = heatmapIds[0];
-	current.timelineIndex = defaults.timelineIndex;
-
-	parseGeoJSONZip(dataSourceOptions).then(function(geoJSONdata) {
-		map.once('load', function() {
-			firstSymbolId = findFirstLayer();
-
-			addGeoJSONSource(heatmapIds[0], geoJSONdata);
-			addGeoJSONSource(heatmapIds[1], '/frontend/assets/null.geojson');
-
-			addSourceLayer(heatmapIds[0], 'visible');
-			addSourceLayer(heatmapIds[1], 'none');
-
-			setHeatmapColorScale(current.heatmapId);
-		})
-	});
-}
-
-function setHeatmap(heatmapId, GeoJSONdata) {
-	map.getSource(heatmapId).setData(GeoJSONdata);
-}
-
-function setHeatmapColorScale(heatmapId) {
-	var fillColor = {
-		property: current.dataSource.analyzedProperty,
-		stops: generateColorScale(current.dataSource.colorScheme,
-			current.dataSource.minStop, current.dataSource.maxStop)
-	};
-
-	map.setPaintProperty(heatmapId, 'fill-color', fillColor);
-
-	current.colorScheme = current.dataSource.colorScheme;
-}
-
-function* range(start, end, step) {
-	while (start < end) {
-		yield start;
-		start += step;
-	}
-}
-
+// Generate a color value for each possible property value
+// Arguments:
+// 		colorScheme – an array containing RGB values to be used in the gradient
+// 		minStop – minimum value of an examined property
+// 		maxStop – maximum value of an examined property
 function generateColorScale(colorScheme, minStop, maxStop) {
 	var stops = Array.from(range(minStop, maxStop, 1));
 	var colors = chroma.scale(colorScheme).colors(stops.length);
@@ -136,46 +44,10 @@ function generateColorScale(colorScheme, minStop, maxStop) {
 	return colorScale;
 }
 
-function addGeoJSONOverlay(overlay, GeoJSONdata) {
-	map.addSource(overlay.id, {
-		'type': 'geojson',
-		'data': GeoJSONdata
-	});
-}
-
-function addOverlayLayer(overlay) {
-	var iconProperties = getIconProperties(overlay.id);
-
-	map.addLayer({
-		'id': overlay.id,
-		'type': 'symbol',
-		'source': overlay.id,
-		'layout': {
-			'icon-allow-overlap': true,
-			'icon-image': iconProperties.id,
-			'icon-size': iconProperties.size,
-			'icon-anchor': 'bottom',
-			'visibility': overlay.defaultVisibility,
-			'text-allow-overlap': true,
-			'text-field': ['get', overlay.analyzedProperty],
-			'text-font': [
-				'literal', [
-					'Lato Regular',
-					'Open Sans Semibold',
-					'Arial Unicode MS Bold'
-				]
-			],
-			'text-size': 16,
-			'text-justify': 'right'
-		},
-		'paint': {
-			'icon-color': generateColorMatch(overlay),
-			'text-color': generateColorMatch(overlay),
-			'text-translate': [24, -19]
-		}
-	});
-}
-
+// Generate a MapBox expression with the color scheme of an overlay
+// for each of the possible property values
+// Arguments:
+// 		overlay – overlay object
 function generateColorMatch(overlay) {
 	var stops = Array.from(range(overlay.minStop, overlay.maxStop, 1));
 	var colors = chroma.scale(overlay.colorScheme).colors(stops.length);
@@ -187,11 +59,21 @@ function generateColorMatch(overlay) {
 		}
 	);
 
+	// Color value for properties outside of the specified range
 	colorMatch.push(colors[colors.length - 1]);
 
 	return colorMatch;
 }
 
+// A helper function to generate values in the given range
+function* range(start, end, step) {
+	while (start < end) {
+		yield start;
+		start += step;
+	}
+}
+
+// Get icon properties for a given overlay id
 function getIconProperties(id) {
 	var iconProperties = {};
 
@@ -211,47 +93,7 @@ function getIconProperties(id) {
 	return iconProperties;
 }
 
-function initializeMapOverlays() {
-	loadAssets();
-
-	dataOverlays.forEach(
-		(dataOverlay, index) => {
-			var dataOverlayOptions = {
-				'index': index,
-				'type': 'overlay',
-				'timelineIndex': defaults.timelineIndex
-			};
-
-			parseGeoJSONZip(dataOverlayOptions).then(function(geoJSONdata) {
-				map.once('load', function() {
-					addGeoJSONOverlay(dataOverlay, geoJSONdata, dataOverlay.colorScheme);
-
-					addOverlayLayer(dataOverlay);
-				});
-			});
-		});
-}
-
-function changeMapOverlayVisibility(index) {
-	var dataOverlay = current.dataOverlays[index];
-	map.setLayoutProperty(dataOverlay.id, 'visibility', dataOverlay.visibility);
-}
-
-function changeMapOverlayTime() {
-	dataOverlays.forEach(
-		(dataOverlay, index) => {
-			var dataOverlayOptions = {
-				'index': index,
-				'type': 'overlay',
-				'timelineIndex': current.timelineIndex
-			};
-
-			parseGeoJSONZip(dataOverlayOptions).then(function(geoJSONdata) {
-				map.getSource(dataOverlay.id).setData(geoJSONdata);
-			});
-		});
-}
-
+// Load overlay icons
 function loadAssets() {
 	assetsConfig.mapAssets.overlayIcons.forEach(
 		(overlayIcon, index) => {
