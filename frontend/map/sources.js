@@ -6,13 +6,12 @@
 //  Copyright 2021 Adam Lewczuk. All rights reserved.
 //
 
+var opacity = 0.5; // Heatmap opacity
+
 // Add a MapBox layer for a source
 // Arguments:
 // 		heatmapId – id of a source and layer used for displaying heatmaps
 // 		visibility – the default visibility
-
-var opacity = 0.5; // Heatmap opacity
-
 function addSourceLayer(heatmapId, visibility) {
 	map.addLayer({
 			'id': heatmapId,

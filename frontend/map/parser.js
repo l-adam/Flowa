@@ -2,7 +2,7 @@
 //  parser.js
 //  Flowa
 //
-//  Created by Adam Lewczuk on 2021-06-14.
+//  Created by Adam Lewczuk.
 //  Copyright 2021 Adam Lewczuk. All rights reserved.
 //
 
