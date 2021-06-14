@@ -352,8 +352,8 @@
 }
 
 .sectionFourGraphFrame {
-	width: fit-content;
-	height: fit-content;
+	width: max-content;
+	height: max-content;
 	background: #FFFFFF;
 	box-shadow: -4px 6px 20px #E1E1E1;
 	border-radius: 10px;
