@@ -248,7 +248,7 @@ body {
 	color: #FFFFFF;
 	background: #C8C8C8;
 	border-radius: 5px;
-	width: fit-content;
+	width: max-content;
 	height: 22px;
 	padding-inline: 6px;
 	margin-top: 10px;
