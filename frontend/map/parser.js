@@ -1,3 +1,12 @@
+//
+//  parser.js
+//  Flowa
+//
+//  Created by Adam Lewczuk on 2021-06-14.
+//  Copyright 2021 Adam Lewczuk. All rights reserved.
+//
+
+
 const configUrl = '/backend/export/config.json';
 const assetsConfigUrl = '/frontend/assets/config.json';
 
