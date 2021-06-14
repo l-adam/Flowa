@@ -38,6 +38,7 @@
 	font-size: 15px;
 	color: #0000FF;
 	letter-spacing: -0.015em;
+	transition: color 0.25s;
 }
 
 .navigationButtonCurrentText {
