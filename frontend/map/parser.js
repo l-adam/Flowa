@@ -1,4 +1,4 @@
-const configUrl = '/backend/export/configuration_example.json';
+const configUrl = '/backend/export/config.json';
 const assetsConfigUrl = '/frontend/assets/config.json';
 
 var config;
