@@ -249,10 +249,12 @@ body {
 	background: #C8C8C8;
 	border-radius: 5px;
 	width: max-content;
-	height: 22px;
+	height: auto;
 	padding-inline: 6px;
 	margin-top: 10px;
 	display: flex;
+	line-height: 1.5;
+	padding-block: 2px;
 }
 
 .disclaimer > * {
