@@ -11,6 +11,9 @@ var timelines;
 var defaults;
 var assetsConfig;
 
+// Get and parse the JSON contents synchronously
+// Arguments:
+// 		url - the JSON url
 function getJSON(url) {
 	var resp;
 	var xmlHttp;
@@ -28,6 +31,10 @@ function getJSON(url) {
 	return resp;
 }
 
+// Get and parse a JSON encapsulated in a DEFLATED ZIP archive asynchronously
+// // Arguments:
+// 		url – URL to a file without a file name
+// 		filename – file name with extension, without .zip at the end
 function getJSONZip(url, filename) {
 	var geoJSONData;
 
@@ -52,6 +59,7 @@ function getJSONZip(url, filename) {
 	return geoJSONData;
 }
 
+// Parse configurations and defaults
 async function parseConfig() {
 	config = getJSON(configUrl);
 
@@ -63,6 +71,8 @@ async function parseConfig() {
 	timelines = config.timeline.items;
 	defaults = config.defaults;
 
+	// Generate indices in each object inside the arrays
+	// This is done to simplify processing later
 	generateIndices(dataSources);
 	generateIndices(dataOverlays);
 
@@ -73,6 +83,7 @@ async function parseConfig() {
 	return 0;
 }
 
+// Set the current application state based on the defaults
 function parseDefaults() {
 	current.dataSource = dataSources[defaults.dataSourceIndex];
 	current.timelineIndex = defaults.timelineIndex;
@@ -83,6 +94,13 @@ function parseDefaults() {
 	});
 }
 
+// Parse a GeoJSON URL based on the arguments asynchronously
+// Arguments:
+// {
+// 	index – index of a source or an overlay
+// 	type – "source" or "overlay"
+// 	timelineIndex – index of the currently set time
+// }
 function parseGeoJSONUrl({
 	index,
 	type,
@@ -108,6 +126,14 @@ function parseGeoJSONUrl({
 	});
 }
 
+// Parse a URL and then parse a GeoJSON encapsulated in a DEFLATED ZIP archive
+// 	based on the arguments asynchronously
+// Arguments:
+// {
+// 	index – index of a source or an overlay
+// 	type – "source" or "overlay"
+// 	timelineIndex – index of the currently set time
+// }
 function parseGeoJSONZip({
 	index,
 	type,
@@ -136,6 +162,7 @@ function parseGeoJSONZip({
 	return geoJSON;
 }
 
+// Generate indices for each object in the array
 function generateIndices(data) {
 	data.forEach(
 		(data, index) => {

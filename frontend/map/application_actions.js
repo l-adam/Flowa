@@ -6,6 +6,10 @@
 //  Copyright 2021 Adam Lewczuk. All rights reserved.
 //
 
+// Change the data source based on user input
+// Arguments:
+// 		dataSourceIndex – index of the data source passed depending
+// 			on which button was clicked
 function layoutChangeDataSource(dataSourceIndex) {
 	if (current.dataSourceIndex != dataSourceIndex) {
 		current.dataSource = dataSources[dataSourceIndex];
@@ -15,6 +19,7 @@ function layoutChangeDataSource(dataSourceIndex) {
 			layoutMapSelector.classList
 				.add("mapSelectorEntry", "mapSelectorEntryActive");
 
+			// Apply the appropriate style to each data source selector button
 			if (index == dataSourceIndex) {
 				layoutMapSelector.classList.remove("mapSelectorEntry");
 			} else {
@@ -26,12 +31,15 @@ function layoutChangeDataSource(dataSourceIndex) {
 	}
 }
 
+// Change the statistics after user input
 function layoutChangeStatistics() {
 	Object.keys(timelines[current.timelineIndex].statistics).forEach((statistic, index) => {
 		layoutStatisticsNumbers[index].textContent = timelines[current.timelineIndex].statistics[statistic];
 	});
 }
 
+// Adjust the position of the slider in the timeline based on user input
+// 1200 is the amount of timeline steps
 function layoutChangeTimeline() {
 	current.timelineIndex = Math.round(timeline.value /
 		(1200 / (timelines.length - 1)));
@@ -40,6 +48,7 @@ function layoutChangeTimeline() {
 	layoutUpdate();
 }
 
+// Perform a layout update
 function layoutUpdate() {
 	var dataSourceOptions = {
 		'index': current.dataSourceIndex,
@@ -53,6 +62,7 @@ function layoutUpdate() {
 	layoutChangeLegend();
 }
 
+// Changethe legend after user input
 function layoutChangeLegend() {
 	var currentLegend = timelines[current.timelineIndex].legend[current.dataSource.id];
 
@@ -60,6 +70,9 @@ function layoutChangeLegend() {
 	layoutLegend.max.textContent = currentLegend.max;
 }
 
+// Change an overlay visibility
+// Arguments:
+// 		index – index of a toggled overlay
 function layoutChangeOverlays(index) {
 	changeMapOverlayVisibility(index);
 }

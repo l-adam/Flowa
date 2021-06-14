@@ -10,6 +10,7 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiczM1NzU1NiIsImEiOiJja201NTJvdnEwYjZuMm90cHNvO
 
 var map;
 
+// Initialize the map
 function initializeMap() {
 	map = new mapboxgl.Map({
 		container: 'map', // ontainer ID
