@@ -20,7 +20,7 @@
 				"maxStop": 4,
 				"legend": {
 					"title": "Cases density",
-					"description": "Do we need one?"
+					"description": "This source shows the correlation between the amount of bikes travels and the amount of positive testing."
 				}
 			},
 			{
@@ -35,7 +35,7 @@
 				"maxStop": 15,
 				"legend": {
 					"title": "Cases density",
-					"description": "Do we need one? I dont think so"
+					"description": "This data is fake and is for demostration purposes only"
 				}
 			}
 		]

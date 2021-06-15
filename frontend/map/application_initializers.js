@@ -170,31 +170,19 @@ function initializeLayoutPopups() {
 	layoutPopupIds.push('overlays');
 	layoutPopupIds.push('statistics');
 	layoutPopupIds.push('legend');
+	
+	layoutChangeLegendPopup();
 
 	layoutPopupIds.forEach(id => {
 		var info = document.getElementById(id + 'Info')
 		var popup = document.getElementById(id + 'Popup');
 
 		info.addEventListener('mouseover', function() {
-			showPopup(popup)
+			layoutShowPopup(popup)
 		});
 
 		info.addEventListener('mouseout', function() {
-			hidePopup(popup)
+			layoutHidePopup(popup)
 		});
 	})
-}
-
-//Hide a popup
-// Arguments:
-// 		popup – a popup div
-function hidePopup(popup) {
-	popup.style.visibility = "hidden";
-}
-
-//Show a popup
-// Arguments:
-// 		popup – a popup div
-function showPopup(popup) {
-	popup.style.visibility = "visible";
 }

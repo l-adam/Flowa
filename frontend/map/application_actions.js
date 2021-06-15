@@ -60,6 +60,7 @@ function layoutUpdate() {
 
 	layoutChangeStatistics();
 	layoutChangeLegend();
+	layoutChangeLegendPopup();
 }
 
 // Changethe legend after user input
@@ -75,4 +76,23 @@ function layoutChangeLegend() {
 // 		index – index of a toggled overlay
 function layoutChangeOverlays(index) {
 	changeMapOverlayVisibility(index);
+}
+
+//Hide a popup
+// Arguments:
+// 		popup – a popup div
+function layoutHidePopup(popup) {
+	popup.style.visibility = "hidden";
+}
+
+//Show a popup
+// Arguments:
+// 		popup – a popup div
+function layoutShowPopup(popup) {
+	popup.style.visibility = "visible";
+}
+
+function layoutChangeLegendPopup() {
+	document.getElementById('legendPopup')
+		.innerText = current.dataSource.legend.description;
 }
