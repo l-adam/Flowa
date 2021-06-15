@@ -211,23 +211,25 @@ body {
 
 .footer {
 	width: 100%;
-	height: 244px;
+	height: auto;
 	background: #0000FF;
 	margin-top: 134px;
 	font-family: Lato;
 	font-style: normal;
 	font-weight: normal;
-	font-size: 15px;
-	line-height: 24px;
+	font-size: 12px;
+	line-height: 18px;
 	letter-spacing: -0.015em;
 	color: #FFFFFF;
+	padding-top: 30px;
+	padding-bottom: 14px;
 }
 
 .footerSection {
 	width: auto;
 	display: flex;
 	flex-direction: column;
-	margin-left: 50px;
+	margin-left: 56px;
 }
 
 .footerSection a {
@@ -240,7 +242,6 @@ body {
 }
 
 .footerSectionTitle {
-	margin-top: 30px;
 	margin-bottom: 16px;
 	font-weight: bold;
 }
@@ -250,11 +251,15 @@ body {
 	height: 0px;
 	border: 0.5px solid #FFFFFF;
 	margin-top: 33px;
-	margin-bottom: 16px;
+	margin-bottom: 24px;
 }
 
 #follow {
 	margin-left: auto;
+}
+
+#footerContainer2 {
+	line-height: 2;
 }
 
 .footer img {
