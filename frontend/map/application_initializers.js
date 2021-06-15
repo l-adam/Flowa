@@ -11,6 +11,8 @@ var layoutStatisticsNumbers = []; // Numbers in the statistics pane
 var layoutLegend = {}; // An object for storing the legend {min, max}
 var layoutOverlays = []; // An array containing the overlay toggles
 var layoutTimeline; // An object linked to the div containing the timeline
+var layoutPopupIds = []; //An array containing the popups with information
+var layoutInfos = []; //An array containing the info buttons
 
 // Initialize data source selector buttons 
 function initializeLayoutDataSources() {
@@ -157,7 +159,42 @@ function initializeApplication() {
 	initializeLayoutTimeline();
 	initializeLayoutLegend();
 	initializeLayoutOverlays();
+	initializeLayoutPopups();
 	initializeMap();
 	initializeMapHeatmap();
 	initializeMapOverlays();
+}
+
+//Initialize all the popups
+function initializeLayoutPopups() {
+	layoutPopupIds.push('overlays');
+	layoutPopupIds.push('statistics');
+	layoutPopupIds.push('legend');
+
+	layoutPopupIds.forEach(id => {
+		var info = document.getElementById(id + 'Info')
+		var popup = document.getElementById(id + 'Popup');
+
+		info.addEventListener('mouseover', function() {
+			showPopup(popup)
+		});
+
+		info.addEventListener('mouseout', function() {
+			hidePopup(popup)
+		});
+	})
+}
+
+//Hide a popup
+// Arguments:
+// 		popup – a popup div
+function hidePopup(popup) {
+	popup.style.visibility = "hidden";
+}
+
+//Show a popup
+// Arguments:
+// 		popup – a popup div
+function showPopup(popup) {
+	popup.style.visibility = "visible";
 }
