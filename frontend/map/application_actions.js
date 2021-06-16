@@ -67,6 +67,7 @@ function layoutUpdate() {
 function layoutChangeLegend() {
 	var currentLegend = timelines[current.timelineIndex].legend[current.dataSource.id];
 
+	layoutLegend.title.textContent = current.dataSource.legend.title;
 	layoutLegend.min.textContent = currentLegend.min;
 	layoutLegend.max.textContent = currentLegend.max;
 }

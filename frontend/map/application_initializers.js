@@ -35,6 +35,9 @@ function initializeLayoutDataSources() {
 
 // Initialize numbers in the statistics pane
 function initializeLayoutStatistics() {
+	document.getElementById('statisticsSectionTitleText').textContent = config.statistics.title;
+	document.getElementById('statisticsPopup').textContent = config.statistics.description;
+	
 	Object.keys(timelines[current.timelineIndex].statistics).forEach((statistic, index) => {
 		document.getElementById(statistic)
 			.appendChild(layoutStatisticsNumbers[index] = document.createElement("div"))
@@ -101,6 +104,9 @@ function initializeLayoutTimeline() {
 function initializeLayoutLegend() {
 	var currentLegend = timelines[current.timelineIndex].legend[current.dataSource.id];
 
+	layoutLegend.title = document.getElementById("legendSectionTitleText");
+	layoutLegend.title.textContent = current.dataSource.legend.title;
+	
 	document.getElementById("legendText")
 		.appendChild(layoutLegend.min = document.createElement("div"));
 	layoutLegend.min.appendChild(document.createTextNode(currentLegend.min));
@@ -114,6 +120,9 @@ function initializeLayoutLegend() {
 
 // Initialize overlay toggles
 function initializeLayoutOverlays() {
+	document.getElementById('overlaysSectionTitleText').textContent = config.dataOverlays.title;
+	document.getElementById('overlaysPopup').textContent = config.dataOverlays.description;
+	
 	current.dataOverlays.forEach((overlay, index) => {
 		var layoutOverlayContainer;
 

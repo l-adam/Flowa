@@ -5,7 +5,7 @@
 		"dataOverlaysPath": "/backend/export/overlays/"
 	},
 	"dataSources": {
-		"header": "Data Sources",
+		"title": "Data Sources",
 		"description": "These are data sources",
 		"items": [
 			{
@@ -41,8 +41,8 @@
 		]
 	},
 	"dataOverlays": {
-		"header": "Data Overlays",
-		"description": "These are data overlays",
+		"title": "Data Overlays",
+		"description": "The overlays allow you to show and hide the different layers displayed on the map.",
 		"items": [
 			{
 				"id": "test_stations",
@@ -70,8 +70,12 @@
 			}
 		]
 	},
+	"statistics": {
+		"title": "Statistics",
+		"description": "The statistics show the numbers for the period of time selected on the bottom slider."
+	},
 	"timeline": {
-		"header": "Timeline",
+		"title": "Timeline",
 		"description": "The time periods",
 		"items": [
 			{
