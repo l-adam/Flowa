@@ -457,7 +457,7 @@ input[type="checkbox"]:checked+span:before {
 	padding: 10px;
 	box-sizing: border-box;
 	z-index: 2;
-	visibility: hidden;
+	visibility: visible;
 	opacity: 0;
 	transition: opacity 0.25s;
 }
