@@ -20,7 +20,7 @@
 				"maxStop": 4,
 				"legend": {
 					"title": "Cases density",
-					"description": "This source shows the correlation between the amount of bikes travels and the amount of positive testing."
+					"description": "This source shows the correlation between the amount of bike travels and the amount of positive COVID cases."
 				}
 			},
 			{
@@ -35,14 +35,14 @@
 				"maxStop": 15,
 				"legend": {
 					"title": "Cases density",
-					"description": "This data is fake and is for demostration purposes only"
+					"description": "This data is fake and therefore is for demostration purposes only"
 				}
 			}
 		]
 	},
 	"dataOverlays": {
 		"title": "Data Overlays",
-		"description": "The overlays allow you to show and hide the different layers displayed on the map.",
+		"description": "The overlays allow you to show and hide different layers displayed on top of the map.",
 		"items": [
 			{
 				"id": "test_stations",
