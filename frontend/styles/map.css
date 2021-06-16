@@ -458,4 +458,6 @@ input[type="checkbox"]:checked+span:before {
 	box-sizing: border-box;
 	z-index: 2;
 	visibility: hidden;
+	opacity: 0;
+	transition: opacity 0.25s;
 }

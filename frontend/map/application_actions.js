@@ -83,17 +83,26 @@ function layoutChangeOverlays(index) {
 // Arguments:
 // 		popup – a popup div
 function layoutHidePopup(popup) {
-	popup.style.visibility = "hidden";
+	popup.style.opacity = 0;
+
+	// The transition time is 250ms. The higher delay here is to workaround a visual glitch
+	setTimeout(function() {
+		if (popup.style.opacity == 0)
+			popup.style.visibility = "hidden";
+	}, 300)
+
 }
 
 //Show a popup
 // Arguments:
 // 		popup – a popup div
 function layoutShowPopup(popup) {
+	popup.style.opacity = 1;
 	popup.style.visibility = "visible";
 }
 
 function layoutChangeLegendPopup() {
-	document.getElementById('legendPopup')
-		.innerText = current.dataSource.legend.description;
+	var popup = document.getElementById('legendPopup');
+
+	popup.innerText = current.dataSource.legend.description;
 }

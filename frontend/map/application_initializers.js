@@ -37,7 +37,7 @@ function initializeLayoutDataSources() {
 function initializeLayoutStatistics() {
 	document.getElementById('statisticsSectionTitleText').textContent = config.statistics.title;
 	document.getElementById('statisticsPopup').textContent = config.statistics.description;
-	
+
 	Object.keys(timelines[current.timelineIndex].statistics).forEach((statistic, index) => {
 		document.getElementById(statistic)
 			.appendChild(layoutStatisticsNumbers[index] = document.createElement("div"))
@@ -106,7 +106,7 @@ function initializeLayoutLegend() {
 
 	layoutLegend.title = document.getElementById("legendSectionTitleText");
 	layoutLegend.title.textContent = current.dataSource.legend.title;
-	
+
 	document.getElementById("legendText")
 		.appendChild(layoutLegend.min = document.createElement("div"));
 	layoutLegend.min.appendChild(document.createTextNode(currentLegend.min));
@@ -122,7 +122,7 @@ function initializeLayoutLegend() {
 function initializeLayoutOverlays() {
 	document.getElementById('overlaysSectionTitleText').textContent = config.dataOverlays.title;
 	document.getElementById('overlaysPopup').textContent = config.dataOverlays.description;
-	
+
 	current.dataOverlays.forEach((overlay, index) => {
 		var layoutOverlayContainer;
 
@@ -179,11 +179,11 @@ function initializeLayoutPopups() {
 	layoutPopupIds.push('overlays');
 	layoutPopupIds.push('statistics');
 	layoutPopupIds.push('legend');
-	
+
 	layoutChangeLegendPopup();
 
 	layoutPopupIds.forEach(id => {
-		var info = document.getElementById(id + 'Info')
+		var info = document.getElementById(id + 'InfoIcon')
 		var popup = document.getElementById(id + 'Popup');
 
 		info.addEventListener('mouseover', function() {
