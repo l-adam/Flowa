@@ -88,6 +88,7 @@ function layoutHidePopup(popup) {
 	// The transition time is 250ms. The higher delay here is to workaround a visual glitch
 	// and to give the user more time to move the cursor over the popup to copy the text
 	setTimeout(function() {
+		// Make sure the user hasn't moved the cursor back over the popup during the transition
 		if (popup.style.opacity == 0)
 			popup.style.visibility = "collapse";
 	}, 300)
@@ -102,6 +103,7 @@ function layoutShowPopup(popup) {
 	popup.style.visibility = "visible";
 }
 
+// Update the legend popup contents
 function layoutChangeLegendPopup() {
 	var popup = document.getElementById('legendPopup');
 
