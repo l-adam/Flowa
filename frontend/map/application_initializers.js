@@ -183,7 +183,7 @@ function initializeLayoutPopups() {
 	layoutChangeLegendPopup();
 
 	layoutPopupIds.forEach(id => {
-		var info = document.getElementById(id + 'InfoIcon')
+		var info = document.getElementById(id + 'Info')
 		var popup = document.getElementById(id + 'Popup');
 
 		info.addEventListener('mouseover', function() {
@@ -193,5 +193,11 @@ function initializeLayoutPopups() {
 		info.addEventListener('mouseout', function() {
 			layoutHidePopup(popup)
 		});
+
+		// Workaround a visual glitch
+		setTimeout(function() {
+			if (popup.style.opacity == 0)
+				popup.style.visibility = "collapse";
+		}, 300)
 	})
 }

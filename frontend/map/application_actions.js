@@ -86,9 +86,10 @@ function layoutHidePopup(popup) {
 	popup.style.opacity = 0;
 
 	// The transition time is 250ms. The higher delay here is to workaround a visual glitch
+	// and to give the user more time to move the cursor over the popup to copy the text
 	setTimeout(function() {
 		if (popup.style.opacity == 0)
-			popup.style.visibility = "hidden";
+			popup.style.visibility = "collapse";
 	}, 300)
 
 }
