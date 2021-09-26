@@ -74,6 +74,7 @@ function* range(start, end, step) {
 }
 
 // Get icon properties for a given overlay id
+// 		id – overlay id
 function getIconProperties(id) {
 	var iconProperties = {};
 

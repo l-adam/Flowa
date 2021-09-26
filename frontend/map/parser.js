@@ -172,6 +172,7 @@ function parseGeoJSONZip({
 }
 
 // Generate indices for each object in the array
+// 		data – an array of objects (e.g dataSources)
 function generateIndices(data) {
 	data.forEach(
 		(data, index) => {

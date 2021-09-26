@@ -39,7 +39,8 @@ function layoutChangeStatistics() {
 }
 
 // Adjust the position of the slider in the timeline based on user input
-// 1200 is the amount of timeline steps
+// 1200 is the amount of timeline steps, as defined in HTML
+// It should be defined as a global constant or calculated based on max-width
 function layoutChangeTimeline() {
 	current.timelineIndex = Math.round(timeline.value /
 		(1200 / (timelines.length - 1)));
@@ -63,7 +64,7 @@ function layoutUpdate() {
 	layoutChangeLegendPopup();
 }
 
-// Changethe legend after user input
+// Change the legend after user input
 function layoutChangeLegend() {
 	var currentLegend = timelines[current.timelineIndex].legend[current.dataSource.id];
 
